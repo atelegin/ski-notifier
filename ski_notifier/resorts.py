@@ -38,6 +38,11 @@ class Resort:
     at_vignette_eur: float
     ski_pass_day_adult_eur: Optional[float] = None
     ski_pass_currency: str = "EUR"
+    
+    @property
+    def discipline_icon(self) -> str:
+        """Return emoji icon for discipline type."""
+        return "🎿" if self.type == "alpine" else "⛷️"
 
 
 @dataclass

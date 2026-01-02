@@ -7,9 +7,10 @@ from datetime import date, datetime, timedelta
 from typing import Dict, List
 from zoneinfo import ZoneInfo
 
+from .features import compute_resort_features, compute_weekly_best, ResortFeatures, WeeklyBest
 from .fetch import fetch_all_resorts_weather, FetchResult
 from .message import RankedResort, format_message
-from .resorts import load_resorts, LoadResult
+from .resorts import load_resorts, LoadResult, Resort
 from .score import calculate_resort_score
 from .telegram import send_message
 
@@ -28,6 +29,27 @@ TZ = ZoneInfo("Europe/Berlin")
 # Exit code thresholds
 SUCCESS_THRESHOLD = 0.60  # Exit 0 if >= 60% success
 CRITICAL_FAILURE_THRESHOLD = 0.30  # Exit 1 if < 30% success
+
+
+def select_top_with_coverage(ranked: List[RankedResort], n_top: int = 3) -> List[RankedResort]:
+    """Select top N resorts ensuring both types (alpine/xc) are represented.
+    
+    If TOP-N doesn't include a type, adds best missing type as N+1.
+    """
+    if len(ranked) <= n_top:
+        return ranked
+    
+    top_n = ranked[:n_top]
+    types_in_top = {r.resort.type for r in top_n}
+    result = list(top_n)
+    
+    for missing in ("alpine", "xc"):
+        if missing not in types_in_top:
+            candidate = next((r for r in ranked[n_top:] if r.resort.type == missing), None)
+            if candidate:
+                result.append(candidate)
+    
+    return result
 
 
 def is_in_season() -> bool:
@@ -126,8 +148,35 @@ def main() -> None:
     # Sort by score descending
     ranked_resorts.sort(key=lambda r: r.score.score, reverse=True)
     
+    # Apply selection logic: TOP-3 + ensure both types represented
+    selected_resorts = select_top_with_coverage(ranked_resorts, n_top=3)
+    
     # Build best scores by day (for "best day of week" logic)
     best_scores_by_day = {d: max(scores) for d, scores in all_scores_by_day.items()}
+    
+    # Compute WeeklyBest
+    top_confidence = selected_resorts[0].score.confidence if selected_resorts else 0.7
+    weekly_best = compute_weekly_best(best_scores_by_day, tomorrow, top_confidence)
+    
+    # Compute ResortFeatures for each selected resort
+    resort_features: Dict[str, ResortFeatures] = {}
+    for ranked in selected_resorts:
+        resort = ranked.resort
+        if resort.id in fetch_result.weather:
+            weather = fetch_result.weather[resort.id]
+            # Build daily snowfall list from weather data
+            dates_sorted = sorted(weather.high.keys())
+            daily_snowfall = [
+                weather.high[d].snowfall_cm if d in weather.high else None
+                for d in dates_sorted
+            ]
+            if tomorrow in weather.low and tomorrow in weather.high:
+                features = compute_resort_features(
+                    weather.low[tomorrow],
+                    weather.high[tomorrow],
+                    daily_snowfall,
+                )
+                resort_features[resort.id] = features
     
     # Get list of missing resort names for the message
     missing_resort_names = [
@@ -137,8 +186,9 @@ def main() -> None:
     # Format message (always attempt, even with low success rate)
     message = format_message(
         tomorrow, 
-        ranked_resorts, 
-        best_scores_by_day, 
+        selected_resorts,
+        weekly_best,
+        resort_features,
         costs,
         missing_resort_names=missing_resort_names,
         success_rate=success_rate,

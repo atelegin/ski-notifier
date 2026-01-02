@@ -599,7 +599,7 @@ resorts:
   name: Flumserberg (CH)
   country: CH
   type: alpine
-  drive_time_min_from_konstanz: 105
+  drive_time_min_from_konstanz: 117
   website: https://flumserberg.ch
   notes: Largest ski resort in Eastern Switzerland (~65 km pistes).
   access:
@@ -616,11 +616,9 @@ resorts:
       lon: 9.252982
       elev_m: 2020
   costs:
-    assume_ferry_used: true
-    ferry_roundtrip_eur: 24.2
-    austria_vignette_1day_eur: 0.0
+    assume_ferry_used: false
     requires_ch_vignette: true
-    ski_pass_day_adult_eur: null
+    ski_pass_day_adult_eur: 70
     ski_pass_currency: CHF
 - id: ch_hoch_ybrig
   name: Hoch-Ybrig (CH)
