@@ -110,27 +110,27 @@ resorts:
     ski_pass_day_adult_eur: null
     ski_pass_currency: EUR
 - id: de_balderschwang_loipe
-  name: Loipe Balderschwang (DE) — XC (approx.)
+  name: Loipe Balderschwang (DE) — XC
   country: DE
   type: xc
-  drive_time_min_from_konstanz: 100
-  notes: Approximate points from secondary YAML source; refine if needed.
+  drive_time_min_from_konstanz: 117
+  notes: 
   access:
     requires_ch_vignette: false
     requires_at_vignette: false
   points:
     low:
-      label: Balderschwang (approx.)
-      lat: 47.45
-      lon: 10.1167
+      label: Balderschwang
+      lat: 47.4621544
+      lon: 10.0950563
       elev_m: 1044
     high:
-      label: Schelpen area (approx.)
-      lat: 47.4333
-      lon: 10.0833
+      label: Schelpen area
+      lat: 47.4496139
+      lon: 10.1061999
       elev_m: 1250
   costs:
-    assume_ferry_used: true
+    assume_ferry_used: false
     ferry_roundtrip_eur: 24.2
     austria_vignette_1day_eur: 0.0
     requires_ch_vignette: false
@@ -162,24 +162,24 @@ resorts:
     ski_pass_day_adult_eur: null
     ski_pass_currency: EUR
 - id: de_oberstaufen_loipe
-  name: Loipe Oberstaufen (DE) — XC (approx.)
+  name: Loipe Oberstaufen (DE) — XC
   country: DE
   type: xc
   drive_time_min_from_konstanz: 108
-  notes: Approximate points from secondary YAML source; refine if needed.
+  notes: 
   access:
     requires_ch_vignette: false
     requires_at_vignette: false
   points:
     low:
-      label: Oberstaufen (approx.)
-      lat: 47.55
-      lon: 10.0167
+      label: Oberstaufen
+      lat: 47.559764
+      lon: 10.0285405
       elev_m: 791
     high:
-      label: Steibis area (approx.)
-      lat: 47.5333
-      lon: 10.0333
+      label: Steibis area
+      lat: 47.5207822
+      lon: 10.0231676
       elev_m: 1100
   costs:
     assume_ferry_used: true

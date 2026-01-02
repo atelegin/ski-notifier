@@ -152,11 +152,36 @@ def is_best_day_of_week(
     return True
 
 
+def format_missing_block(missing_names: List[str], max_show: int = 5) -> str:
+    """Format the missing forecast warning block.
+    
+    Args:
+        missing_names: List of resort names that failed.
+        max_show: Maximum number to show before truncating.
+        
+    Returns:
+        Formatted warning string.
+    """
+    if not missing_names:
+        return ""
+    
+    if len(missing_names) <= max_show:
+        names_str = ", ".join(missing_names)
+    else:
+        shown = missing_names[:max_show]
+        remaining = len(missing_names) - max_show
+        names_str = ", ".join(shown) + f" (+{remaining} more)"
+    
+    return f"⚠️ Missing forecast: {names_str}"
+
+
 def format_message(
     tomorrow: date,
     ranked_resorts: List[RankedResort],
     best_scores_by_day: Dict[date, float],
     costs: Costs,
+    missing_resort_names: Optional[List[str]] = None,
+    success_rate: float = 1.0,
 ) -> str:
     """Format the complete Telegram message.
     
@@ -165,6 +190,8 @@ def format_message(
         ranked_resorts: List of resorts with scores, sorted by score descending.
         best_scores_by_day: Dict of date -> best resort score for each day (7 days).
         costs: Cost constants.
+        missing_resort_names: Optional list of resort names that failed to fetch.
+        success_rate: Fraction of resorts with successful weather data.
         
     Returns:
         Formatted message string.
@@ -174,8 +201,17 @@ def format_message(
         "",
     ]
     
+    # Show warning if success rate is low
+    if success_rate < 0.50:
+        lines.append("⚠️ **Forecast mostly unavailable today**")
+        lines.append("")
+    
     if not ranked_resorts:
         lines.append("❌ Нет данных о курортах.")
+        # Still show missing list
+        if missing_resort_names:
+            lines.append("")
+            lines.append(format_missing_block(missing_resort_names))
         return "\n".join(lines)
     
     top = ranked_resorts[0]
@@ -212,4 +248,11 @@ def format_message(
     if lines[-1] == "---":
         lines.pop()
     
+    # Add missing resorts warning at the end
+    if missing_resort_names:
+        lines.append("")
+        lines.append("")
+        lines.append(format_missing_block(missing_resort_names))
+    
     return "\n".join(lines)
+
