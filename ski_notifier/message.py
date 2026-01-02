@@ -16,6 +16,88 @@ class RankedResort:
     score: ResortScore
 
 
+@dataclass
+class DisciplineItem:
+    """Input item for discipline-best computation."""
+    resort_type: str  # "alpine" or "xc"
+    score: float
+    confidence: float
+
+
+@dataclass
+class DisciplineBests:
+    """Best scores by discipline for tomorrow."""
+    best_alpine_score: Optional[float]
+    best_xc_score: Optional[float]
+    best_alpine_confidence: Optional[float]
+    best_xc_confidence: Optional[float]
+
+
+def compute_discipline_bests(items: List[DisciplineItem]) -> DisciplineBests:
+    """Compute best scores per discipline.
+    
+    Note: Lives in message.py as utility since it's only used for formatting.
+    """
+    alpine_items = [i for i in items if i.resort_type == "alpine"]
+    xc_items = [i for i in items if i.resort_type == "xc"]
+    
+    best_alpine = max(alpine_items, key=lambda i: i.score) if alpine_items else None
+    best_xc = max(xc_items, key=lambda i: i.score) if xc_items else None
+    
+    return DisciplineBests(
+        best_alpine_score=best_alpine.score if best_alpine else None,
+        best_xc_score=best_xc.score if best_xc else None,
+        best_alpine_confidence=best_alpine.confidence if best_alpine else None,
+        best_xc_confidence=best_xc.confidence if best_xc else None,
+    )
+
+
+def format_discipline_warnings(discipline_bests: DisciplineBests) -> List[str]:
+    """Generate 0-2 discipline warning lines.
+    
+    Thresholds:
+    - >= 70: no warning
+    - 60..69: "сомнительно" (⚠️)
+    - < 60: "не стоит" (⛔)
+    
+    Format: "⛔ Горные: не стоит (58)"
+    Append ", низкая уверенность" if confidence < 0.7.
+    """
+    warnings = []
+    
+    # Alpine first
+    if discipline_bests.best_alpine_score is not None:
+        score = discipline_bests.best_alpine_score
+        conf = discipline_bests.best_alpine_confidence or 1.0
+        if score < 60:
+            line = f"⛔ Горные: не стоит ({score:.0f})"
+            if conf < 0.7:
+                line += ", низкая уверенность"
+            warnings.append(line)
+        elif score < 70:
+            line = f"⚠️ Горные: сомнительно ({score:.0f})"
+            if conf < 0.7:
+                line += ", низкая уверенность"
+            warnings.append(line)
+    
+    # XC second
+    if discipline_bests.best_xc_score is not None:
+        score = discipline_bests.best_xc_score
+        conf = discipline_bests.best_xc_confidence or 1.0
+        if score < 60:
+            line = f"⛔ Беговые: не стоит ({score:.0f})"
+            if conf < 0.7:
+                line += ", низкая уверенность"
+            warnings.append(line)
+        elif score < 70:
+            line = f"⚠️ Беговые: сомнительно ({score:.0f})"
+            if conf < 0.7:
+                line += ", низкая уверенность"
+            warnings.append(line)
+    
+    return warnings
+
+
 def format_costs_line(resort: Resort) -> Optional[str]:
     """Format costs line with ↳ prefix.
     
@@ -128,6 +210,7 @@ def format_message(
     weekly_best: WeeklyBest,
     resort_features: Dict[str, ResortFeatures],
     costs: Costs,
+    discipline_bests: DisciplineBests,
     missing_resort_names: Optional[List[str]] = None,
     success_rate: float = 1.0,
 ) -> str:
@@ -136,7 +219,9 @@ def format_message(
     Format:
     - Header with date
     - Weekly best line
-    - Resort lines (2 lines each: weather + costs)
+    - Discipline warnings (0-2 lines)
+    - Blank line
+    - Resort blocks
     - Missing warning (if any)
     """
     lines = [
@@ -155,6 +240,10 @@ def format_message(
     
     # Weekly best line
     lines.append(weekly_best.message)
+    
+    # Discipline warnings (0-2 lines)
+    warnings = format_discipline_warnings(discipline_bests)
+    lines.extend(warnings)
     
     # Check if all resorts have low scores
     all_scores = [r.score.score for r in ranked_resorts]

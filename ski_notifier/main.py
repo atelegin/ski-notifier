@@ -9,7 +9,7 @@ from zoneinfo import ZoneInfo
 
 from .features import compute_resort_features, compute_weekly_best, ResortFeatures, WeeklyBest
 from .fetch import fetch_all_resorts_weather, FetchResult
-from .message import RankedResort, format_message
+from .message import RankedResort, DisciplineItem, DisciplineBests, compute_discipline_bests, format_message
 from .resorts import load_resorts, LoadResult, Resort
 from .score import calculate_resort_score
 from .telegram import send_message
@@ -155,8 +155,18 @@ def main() -> None:
     best_scores_by_day = {d: max(scores) for d, scores in all_scores_by_day.items()}
     
     # Compute WeeklyBest
-    top_confidence = selected_resorts[0].score.confidence if selected_resorts else 0.7
-    weekly_best = compute_weekly_best(best_scores_by_day, tomorrow, top_confidence)
+    weekly_best = compute_weekly_best(best_scores_by_day, tomorrow)
+    
+    # Compute discipline bests from ALL ranked resorts (for warnings)
+    discipline_items = [
+        DisciplineItem(
+            resort_type=r.resort.type,
+            score=r.score.score,
+            confidence=r.score.confidence,
+        )
+        for r in ranked_resorts
+    ]
+    discipline_bests = compute_discipline_bests(discipline_items)
     
     # Compute ResortFeatures for each selected resort
     resort_features: Dict[str, ResortFeatures] = {}
@@ -190,6 +200,7 @@ def main() -> None:
         weekly_best,
         resort_features,
         costs,
+        discipline_bests,
         missing_resort_names=missing_resort_names,
         success_rate=success_rate,
     )

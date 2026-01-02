@@ -7,7 +7,7 @@ import pytest
 
 from ski_notifier.features import ResortFeatures, WeeklyBest
 from ski_notifier.fetch import PointWeather
-from ski_notifier.message import RankedResort, format_message, format_costs_line
+from ski_notifier.message import RankedResort, DisciplineBests, format_message, format_costs_line
 from ski_notifier.resorts import Costs, Point, Resort
 from ski_notifier.score import ResortScore, PointScore
 
@@ -73,13 +73,29 @@ def make_features() -> ResortFeatures:
 
 def make_weekly_best(is_best: bool = True) -> WeeklyBest:
     """Create WeeklyBest for testing."""
-    return WeeklyBest(
-        tomorrow_is_best=is_best,
-        tomorrow_score=78,
-        best_day=date(2025, 1, 15),
-        best_day_score=78,
-        second_best_score=64,
-        message="✅ Завтра — лучший день (78 vs 2nd 64)" if is_best else "ℹ️ Лучший день: чт (82). Завтра: 68",
+    if is_best:
+        return WeeklyBest(
+            tomorrow_score=78,
+            best_day=date(2025, 1, 15),
+            best_day_score=78,
+            message="✅ Завтра — лучший день недели (78)",
+        )
+    else:
+        return WeeklyBest(
+            tomorrow_score=68,
+            best_day=date(2025, 1, 16),
+            best_day_score=82,
+            message="ℹ️ Лучший день: чт (82). Завтра: 68 (−14)",
+        )
+
+
+def make_discipline_bests(alpine: float = 80, xc: float = 75) -> DisciplineBests:
+    """Create DisciplineBests for testing."""
+    return DisciplineBests(
+        best_alpine_score=alpine if alpine is not None else None,
+        best_xc_score=xc if xc is not None else None,
+        best_alpine_confidence=0.9 if alpine is not None else None,
+        best_xc_confidence=0.9 if xc is not None else None,
     )
 
 
@@ -101,6 +117,7 @@ class TestFormatMessage:
             make_weekly_best(),
             features,
             costs,
+            make_discipline_bests(),
         )
         
         # No --- separators
@@ -127,6 +144,7 @@ class TestFormatMessage:
             make_weekly_best(),
             features,
             costs,
+            make_discipline_bests(),
         )
         
         assert "🎿" in message  # alpine
@@ -145,6 +163,7 @@ class TestFormatMessage:
             make_weekly_best(),
             features,
             costs,
+            make_discipline_bests(),
         )
         
         assert message.startswith("🟦 Ski forecast")
@@ -184,6 +203,7 @@ class TestFormatMessage:
             make_weekly_best(),
             features,
             costs,
+            make_discipline_bests(),
         )
         
         assert "(каша)" in message
@@ -207,6 +227,7 @@ class TestFormatMessage:
             make_weekly_best(),
             features,
             costs,
+            make_discipline_bests(),
         )
         
         lines = message.split("\n")
@@ -250,6 +271,7 @@ class TestFormatMessage:
             make_weekly_best(),
             features,
             costs,
+            make_discipline_bests(),
         )
         
         # Find the resort line and costs line
@@ -279,6 +301,7 @@ class TestFormatMessage:
             make_weekly_best(),
             features,
             costs,
+            make_discipline_bests(),
         )
         
         # This line should NOT exist in the message
@@ -297,6 +320,7 @@ class TestFormatMessage:
             make_weekly_best(),
             features,
             costs,
+            make_discipline_bests(),
         )
         
         lines = message.split("\n")
@@ -312,3 +336,61 @@ class TestFormatMessage:
         
         # Line 3: first resort (🎿 or ⛷️)
         assert "🎿" in lines[3] or "⛷️" in lines[3]
+
+
+def test_discipline_warning_thresholds():
+    """Test discipline warning lines at correct thresholds."""
+    from ski_notifier.message import format_discipline_warnings, DisciplineBests
+    
+    bests = DisciplineBests(
+        best_alpine_score=58,
+        best_xc_score=66,
+        best_alpine_confidence=0.8,
+        best_xc_confidence=0.8,
+    )
+    
+    warnings = format_discipline_warnings(bests)
+    
+    assert len(warnings) == 2
+    assert warnings[0] == "⛔ Горные: не стоит (58)"
+    assert warnings[1] == "⚠️ Беговые: сомнительно (66)"
+
+
+def test_discipline_warning_no_warning_high_scores():
+    """No warnings when scores >= 70."""
+    from ski_notifier.message import format_discipline_warnings, DisciplineBests
+    
+    bests = DisciplineBests(
+        best_alpine_score=75,
+        best_xc_score=80,
+        best_alpine_confidence=0.9,
+        best_xc_confidence=0.9,
+    )
+    
+    warnings = format_discipline_warnings(bests)
+    
+    assert len(warnings) == 0
+
+
+def test_xc_costs_still_present_e2e():
+    """XC resorts with ferry show costs line, no skipass."""
+    xc_resort = make_resort("xc1", "xc")
+    
+    ranked = [make_ranked(xc_resort, 70)]
+    features: Dict[str, ResortFeatures] = {"xc1": make_features()}
+    costs = Costs(ferry_konstanz_meersburg_rt_eur=24, at_vignette_1day_eur=10)
+    discipline_bests = make_discipline_bests(alpine=None, xc=70)
+    
+    message = format_message(
+        date(2025, 1, 15),
+        ranked,
+        make_weekly_best(),
+        features,
+        costs,
+        discipline_bests,
+    )
+    
+    assert "↳ 💶" in message
+    assert "ferry" in message
+    assert "Skipass" not in message
+

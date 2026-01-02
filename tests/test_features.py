@@ -122,45 +122,60 @@ class TestComputeResortFeatures:
 
 
 class TestComputeWeeklyBest:
-    def test_tomorrow_best_margin_ok(self):
-        """tomorrow_is_best when margin >= 10 and confidence >= 0.7."""
+    def test_tomorrow_is_best_day(self):
+        """When tomorrow has highest score and is the only best day."""
         tomorrow = date(2025, 1, 15)
         scores = {
-            date(2025, 1, 15): 78,  # tomorrow
-            date(2025, 1, 16): 64,  # second
-            date(2025, 1, 17): 55,
+            date(2025, 1, 15): 86,
+            date(2025, 1, 16): 70,
+            date(2025, 1, 17): 65,
         }
         
-        result = compute_weekly_best(scores, tomorrow, 0.8)
+        result = compute_weekly_best(scores, tomorrow)
         
-        assert result.tomorrow_is_best is True
-        assert result.tomorrow_score == 78
-        assert result.second_best_score == 64
+        assert "Завтра — лучший день недели (86)" in result.message
+        assert "Лучший день:" not in result.message
     
-    def test_tomorrow_best_margin_low(self):
-        """Not best when margin < 10."""
+    def test_tie_with_other_day(self):
+        """When tomorrow ties with another day."""
+        tomorrow = date(2025, 1, 16)
+        scores = {
+            date(2025, 1, 15): 86,
+            date(2025, 1, 16): 86,
+            date(2025, 1, 17): 70,
+        }
+        
+        result = compute_weekly_best(scores, tomorrow)
+        
+        # best_day will be 2025-01-15 (earliest with highest score)
+        # tomorrow ties but is not the best_day
+        assert "один из лучших дней недели (86)" in result.message
+        assert "Лучший день:" not in result.message
+    
+    def test_tomorrow_worse_has_diff(self):
+        """When tomorrow is worse, show diff."""
         tomorrow = date(2025, 1, 15)
         scores = {
             date(2025, 1, 15): 70,
-            date(2025, 1, 16): 65,  # margin = 5 < 10
+            date(2025, 1, 18): 86,
         }
         
-        result = compute_weekly_best(scores, tomorrow, 0.8)
+        result = compute_weekly_best(scores, tomorrow)
         
-        assert result.tomorrow_is_best is False
+        assert "Лучший день:" in result.message
+        assert "(86)" in result.message
+        assert "Завтра: 70" in result.message
+        assert "(−16)" in result.message
     
-    def test_tomorrow_not_highest(self):
-        """Not best when tomorrow not highest score."""
+    def test_empty_scores(self):
+        """Empty scores dict returns sensible defaults."""
         tomorrow = date(2025, 1, 15)
-        scores = {
-            date(2025, 1, 15): 60,
-            date(2025, 1, 16): 78,  # higher
-        }
         
-        result = compute_weekly_best(scores, tomorrow, 0.8)
+        result = compute_weekly_best({}, tomorrow)
         
-        assert result.tomorrow_is_best is False
-        assert result.best_day == date(2025, 1, 16)
+        assert result.tomorrow_score == 0
+        assert result.best_day == tomorrow
+        assert "Нет данных" in result.message
 
 
 class TestFormatReasonLine:

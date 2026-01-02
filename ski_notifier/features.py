@@ -92,69 +92,56 @@ def compute_resort_features(
 @dataclass
 class WeeklyBest:
     """Best day of week analysis."""
-    tomorrow_is_best: bool
     tomorrow_score: float
     best_day: date
     best_day_score: float
-    second_best_score: float
-    message: str  # formatted header line
+    message: str
 
 
 def compute_weekly_best(
-    scores_by_day: Dict[date, float],
+    best_scores_by_day: Dict[date, float],
     tomorrow: date,
-    tomorrow_confidence: float,
 ) -> WeeklyBest:
     """Compute weekly best day analysis.
     
-    Args:
-        scores_by_day: Dict of date -> best resort score for each day.
-        tomorrow: Tomorrow's date.
-        tomorrow_confidence: Confidence of top-1 resort for tomorrow.
-        
-    Returns:
-        WeeklyBest with analysis and formatted message.
+    Message logic:
+    - tomorrow_score == best_score AND best_day == tomorrow:
+      "✅ Завтра — лучший день недели (<score>)"
+    - tomorrow_score == best_score AND best_day != tomorrow (tie):
+      "✅ Завтра — один из лучших дней недели (<score>)"
+    - tomorrow_score < best_score:
+      "ℹ️ Лучший день: <day> (<best_score>). Завтра: <tomorrow_score> (−<diff>)"
     """
-    if not scores_by_day:
+    if not best_scores_by_day:
         return WeeklyBest(
-            tomorrow_is_best=False,
             tomorrow_score=0,
             best_day=tomorrow,
             best_day_score=0,
-            second_best_score=0,
             message="ℹ️ Нет данных о прогнозе",
         )
     
-    tomorrow_score = scores_by_day.get(tomorrow, 0)
+    tomorrow_score = best_scores_by_day.get(tomorrow, 0)
     
-    # Find best day and second best
-    sorted_days = sorted(scores_by_day.items(), key=lambda x: x[1], reverse=True)
+    # Find best day (earliest wins on tie)
+    sorted_days = sorted(best_scores_by_day.items(), key=lambda x: (-x[1], x[0]))
     best_day, best_day_score = sorted_days[0]
-    second_best_score = sorted_days[1][1] if len(sorted_days) > 1 else 0
     
-    # Check if tomorrow is best
-    # Conditions: tomorrow has highest score, margin >= 10, confidence >= 0.7
-    tomorrow_is_best = (
-        tomorrow_score >= best_day_score and
-        tomorrow_score - second_best_score >= 10 and
-        tomorrow_confidence >= 0.7
-    )
-    
-    if tomorrow_is_best:
-        message = f"✅ Завтра — лучший день ({tomorrow_score:.0f} vs 2nd {second_best_score:.0f})"
+    # Generate message
+    if tomorrow_score == best_day_score:
+        if best_day == tomorrow:
+            message = f"✅ Завтра — лучший день недели ({tomorrow_score:.0f})"
+        else:
+            message = f"✅ Завтра — один из лучших дней недели ({tomorrow_score:.0f})"
     else:
-        weekday_names = {
-            0: "пн", 1: "вт", 2: "ср", 3: "чт", 4: "пт", 5: "сб", 6: "вс"
-        }
+        weekday_names = {0: "пн", 1: "вт", 2: "ср", 3: "чт", 4: "пт", 5: "сб", 6: "вс"}
         best_weekday = weekday_names.get(best_day.weekday(), "")
-        message = f"ℹ️ Лучший день: {best_weekday} ({best_day_score:.0f}). Завтра: {tomorrow_score:.0f}"
+        diff = best_day_score - tomorrow_score
+        message = f"ℹ️ Лучший день: {best_weekday} ({best_day_score:.0f}). Завтра: {tomorrow_score:.0f} (−{diff:.0f})"
     
     return WeeklyBest(
-        tomorrow_is_best=tomorrow_is_best,
         tomorrow_score=tomorrow_score,
         best_day=best_day,
         best_day_score=best_day_score,
-        second_best_score=second_best_score,
         message=message,
     )
 
