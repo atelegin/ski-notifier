@@ -164,6 +164,25 @@ class TestComputeWeeklyBest:
 
 
 class TestFormatReasonLine:
+    def test_reason_line_prefix(self):
+        """Reason line uses 'Условия завтра:' prefix, not 'Причина:'."""
+        features = ResortFeatures(
+            snow24_cm=10,
+            snow48_cm=15,
+            overnight_cm=None,
+            rain_mm=0,
+            temp_min=-5,
+            temp_max=-2,
+            wind_max=10,
+            slush_risk=False,
+            rain_risk=False,
+        )
+        
+        result = format_reason_line(features)
+        
+        assert result.startswith("Условия завтра: ")
+        assert "Причина:" not in result
+    
     def test_with_snow_and_temp(self):
         """Reason line includes snow and temp."""
         features = ResortFeatures(

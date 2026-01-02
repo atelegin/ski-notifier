@@ -160,7 +160,7 @@ def compute_weekly_best(
 
 
 def format_reason_line(features: ResortFeatures) -> str:
-    """Generate 'Причина:' line from top signals.
+    """Generate 'Условия завтра:' line from top signals.
     
     Priority order (max 3 signals):
     1. snow24 if > 0
@@ -190,4 +190,4 @@ def format_reason_line(features: ResortFeatures) -> str:
     if features.wind_max is not None and features.wind_max > 30 and len(signals) < 3:
         signals.append(f"ветер {features.wind_max:.0f}km/h")
     
-    return "Причина: " + ", ".join(signals[:3]) if signals else "Причина: —"
+    return "Условия завтра: " + ", ".join(signals[:3]) if signals else "Условия завтра: —"

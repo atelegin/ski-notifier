@@ -16,9 +16,10 @@ class RankedResort:
     score: ResortScore
 
 
-def format_cost_line(resort: Resort) -> str:
-    """Format compact cost line (💶 ...).
+def format_costs_line(resort: Resort) -> Optional[str]:
+    """Format costs line with ↳ prefix.
     
+    Returns: "↳ 💶 <costs...>" or None if no costs to show.
     XC resorts don't show skipass.
     """
     parts = []
@@ -41,9 +42,9 @@ def format_cost_line(resort: Resort) -> str:
         parts.append(f"Skipass {currency} {resort.ski_pass_day_adult_eur:.0f}")
     
     if not parts:
-        return ""
+        return None
     
-    return "💶 " + " | ".join(parts)
+    return "↳ 💶 " + " | ".join(parts)
 
 
 def format_resort_weather_line(
@@ -167,21 +168,25 @@ def format_message(
     if all(score < 35 for score in all_scores):
         lines.append("⚠️ Завтра бессмысленно ехать — все курорты <35")
     
-    # Blank line after header
-    lines.append("")
-    
-    # Resort lines (no blanks between resorts, 2 lines each)
+    # Build resort blocks (line1 + optional line2, joined by \n\n)
+    blocks: List[str] = []
     for ranked in ranked_resorts:
         features = resort_features.get(ranked.resort.id)
         
         # Line 1: weather
-        weather_line = format_resort_weather_line(ranked, features)
-        lines.append(weather_line)
+        line1 = format_resort_weather_line(ranked, features)
         
-        # Line 2: costs
-        cost_line = format_cost_line(ranked.resort)
-        if cost_line:
-            lines.append(cost_line)
+        # Line 2: costs (optional)
+        line2 = format_costs_line(ranked.resort)
+        
+        if line2:
+            blocks.append(line1 + "\n" + line2)
+        else:
+            blocks.append(line1)
+    
+    # Join header + blank line + resort blocks
+    lines.append("")  # Blank line after header
+    lines.append("\n\n".join(blocks))
     
     # Missing warning at end
     if missing_resort_names:

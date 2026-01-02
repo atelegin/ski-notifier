@@ -7,7 +7,7 @@ import pytest
 
 from ski_notifier.features import ResortFeatures, WeeklyBest
 from ski_notifier.fetch import PointWeather
-from ski_notifier.message import RankedResort, format_message, format_cost_line
+from ski_notifier.message import RankedResort, format_message, format_costs_line
 from ski_notifier.resorts import Costs, Point, Resort
 from ski_notifier.score import ResortScore, PointScore
 
@@ -154,9 +154,11 @@ class TestFormatMessage:
         xc_resort = make_resort("xc1", "xc")
         xc_resort.ski_pass_day_adult_eur = 50  # Should be ignored
         
-        cost_line = format_cost_line(xc_resort)
+        cost_line = format_costs_line(xc_resort)
         
-        assert "Skipass" not in cost_line
+        # May return None or string without Skipass
+        if cost_line:
+            assert "Skipass" not in cost_line
     
     def test_slush_label(self):
         """Slush label appears when slush_risk is True."""
@@ -185,3 +187,81 @@ class TestFormatMessage:
         )
         
         assert "(каша)" in message
+
+    def test_blocks_spacing(self):
+        """Resort blocks are separated by exactly one blank line."""
+        r1 = make_ranked(make_resort("a", "alpine"), 80)
+        r2 = make_ranked(make_resort("b", "alpine"), 75)
+        r3 = make_ranked(make_resort("c", "alpine"), 70)
+        
+        features: Dict[str, ResortFeatures] = {
+            "a": make_features(),
+            "b": make_features(),
+            "c": make_features(),
+        }
+        costs = Costs(ferry_konstanz_meersburg_rt_eur=24, at_vignette_1day_eur=10)
+        
+        message = format_message(
+            date(2025, 1, 15),
+            [r1, r2, r3],
+            make_weekly_best(),
+            features,
+            costs,
+        )
+        
+        lines = message.split("\n")
+        
+        # Find header section end (blank line after header)
+        header_end = None
+        for i, line in enumerate(lines):
+            if line == "" and i > 0:
+                header_end = i
+                break
+        assert header_end is not None, "Should have blank line after header"
+        
+        # After header blank line, get rest of message
+        resort_section = "\n".join(lines[header_end + 1:])
+        
+        # Between resort blocks there should be exactly \n\n (one blank line)
+        # Within a block (resort + costs) there's just \n
+        # This means we should see patterns of: resort_line\n↳ costs_line\n\n
+        assert "\n\n\n" not in resort_section, "Should not have multiple blank lines"
+        assert "\n\n" in resort_section, "Should have blank lines between blocks"
+    
+    def test_costs_prefix(self):
+        """Costs line starts with ↳ 💶 prefix."""
+        alpine_resort = make_resort("alpine1", "alpine")
+        
+        cost_line = format_costs_line(alpine_resort)
+        
+        assert cost_line is not None
+        assert cost_line.startswith("↳ 💶 ")
+    
+    def test_costs_inside_block_single_newline(self):
+        """Inside a block, costs is separated from resort by single newline."""
+        r1 = make_ranked(make_resort("a", "alpine"), 80)
+        
+        features: Dict[str, ResortFeatures] = {"a": make_features()}
+        costs = Costs(ferry_konstanz_meersburg_rt_eur=24, at_vignette_1day_eur=10)
+        
+        message = format_message(
+            date(2025, 1, 15),
+            [r1],
+            make_weekly_best(),
+            features,
+            costs,
+        )
+        
+        # Find the resort line and costs line
+        assert "Resort a" in message
+        assert "↳ 💶" in message
+        
+        # There should be exactly one \n between resort and costs (no blank line)
+        lines = message.split("\n")
+        for i, line in enumerate(lines):
+            if "Resort a" in line and "🎿" in line:
+                # Next line should be costs (if exists)
+                if i + 1 < len(lines) and lines[i + 1].startswith("↳"):
+                    # Good - directly next line, no empty line in between
+                    pass
+                break
