@@ -22,6 +22,23 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
       
+      - name: Debug which code runs
+        run: |
+          pwd
+          ls -la
+          git rev-parse HEAD
+          python -c "import sys; import ski_notifier, ski_notifier.fetch as f; print('sys.path[0]:', sys.path[0]); print('pkg:', ski_notifier.__file__); print('fetch:', f.__file__); print('READ_TIMEOUT:', getattr(f,'READ_TIMEOUT',None))"
+          python - << 'PY'
+import pathlib, re
+pat = re.compile(r"timeout\s*=\s*30|READ_TIMEOUT\s*=\s*30|ERROR fetching")
+hits=[]
+for p in pathlib.Path(".").rglob("*.py"):
+    s=p.read_text(encoding="utf-8")
+    if pat.search(s):
+        hits.append(str(p))
+print("matches:", hits)
+PY
+
       - name: Run notifier
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
