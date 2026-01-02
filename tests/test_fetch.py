@@ -210,6 +210,100 @@ class TestParsePointWeatherFromBatch:
         assert weather.temp_c_avg_9_16 is None
         assert weather.wind_gust_kmh_max_9_16 is None
 
+    def test_daily_snowfall_sum_priority(self):
+        """Should use daily snowfall_sum when available, even if hourly exists."""
+        data = {
+            "hourly": {
+                "time": [
+                    "2025-01-15T09:00",
+                    "2025-01-15T10:00",
+                    "2025-01-15T11:00",
+                ],
+                "temperature_2m": [-5.0, -4.0, -3.0],
+                "wind_gusts_10m": [20.0, 25.0, 30.0],
+                "precipitation": [0.0, 0.0, 0.0],
+                "snowfall": [1.0, 1.0, 1.0],  # Total 3.0 cm (but should be ignored)
+            },
+            "daily": {
+                "time": ["2025-01-15"],
+                "snow_depth_max": [0.5],
+                "snowfall_sum": [15.5],  # This should be used
+            },
+        }
+        hourly_units = {"snowfall": "cm"}
+        daily_units = {"snow_depth_max": "m", "snowfall_sum": "cm"}
+        
+        result = _parse_point_weather_from_batch(data, hourly_units, daily_units)
+        
+        assert date(2025, 1, 15) in result
+        weather = result[date(2025, 1, 15)]
+        assert weather.snowfall_cm == 15.5  # Daily value, not hourly sum
+
+    def test_hourly_fallback_sums_full_calendar_day(self):
+        """Should sum hourly snowfall for FULL calendar day, not just 09-16 window."""
+        # Snowfall at night (02:00, 04:00, 06:00) should be captured
+        data = {
+            "hourly": {
+                "time": [
+                    "2025-01-15T02:00",  # Night
+                    "2025-01-15T04:00",  # Night
+                    "2025-01-15T06:00",  # Early morning
+                    "2025-01-15T10:00",  # Day
+                    "2025-01-15T14:00",  # Day
+                    "2025-01-15T20:00",  # Night
+                ],
+                "temperature_2m": [-8.0, -7.0, -6.0, -4.0, -3.0, -5.0],
+                "wind_gusts_10m": [10.0, 10.0, 10.0, 10.0, 10.0, 10.0],
+                "precipitation": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0],
+                "snowfall": [3.0, 4.0, 2.0, 0.5, 0.5, 1.0],  # Total 11.0 cm
+            },
+            "daily": {
+                "time": ["2025-01-15"],
+                "snow_depth_max": [0.5],
+                # No snowfall_sum - should trigger hourly fallback
+            },
+        }
+        hourly_units = {"snowfall": "cm"}
+        daily_units = {"snow_depth_max": "m"}
+        
+        result = _parse_point_weather_from_batch(data, hourly_units, daily_units)
+        
+        assert date(2025, 1, 15) in result
+        weather = result[date(2025, 1, 15)]
+        # Should be 11.0 cm (all hours), not just 1.0 cm (09-16 window)
+        assert weather.snowfall_cm == 11.0
+
+    def test_overnight_snowfall_not_missed(self):
+        """Snowfall only outside 09-16 window should still be captured."""
+        data = {
+            "hourly": {
+                "time": [
+                    "2025-01-15T01:00",
+                    "2025-01-15T03:00", 
+                    "2025-01-15T05:00",
+                    "2025-01-15T10:00",  # Only this is in 09-16 window
+                    "2025-01-15T22:00",
+                ],
+                "temperature_2m": [-10.0, -10.0, -10.0, -5.0, -8.0],
+                "wind_gusts_10m": [5.0, 5.0, 5.0, 10.0, 5.0],
+                "precipitation": [0.0, 0.0, 0.0, 0.0, 0.0],
+                "snowfall": [5.0, 5.0, 3.0, 0.0, 2.0],  # 15 cm total, 0 in 09-16
+            },
+            "daily": {
+                "time": ["2025-01-15"],
+                "snow_depth_max": [1.0],
+            },
+        }
+        hourly_units = {"snowfall": "cm"}
+        daily_units = {"snow_depth_max": "m"}
+        
+        result = _parse_point_weather_from_batch(data, hourly_units, daily_units)
+        
+        assert date(2025, 1, 15) in result
+        weather = result[date(2025, 1, 15)]
+        # Should be 15.0 cm (full day), not 0 (09-16 window only)
+        assert weather.snowfall_cm == 15.0
+
 
 class TestFetchAllResortsWeather:
     """Integration tests for fetch_all_resorts_weather."""

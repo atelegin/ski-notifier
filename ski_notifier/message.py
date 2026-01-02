@@ -4,7 +4,7 @@ from dataclasses import dataclass
 from datetime import date
 from typing import Dict, List, Optional
 
-from .features import ResortFeatures, WeeklyBest, format_reason_line
+from .features import ResortFeatures, WeeklyBest
 from .resorts import Costs, Resort
 from .score import ResortScore
 
@@ -136,7 +136,6 @@ def format_message(
     Format:
     - Header with date
     - Weekly best line
-    - Причина line (from top-1)
     - Resort lines (2 lines each: weather + costs)
     - Missing warning (if any)
     """
@@ -156,12 +155,6 @@ def format_message(
     
     # Weekly best line
     lines.append(weekly_best.message)
-    
-    # Причина from top-1 resort
-    top = ranked_resorts[0]
-    if top.resort.id in resort_features:
-        reason = format_reason_line(resort_features[top.resort.id])
-        lines.append(reason)
     
     # Check if all resorts have low scores
     all_scores = [r.score.score for r in ranked_resorts]

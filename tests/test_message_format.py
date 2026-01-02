@@ -265,3 +265,50 @@ class TestFormatMessage:
                     # Good - directly next line, no empty line in between
                     pass
                 break
+
+    def test_no_usloviya_zavtra_line(self):
+        """Message should NOT contain 'Условия завтра:' line - it was misleading."""
+        r1 = make_ranked(make_resort("a"), 80)
+        
+        features: Dict[str, ResortFeatures] = {"a": make_features()}
+        costs = Costs(ferry_konstanz_meersburg_rt_eur=24, at_vignette_1day_eur=10)
+        
+        message = format_message(
+            date(2025, 1, 15),
+            [r1],
+            make_weekly_best(),
+            features,
+            costs,
+        )
+        
+        # This line should NOT exist in the message
+        assert "Условия завтра:" not in message
+
+    def test_header_structure_compact(self):
+        """Header: title line + weekly-best line + blank line + first resort."""
+        r1 = make_ranked(make_resort("a"), 80)
+        
+        features: Dict[str, ResortFeatures] = {"a": make_features()}
+        costs = Costs(ferry_konstanz_meersburg_rt_eur=24, at_vignette_1day_eur=10)
+        
+        message = format_message(
+            date(2025, 1, 15),
+            [r1],
+            make_weekly_best(),
+            features,
+            costs,
+        )
+        
+        lines = message.split("\n")
+        
+        # Line 0: title
+        assert lines[0].startswith("🟦 Ski forecast")
+        
+        # Line 1: weekly best (starts with ✅ or ℹ️)
+        assert lines[1].startswith("✅") or lines[1].startswith("ℹ️")
+        
+        # Line 2: blank line
+        assert lines[2] == ""
+        
+        # Line 3: first resort (🎿 or ⛷️)
+        assert "🎿" in lines[3] or "⛷️" in lines[3]

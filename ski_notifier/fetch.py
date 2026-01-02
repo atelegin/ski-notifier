@@ -219,8 +219,6 @@ def _parse_point_weather_from_batch(
                  if hourly["wind_gusts_10m"][i] is not None]
         precip = [hourly["precipitation"][i] for i in indices 
                   if hourly["precipitation"][i] is not None]
-        snowfall_hourly = [hourly["snowfall"][i] for i in indices 
-                          if hourly["snowfall"][i] is not None]
         
         temp_avg = sum(temps) / len(temps) if temps else None
         gust_max = max(gusts) if gusts else None
@@ -229,7 +227,7 @@ def _parse_point_weather_from_batch(
         snowfall_cm: Optional[float] = None
         snow_depth_cm: Optional[float] = None
         
-        # Try daily snowfall_sum
+        # Try daily snowfall_sum (primary source for full-day snowfall)
         if "snowfall_sum" in daily and daily["snowfall_sum"]:
             daily_dates = [datetime.fromisoformat(t).date() for t in daily.get("time", [])]
             if d in daily_dates:
@@ -239,10 +237,21 @@ def _parse_point_weather_from_batch(
                     unit = daily_units.get("snowfall_sum", "cm")
                     snowfall_cm = _convert_to_cm(val, unit)
         
-        # Fallback: sum hourly snowfall
-        if snowfall_cm is None and snowfall_hourly:
-            unit = hourly_units.get("snowfall", "cm")
-            snowfall_cm = _convert_to_cm(sum(snowfall_hourly), unit)
+        # Fallback: sum hourly snowfall for FULL calendar day (not just 09-16 window)
+        # This captures overnight/nighttime snowfall when daily data is unavailable
+        if snowfall_cm is None:
+            # Get all hourly indices for this calendar day (00:00-23:00)
+            full_day_indices = [
+                i for i, dt in enumerate(hourly_times)
+                if dt.date() == d
+            ]
+            snowfall_hourly_full_day = [
+                hourly["snowfall"][i] for i in full_day_indices
+                if hourly["snowfall"][i] is not None
+            ]
+            if snowfall_hourly_full_day:
+                unit = hourly_units.get("snowfall", "cm")
+                snowfall_cm = _convert_to_cm(sum(snowfall_hourly_full_day), unit)
         
         # Snow depth from daily
         if "snow_depth_max" in daily and daily["snow_depth_max"]:
@@ -289,7 +298,7 @@ def _fetch_batch(
         "latitude": latitudes,
         "longitude": longitudes,
         "hourly": "temperature_2m,wind_gusts_10m,precipitation,snowfall",
-        "daily": "snow_depth_max",
+        "daily": "snow_depth_max,snowfall_sum",
         "timezone": TIMEZONE,
         "forecast_days": forecast_days,
     }
@@ -481,7 +490,7 @@ def fetch_point_weather(point: Point, forecast_days: int = 7) -> Dict[date, Poin
         "latitude": point.lat,
         "longitude": point.lon,
         "hourly": "temperature_2m,wind_gusts_10m,precipitation,snowfall",
-        "daily": "snow_depth_max",
+        "daily": "snow_depth_max,snowfall_sum",
         "timezone": TIMEZONE,
         "forecast_days": forecast_days,
     }
