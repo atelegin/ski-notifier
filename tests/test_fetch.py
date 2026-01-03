@@ -425,3 +425,197 @@ class TestFetchAllResortsWeather:
         # Resort should still have low point data
         assert "resort_a" in result.weather
         assert date(2025, 1, 15) in result.weather["resort_a"].low
+
+
+class TestSnow24To9:
+    """Tests for compute_snow24_to_9 computation (P0 - must implement before merge)."""
+    
+    def test_normal_day_sum(self):
+        """Sum hourly snowfall for [D-24h, D 09:00). Always 24 slots."""
+        from datetime import datetime
+        from zoneinfo import ZoneInfo
+        from ski_notifier.fetch import compute_snow24_to_9
+        
+        tz = ZoneInfo("Europe/Berlin")
+        target_day = date(2025, 1, 15)
+        
+        # Create 24h of hourly data ending at 09:00 on target day
+        # Window: 2025-01-14 09:00 to 2025-01-15 09:00 (exclusive)
+        end_dt = datetime(2025, 1, 15, 9, 0, tzinfo=tz)
+        
+        hourly_unix_times = []
+        hourly_snowfall = []
+        for i in range(24):
+            t = end_dt.timestamp() - (24 - i) * 3600
+            hourly_unix_times.append(int(t))
+            hourly_snowfall.append(1.0)  # 1 cm per hour
+        
+        snow24, quality = compute_snow24_to_9(
+            hourly_unix_times, hourly_snowfall, target_day, "cm"
+        )
+        
+        assert snow24 == 24.0  # 24 hours * 1 cm
+        assert quality == "ok"
+    
+    def test_boundary_start_included(self):
+        """Unix timestamp == start should be included."""
+        from datetime import datetime
+        from zoneinfo import ZoneInfo
+        from ski_notifier.fetch import compute_snow24_to_9
+        
+        tz = ZoneInfo("Europe/Berlin")
+        target_day = date(2025, 1, 15)
+        
+        # Only the start timestamp (09:00 yesterday)
+        end_dt = datetime(2025, 1, 15, 9, 0, tzinfo=tz)
+        start_unix = int((end_dt.timestamp() - 24 * 3600))
+        
+        snow24, quality = compute_snow24_to_9(
+            [start_unix], [5.0], target_day, "cm"
+        )
+        
+        assert snow24 == 5.0  # Start is included
+        assert quality == "partial"  # Only 1 of 24 slots
+    
+    def test_boundary_end_excluded(self):
+        """Unix timestamp == end (09:00) should be excluded."""
+        from datetime import datetime
+        from zoneinfo import ZoneInfo
+        from ski_notifier.fetch import compute_snow24_to_9
+        
+        tz = ZoneInfo("Europe/Berlin")
+        target_day = date(2025, 1, 15)
+        
+        # Only the end timestamp (09:00 today) - should be excluded
+        end_unix = int(datetime(2025, 1, 15, 9, 0, tzinfo=tz).timestamp())
+        
+        snow24, quality = compute_snow24_to_9(
+            [end_unix], [5.0], target_day, "cm"
+        )
+        
+        assert snow24 is None  # End is excluded
+        assert quality == "missing"
+    
+    def test_dst_forward_robust(self):
+        """DST spring forward: function works correctly, returns reasonable result."""
+        from datetime import datetime
+        from zoneinfo import ZoneInfo
+        from ski_notifier.fetch import compute_snow24_to_9
+        
+        tz = ZoneInfo("Europe/Berlin")
+        # DST forward in Germany: last Sunday of March (2025-03-30)
+        # Clocks jump from 02:00 to 03:00
+        target_day = date(2025, 3, 30)
+        
+        end_dt = datetime(2025, 3, 30, 9, 0, tzinfo=tz)
+        
+        # Generate slots using Unix time (may be 23 or 24 depending on window)
+        hourly_unix_times = []
+        hourly_snowfall = []
+        for i in range(24):
+            t = end_dt.timestamp() - (24 - i) * 3600
+            hourly_unix_times.append(int(t))
+            hourly_snowfall.append(0.5)
+        
+        snow24, quality = compute_snow24_to_9(
+            hourly_unix_times, hourly_snowfall, target_day, "cm"
+        )
+        
+        # Verify function handles DST without crashing
+        assert snow24 is not None
+        assert snow24 > 10.0  # At least most of the data should be counted
+        assert quality in ("ok", "partial")  # May be partial due to DST
+    
+    def test_dst_backward_robust(self):
+        """DST fall back: function works correctly, handles potential collision."""
+        from datetime import datetime
+        from zoneinfo import ZoneInfo
+        from ski_notifier.fetch import compute_snow24_to_9
+        
+        tz = ZoneInfo("Europe/Berlin")
+        # DST back in Germany: last Sunday of October (2025-10-26)
+        # Clocks go from 03:00 back to 02:00
+        target_day = date(2025, 10, 26)
+        
+        end_dt = datetime(2025, 10, 26, 9, 0, tzinfo=tz)
+        
+        hourly_unix_times = []
+        hourly_snowfall = []
+        for i in range(24):
+            t = end_dt.timestamp() - (24 - i) * 3600
+            hourly_unix_times.append(int(t))
+            hourly_snowfall.append(0.5)
+        
+        snow24, quality = compute_snow24_to_9(
+            hourly_unix_times, hourly_snowfall, target_day, "cm"
+        )
+        
+        # Verify function handles DST without crashing
+        assert snow24 is not None
+        assert snow24 > 10.0  # At least most of the data should be counted
+        assert quality in ("ok", "partial")  # May be partial due to DST
+    
+    def test_partial_missing_data(self):
+        """Missing some slots → quality=partial."""
+        from datetime import datetime
+        from zoneinfo import ZoneInfo
+        from ski_notifier.fetch import compute_snow24_to_9
+        
+        tz = ZoneInfo("Europe/Berlin")
+        target_day = date(2025, 1, 15)
+        
+        end_dt = datetime(2025, 1, 15, 9, 0, tzinfo=tz)
+        
+        # Only provide 12 of 24 expected slots
+        hourly_unix_times = []
+        hourly_snowfall = []
+        for i in range(12):
+            t = end_dt.timestamp() - (24 - i) * 3600
+            hourly_unix_times.append(int(t))
+            hourly_snowfall.append(1.0)
+        
+        snow24, quality = compute_snow24_to_9(
+            hourly_unix_times, hourly_snowfall, target_day, "cm"
+        )
+        
+        assert snow24 == 12.0  # Sum of available data
+        assert quality == "partial"  # Missing 12 slots
+    
+    def test_fully_missing_data(self):
+        """No data in window → quality=missing, snow24=None."""
+        from datetime import datetime
+        from zoneinfo import ZoneInfo
+        from ski_notifier.fetch import compute_snow24_to_9
+        
+        tz = ZoneInfo("Europe/Berlin")
+        target_day = date(2025, 1, 15)
+        
+        # Provide data outside the window (after 09:00)
+        outside_window = int(datetime(2025, 1, 15, 10, 0, tzinfo=tz).timestamp())
+        
+        snow24, quality = compute_snow24_to_9(
+            [outside_window], [5.0], target_day, "cm"
+        )
+        
+        assert snow24 is None
+        assert quality == "missing"
+    
+    def test_unit_conversion_mm(self):
+        """Snowfall in mm should be converted to cm."""
+        from datetime import datetime
+        from zoneinfo import ZoneInfo
+        from ski_notifier.fetch import compute_snow24_to_9
+        
+        tz = ZoneInfo("Europe/Berlin")
+        target_day = date(2025, 1, 15)
+        
+        end_dt = datetime(2025, 1, 15, 9, 0, tzinfo=tz)
+        start_unix = int((end_dt.timestamp() - 24 * 3600))
+        
+        # 10mm should become 1cm
+        snow24, quality = compute_snow24_to_9(
+            [start_unix], [10.0], target_day, "mm"
+        )
+        
+        assert snow24 == 1.0  # 10mm = 1cm
+        assert quality == "partial"

@@ -36,13 +36,14 @@ def calculate_point_score(weather: PointWeather) -> PointScore:
     Scoring formula (0-100):
     - base = 50
     - + clamp(snow_depth_cm, 0..60) * 0.6
-    - + clamp(snowfall_cm, 0..30) * 0.4   (fresh snow bonus)
+    - + clamp(snow24_to_9_cm, 0..30) * 0.4   (fresh snow: 24h ending at 09:00)
     - - max(0, wind_gust_kmh_max - 35) * 0.8
     - - max(0, precip_mm_sum - 8) * 1.0   (heavy rain/wet snow penalty)
     - - max(0, temp_C_avg - 4) * 3.0      (warm = worse snow)
     - - max(0, -temp_C_avg - 18) * 1.0    (extreme cold discomfort)
     
     Note: Wind threshold (35 km/h) is for GUSTS, not average wind.
+    Note: snow24_to_9_cm used for scoring, fallback to snowfall_cm if unavailable.
     """
     score = 50.0
     has_snow_data = False
@@ -52,10 +53,12 @@ def calculate_point_score(weather: PointWeather) -> PointScore:
         has_snow_data = True
         score += clamp(weather.snow_depth_cm, 0, 60) * 0.6
     
-    # Fresh snow bonus (not penalized, only bonus)
-    if weather.snowfall_cm is not None:
+    # Fresh snow bonus: use snow24_to_9_cm (24h ending at 09:00)
+    # Fallback to deprecated snowfall_cm for backward compatibility
+    snowfall_for_scoring = weather.snow24_to_9_cm if weather.snow24_to_9_cm is not None else weather.snowfall_cm
+    if snowfall_for_scoring is not None:
         has_snow_data = True
-        score += clamp(weather.snowfall_cm, 0, 30) * 0.4
+        score += clamp(snowfall_for_scoring, 0, 30) * 0.4
     
     # Wind gust penalty (threshold for GUSTS specifically)
     if weather.wind_gust_kmh_max_9_16 is not None:

@@ -3,7 +3,7 @@
 import logging
 import time
 from dataclasses import dataclass, field
-from datetime import date, datetime
+from datetime import date, datetime, timedelta
 from typing import Any, Dict, List, Optional, Tuple
 from zoneinfo import ZoneInfo
 
@@ -41,7 +41,10 @@ class PointWeather:
     wind_gust_kmh_max_9_16: Optional[float]
     precip_mm_sum_9_16: Optional[float]
     snow_depth_cm: Optional[float]
-    snowfall_cm: Optional[float]
+    snowfall_cm: Optional[float]  # DEPRECATED: calendar-day sum, kept for compatibility
+    # NEW: 24h snowfall ending at 09:00 Europe/Berlin
+    snow24_to_9_cm: Optional[float] = None
+    snow24_quality: str = "missing"  # "ok" | "partial" | "missing"
 
 
 @dataclass
@@ -184,6 +187,85 @@ def _convert_to_cm(value: Optional[float], unit: str) -> Optional[float]:
         return value
 
 
+def compute_snow24_to_9(
+    hourly_unix_times: List[int],
+    hourly_snowfall: List[Optional[float]],
+    target_day: date,
+    snowfall_unit: str,
+) -> Tuple[Optional[float], str]:
+    """Compute snowfall sum for 24h ending at 09:00 on target_day.
+    
+    Uses Unix timestamps to avoid DST ambiguity (the "repeated 02:00" problem).
+    
+    Contract: hourly_snowfall must be RAW values from API (not pre-converted).
+    Conversion to cm happens exactly once inside this function.
+    
+    Args:
+        hourly_unix_times: Unix timestamps from API (timeformat=unixtime)
+        hourly_snowfall: RAW snowfall values from API (not pre-converted)
+        target_day: The day for which to compute snow24
+        snowfall_unit: Unit from API (cm, mm, m) — conversion applied once here
+    
+    Returns:
+        Tuple of (snow24_cm, quality) where quality is "ok"|"partial"|"missing"
+    """
+    # TZ must be ZoneInfo (not fixed offset) for correct DST handling
+    tz = ZoneInfo("Europe/Berlin")
+    
+    # end = target_day at 09:00 Europe/Berlin -> convert to Unix
+    end_dt = datetime(target_day.year, target_day.month, target_day.day, 9, 0, tzinfo=tz)
+    start_dt = end_dt - timedelta(hours=24)
+    end_unix = int(end_dt.timestamp())
+    start_unix = int(start_dt.timestamp())
+    
+    # Generate expected Unix timestamps (3600s apart, handles DST correctly)
+    expected_unix: set = set()
+    t = start_unix
+    while t < end_unix:
+        expected_unix.add(t)
+        t += 3600  # 1 hour in seconds
+    
+    # Length guard - INTENDED: still compute via zip(), quality = partial
+    length_mismatch = len(hourly_unix_times) != len(hourly_snowfall)
+    if length_mismatch:
+        logger.warning(f"Array length mismatch: times={len(hourly_unix_times)}, snowfall={len(hourly_snowfall)}")
+    
+    # Validate unit (guard against silent garbage)
+    unit = snowfall_unit
+    if unit not in {"mm", "cm", "m"}:
+        logger.warning(f"Unknown snowfall unit '{unit}', treating as cm")
+        unit = "cm"
+    
+    # Build unix->value mapping, sum if duplicate (defensive)
+    time_to_value: Dict[int, float] = {}
+    for unix_t, val in zip(hourly_unix_times, hourly_snowfall):
+        # Normalize to round hour (must match expected_unix which is 3600-aligned)
+        unix_t = unix_t - (unix_t % 3600)
+        if unix_t in expected_unix and val is not None:
+            # Sum duplicates (shouldn't happen, but don't lose data)
+            time_to_value[unix_t] = time_to_value.get(unix_t, 0.0) + val
+    
+    # Check which expected timestamps are missing
+    missing_times = expected_unix - set(time_to_value.keys())
+    
+    # Extract valid snowfall values (still raw units)
+    snow_values = list(time_to_value.values())
+    
+    # INTENDED: return partial sum (not None) if any values exist
+    if not snow_values:
+        return None, "missing"
+    
+    # Convert to cm ONCE here (sum first, then convert)
+    total_cm = _convert_to_cm(sum(snow_values), unit)
+    
+    # Quality: partial if any gaps or length mismatch
+    if missing_times or length_mismatch:
+        quality = "partial"
+    else:
+        quality = "ok"
+    
+    return round(total_cm, 1) if total_cm is not None else None, quality
+
 def _parse_point_weather_from_batch(
     data: Dict[str, Any],
     hourly_units: Dict[str, str],
@@ -196,8 +278,23 @@ def _parse_point_weather_from_batch(
     if not hourly or "time" not in hourly:
         return {}
     
-    # Parse hourly times
-    hourly_times = [datetime.fromisoformat(t) for t in hourly["time"]]
+    # TZ for datetime conversions
+    tz = ZoneInfo("Europe/Berlin")
+    
+    # Parse hourly times - now Unix timestamps (integers)
+    raw_times = hourly["time"]
+    # Handle both Unix timestamps (int) and ISO strings (fallback for legacy)
+    if raw_times and isinstance(raw_times[0], (int, float)):
+        hourly_unix_times: List[int] = [int(t) for t in raw_times]
+        hourly_times = [datetime.fromtimestamp(t, tz=tz) for t in hourly_unix_times]
+    else:
+        # Legacy: ISO strings
+        hourly_times = [datetime.fromisoformat(t) for t in raw_times]
+        hourly_unix_times = [int(dt.timestamp()) for dt in hourly_times]
+    
+    # Get raw hourly snowfall for snow24 computation
+    hourly_snowfall_raw: List[Optional[float]] = hourly.get("snowfall", [])
+    snowfall_unit = hourly_units.get("snowfall", "cm")
     
     result: Dict[date, PointWeather] = {}
     dates = sorted(set(dt.date() for dt in hourly_times))
@@ -227,9 +324,17 @@ def _parse_point_weather_from_batch(
         snowfall_cm: Optional[float] = None
         snow_depth_cm: Optional[float] = None
         
-        # Try daily snowfall_sum (primary source for full-day snowfall)
+        # Parse daily times - also Unix timestamps now
+        daily_dates: List[date] = []
+        if "time" in daily and daily["time"]:
+            daily_raw = daily["time"]
+            if isinstance(daily_raw[0], (int, float)):
+                daily_dates = [datetime.fromtimestamp(t, tz=tz).date() for t in daily_raw]
+            else:
+                daily_dates = [datetime.fromisoformat(t).date() for t in daily_raw]
+        
+        # Try daily snowfall_sum (DEPRECATED for scoring, kept for compatibility)
         if "snowfall_sum" in daily and daily["snowfall_sum"]:
-            daily_dates = [datetime.fromisoformat(t).date() for t in daily.get("time", [])]
             if d in daily_dates:
                 idx = daily_dates.index(d)
                 val = daily["snowfall_sum"][idx]
@@ -237,10 +342,8 @@ def _parse_point_weather_from_batch(
                     unit = daily_units.get("snowfall_sum", "cm")
                     snowfall_cm = _convert_to_cm(val, unit)
         
-        # Fallback: sum hourly snowfall for FULL calendar day (not just 09-16 window)
-        # This captures overnight/nighttime snowfall when daily data is unavailable
+        # Fallback: sum hourly snowfall for FULL calendar day (DEPRECATED for scoring)
         if snowfall_cm is None:
-            # Get all hourly indices for this calendar day (00:00-23:00)
             full_day_indices = [
                 i for i, dt in enumerate(hourly_times)
                 if dt.date() == d
@@ -255,13 +358,20 @@ def _parse_point_weather_from_batch(
         
         # Snow depth from daily
         if "snow_depth_max" in daily and daily["snow_depth_max"]:
-            daily_dates = [datetime.fromisoformat(t).date() for t in daily.get("time", [])]
             if d in daily_dates:
                 idx = daily_dates.index(d)
                 val = daily["snow_depth_max"][idx]
                 if val is not None:
                     unit = daily_units.get("snow_depth_max", "m")
                     snow_depth_cm = _convert_to_cm(val, unit)
+        
+        # NEW: Compute snow24_to_9_cm (24h ending at 09:00)
+        snow24_cm, snow24_quality = compute_snow24_to_9(
+            hourly_unix_times,
+            hourly_snowfall_raw,
+            d,
+            snowfall_unit,
+        )
         
         result[d] = PointWeather(
             date=d,
@@ -270,6 +380,8 @@ def _parse_point_weather_from_batch(
             precip_mm_sum_9_16=round(precip_sum, 1) if precip_sum is not None else None,
             snow_depth_cm=round(snow_depth_cm, 1) if snow_depth_cm is not None else None,
             snowfall_cm=round(snowfall_cm, 1) if snowfall_cm is not None else None,
+            snow24_to_9_cm=snow24_cm,
+            snow24_quality=snow24_quality,
         )
     
     return result
@@ -300,6 +412,7 @@ def _fetch_batch(
         "hourly": "temperature_2m,wind_gusts_10m,precipitation,snowfall",
         "daily": "snow_depth_max,snowfall_sum",
         "timezone": TIMEZONE,
+        "timeformat": "unixtime",  # P0: Use Unix timestamps for DST safety
         "forecast_days": forecast_days,
     }
     
@@ -492,6 +605,7 @@ def fetch_point_weather(point: Point, forecast_days: int = 7) -> Dict[date, Poin
         "hourly": "temperature_2m,wind_gusts_10m,precipitation,snowfall",
         "daily": "snow_depth_max,snowfall_sum",
         "timezone": TIMEZONE,
+        "timeformat": "unixtime",  # P0: Use Unix timestamps for DST safety
         "forecast_days": forecast_days,
     }
     

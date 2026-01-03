@@ -358,22 +358,24 @@ class TestFormatMessage:
 class TestDisciplineHeaderLine:
     def test_header_line_tomorrow_is_best(self):
         """When tomorrow is best day, show '— завтра лучший день недели: <score>'."""
+        tomorrow = date(2025, 1, 15)
         summary = DisciplineWeekly(
             discipline="alpine",
             tomorrow_score=85,
-            best_day=date(2025, 1, 15),
+            best_day=tomorrow,
             best_day_score=85,
         )
         
-        line = format_discipline_header_line(summary)
+        line = format_discipline_header_line(summary, tomorrow)
         
         assert "— завтра лучший день недели: 85" in line
-        assert "✅ Горные: стоит" in line
+        assert "Горные: стоит" in line
         # Must NOT contain "но лучший день" when tomorrow is best
         assert "но лучший день" not in line
     
     def test_header_line_tomorrow_worse(self):
-        """When tomorrow is worse than best, show 'но лучший день <DAY>: <score>' (no delta)."""
+        """When tomorrow is worse than best (large gap), show 'но лучший день <DAY>: <score>'."""
+        tomorrow = date(2025, 1, 15)
         summary = DisciplineWeekly(
             discipline="alpine",
             tomorrow_score=74,
@@ -381,11 +383,11 @@ class TestDisciplineHeaderLine:
             best_day_score=84,
         )
         
-        line = format_discipline_header_line(summary)
+        line = format_discipline_header_line(summary, tomorrow)
         
-        # New format: "— завтра 74, но лучший день СБ: 84"
+        # gap=10 > 2: "— завтра 74, но лучший день СБ: 84"
         assert ", но лучший день СБ: 84" in line
-        assert "✅ Горные: стоит" in line
+        assert "Горные: стоит" in line
         # No delta tokens
         assert "(-" not in line
         assert "(+" not in line
@@ -395,53 +397,54 @@ class TestDisciplineHeaderLine:
     
     def test_header_verdict_threshold_stoit(self):
         """Score >= 70 shows 'стоит' with ✅."""
+        tomorrow = date(2025, 1, 15)
         for score in [70, 75, 85, 100]:
             summary = DisciplineWeekly(
                 discipline="alpine",
                 tomorrow_score=score,
-                best_day=date(2025, 1, 15),
+                best_day=tomorrow,
                 best_day_score=score,
             )
-            line = format_discipline_header_line(summary)
-            assert "✅" in line
+            line = format_discipline_header_line(summary, tomorrow)
             assert "стоит" in line
     
     def test_header_verdict_threshold_somnitelno(self):
         """Score 60-69 shows 'сомнительно' with ⚠️."""
+        tomorrow = date(2025, 1, 15)
         for score in [60, 65, 69]:
             summary = DisciplineWeekly(
                 discipline="alpine",
                 tomorrow_score=score,
-                best_day=date(2025, 1, 15),
+                best_day=tomorrow,
                 best_day_score=score,
             )
-            line = format_discipline_header_line(summary)
-            assert "⚠️" in line
+            line = format_discipline_header_line(summary, tomorrow)
             assert "сомнительно" in line
     
-    def test_header_verdict_threshold_ne_stoit(self):
-        """Score < 60 shows 'не стоит' with ⛔️."""
+    def test_header_verdict_threshold_skip(self):
+        """Score < 60 shows ⛔️ verdict."""
+        tomorrow = date(2025, 1, 15)
         for score in [55, 50, 30, 0]:
             summary = DisciplineWeekly(
                 discipline="alpine",
                 tomorrow_score=score,
-                best_day=date(2025, 1, 15),
+                best_day=tomorrow,
                 best_day_score=score,
             )
-            line = format_discipline_header_line(summary)
-            assert "⛔️" in line
+            line = format_discipline_header_line(summary, tomorrow)
             assert "не стоит" in line
     
     def test_header_xc_label(self):
         """XC discipline shows 'Беговые' label."""
+        tomorrow = date(2025, 1, 15)
         summary = DisciplineWeekly(
             discipline="xc",
             tomorrow_score=75,
-            best_day=date(2025, 1, 15),
+            best_day=tomorrow,
             best_day_score=75,
         )
         
-        line = format_discipline_header_line(summary)
+        line = format_discipline_header_line(summary, tomorrow)
         
         assert "Беговые:" in line
     
@@ -563,3 +566,182 @@ def test_xc_costs_still_present_e2e():
     assert "↳ 💶" in message
     assert "ferry" in message
     assert "Skipass" not in message
+
+
+class TestVerdictDependentTemplates:
+    """Tests for verdict-dependent header templates (P1.HEADER.9)."""
+    
+    def test_ok_small_gap(self):
+        """✅ small gap: t=82, b=84 → 'почти лучший день недели: 82'."""
+        tomorrow = date(2025, 1, 15)
+        summary = DisciplineWeekly(
+            discipline="alpine",
+            tomorrow_score=82,
+            best_day=date(2025, 1, 18),  # Saturday
+            best_day_score=84,
+        )
+        line = format_discipline_header_line(summary, tomorrow)
+        
+        assert "почти лучший день недели: 82" in line
+        assert "стоит" in line
+    
+    def test_ok_large_gap(self):
+        """✅ large gap: t=72, b=80 → 'но лучший день СБ: 80'."""
+        tomorrow = date(2025, 1, 15)
+        summary = DisciplineWeekly(
+            discipline="alpine",
+            tomorrow_score=72,
+            best_day=date(2025, 1, 18),  # Saturday
+            best_day_score=80,
+        )
+        line = format_discipline_header_line(summary, tomorrow)
+        
+        assert "но лучший день СБ: 80" in line
+        assert "стоит" in line
+    
+    def test_warning_non_tie(self):
+        """⚠️ non-tie: t=61, b=62 → exact template with 'Лучший вариант на неделе'."""
+        tomorrow = date(2025, 1, 15)
+        summary = DisciplineWeekly(
+            discipline="xc",
+            tomorrow_score=61,
+            best_day=date(2025, 1, 18),  # Saturday
+            best_day_score=62,
+        )
+        line = format_discipline_header_line(summary, tomorrow)
+        
+        assert "Беговые: сомнительно — завтра 61. Лучший вариант на неделе: 62 (СБ)" in line
+        assert "почти лучший день" not in line
+    
+    def test_warning_tie(self):
+        """⚠️ tie: t=61, b=61 → 'завтра лучший вариант на неделе: 61'."""
+        tomorrow = date(2025, 1, 15)
+        summary = DisciplineWeekly(
+            discipline="xc",
+            tomorrow_score=61,
+            best_day=tomorrow,
+            best_day_score=61,
+        )
+        line = format_discipline_header_line(summary, tomorrow)
+        
+        assert "завтра лучший вариант на неделе: 61" in line
+        assert "сомнительно" in line
+    
+    def test_skip_good_day_soon(self):
+        """⛔️ good day soon: t=56, b=80, days_to_best=2 → 'подождать до СР (80)'."""
+        tomorrow = date(2025, 1, 15)  # Wednesday is 2 days later
+        summary = DisciplineWeekly(
+            discipline="alpine",
+            tomorrow_score=56,
+            best_day=date(2025, 1, 17),  # Friday, 2 days later
+            best_day_score=80,
+        )
+        line = format_discipline_header_line(summary, tomorrow)
+        
+        assert "подождать до ПТ (80)" in line
+        assert "лучше не завтра" in line
+    
+    def test_skip_not_best_weak_best_day(self):
+        """⛔️ not best tomorrow + weak best day: t=56, b=62 → 'тоже слабый'."""
+        tomorrow = date(2025, 1, 15)
+        summary = DisciplineWeekly(
+            discipline="alpine",
+            tomorrow_score=56,
+            best_day=date(2025, 1, 19),  # Sunday, 4 days later
+            best_day_score=62,
+        )
+        line = format_discipline_header_line(summary, tomorrow)
+        
+        assert "не стоит — завтра 56; лучший день ВС тоже слабый: 62" in line
+        assert "подождать" not in line
+    
+    def test_skip_best_day_in_past(self):
+        """⛔️ best day in past relative to tomorrow → no crash, uses 'не стоит'."""
+        tomorrow = date(2025, 1, 15)
+        summary = DisciplineWeekly(
+            discipline="alpine",
+            tomorrow_score=45,
+            best_day=date(2025, 1, 14),  # Yesterday
+            best_day_score=80,
+        )
+        line = format_discipline_header_line(summary, tomorrow)
+        
+        # Should not crash, should use "не стоит" fallback
+        assert "не стоит — завтра 45" in line
+        assert "подождать" not in line
+    
+    def test_warning_large_gap(self):
+        """⚠️ large gap: t=61, b=80 → still uses 'Лучший вариант на неделе', no 'почти лучший'."""
+        tomorrow = date(2025, 1, 15)
+        summary = DisciplineWeekly(
+            discipline="xc",
+            tomorrow_score=61,
+            best_day=date(2025, 1, 18),  # Saturday
+            best_day_score=80,
+        )
+        line = format_discipline_header_line(summary, tomorrow)
+        
+        assert "Лучший вариант на неделе: 80 (СБ)" in line
+        assert "почти лучший" not in line
+        assert "сомнительно" in line
+    
+    def test_skip_tomorrow_is_best(self):
+        """⛔️ tomorrow IS best (gap=0) → 'не стоит — завтра {t}', no 'лучший день'."""
+        tomorrow = date(2025, 1, 15)
+        summary = DisciplineWeekly(
+            discipline="alpine",
+            tomorrow_score=55,
+            best_day=tomorrow,
+            best_day_score=55,
+        )
+        line = format_discipline_header_line(summary, tomorrow)
+        
+        assert "не стоит — завтра 55" in line
+        assert "лучший день" not in line
+        assert "подождать" not in line
+    
+    def test_wait_rule_up_to_7_days(self):
+        """⛔️ good day within 7 days: t=59, b=78, days_to_best=6 → 'подождать до СБ (78)'."""
+        tomorrow = date(2025, 1, 15)  # Wednesday
+        summary = DisciplineWeekly(
+            discipline="xc",
+            tomorrow_score=59,
+            best_day=date(2025, 1, 21),  # Tuesday, 6 days later
+            best_day_score=78,
+        )
+        line = format_discipline_header_line(summary, tomorrow)
+        
+        assert "подождать до ВТ (78)" in line
+        assert "лучше не завтра" in line
+    
+    def test_wait_rule_over_7_days_no_best_mention(self):
+        """⛔️ good day beyond 7 days: t=59, b=78, days_to_best=8 → no 'подождать', no 'лучший день'."""
+        tomorrow = date(2025, 1, 15)  # Wednesday
+        summary = DisciplineWeekly(
+            discipline="xc",
+            tomorrow_score=59,
+            best_day=date(2025, 1, 23),  # Thursday, 8 days later
+            best_day_score=78,
+        )
+        line = format_discipline_header_line(summary, tomorrow)
+        
+        assert "не стоит — завтра 59" in line
+        assert "подождать" not in line
+        assert "лучший день" not in line
+    
+    def test_day_abbreviation_uppercase(self):
+        """Day abbreviation in output is uppercase (СБ, not сб)."""
+        tomorrow = date(2025, 1, 15)  # Wednesday
+        summary = DisciplineWeekly(
+            discipline="alpine",
+            tomorrow_score=56,
+            best_day=date(2025, 1, 18),  # Saturday
+            best_day_score=62,
+        )
+        line = format_discipline_header_line(summary, tomorrow)
+        
+        # Day should be uppercase СБ in the output
+        assert "СБ" in line
+        # Ensure lowercase "сб" is not in the original line
+        assert "сб" not in line
+

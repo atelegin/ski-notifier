@@ -2,8 +2,8 @@ name: Daily Ski Notifier
 
 on:
   schedule:
-    # 16:00 UTC = 17:00 CET (winter) / 18:00 CEST (summer)
-    - cron: '0 16 * * *'
+    # 16:00 UTC = 16:00 CET (winter) / 17:00 CEST (summer)
+    - cron: '0 15 * * *'
   workflow_dispatch:  # Manual trigger for testing
 
 jobs:

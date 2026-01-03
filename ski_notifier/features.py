@@ -27,30 +27,23 @@ class ResortFeatures:
 def compute_resort_features(
     weather_low: PointWeather,
     weather_high: PointWeather,
-    daily_snowfall: List[Optional[float]],  # [day0=today, day1=tomorrow, day2, ...]
 ) -> ResortFeatures:
     """Compute display features from weather data.
     
     Args:
         weather_low: Weather for base station (tomorrow, 09-16 window).
         weather_high: Weather for summit (tomorrow, 09-16 window).
-        daily_snowfall: List of daily snowfall values [day0, day1, day2, ...].
         
     Returns:
         ResortFeatures with computed display values.
     """
-    # snow24 = tomorrow's snowfall
-    snow24_cm: Optional[float] = None
-    if len(daily_snowfall) > 1 and daily_snowfall[1] is not None:
-        snow24_cm = daily_snowfall[1]
+    # snow24 = max of low/high snow24_to_9_cm (24h ending at 09:00)
+    snow24_values = [w.snow24_to_9_cm for w in [weather_low, weather_high] if w.snow24_to_9_cm is not None]
+    snow24_cm = max(snow24_values) if snow24_values else None
     
-    # snow48 = tomorrow + day after
-    snow48_cm: Optional[float] = None
-    if len(daily_snowfall) > 2:
-        day1 = daily_snowfall[1] if daily_snowfall[1] is not None else 0
-        day2 = daily_snowfall[2] if daily_snowfall[2] is not None else 0
-        if daily_snowfall[1] is not None or daily_snowfall[2] is not None:
-            snow48_cm = day1 + day2
+    # snow48 = for now, just double snow24 (simplified; proper implementation would need 2 days of data)
+    # TODO: Implement proper 48h window when needed
+    snow48_cm = snow24_cm * 2 if snow24_cm is not None else None
     
     # Aggregation: max(low, high) for rain
     rain_low = weather_low.precip_mm_sum_9_16 or 0

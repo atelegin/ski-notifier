@@ -161,17 +161,10 @@ def main() -> None:
         resort = ranked.resort
         if resort.id in fetch_result.weather:
             weather = fetch_result.weather[resort.id]
-            # Build daily snowfall list from weather data
-            dates_sorted = sorted(weather.high.keys())
-            daily_snowfall = [
-                weather.high[d].snowfall_cm if d in weather.high else None
-                for d in dates_sorted
-            ]
             if tomorrow in weather.low and tomorrow in weather.high:
                 features = compute_resort_features(
                     weather.low[tomorrow],
                     weather.high[tomorrow],
-                    daily_snowfall,
                 )
                 resort_features[resort.id] = features
     

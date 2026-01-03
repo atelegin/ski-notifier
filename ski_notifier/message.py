@@ -20,41 +20,51 @@ class RankedResort:
     score: ResortScore
 
 
-def format_discipline_header_line(summary: DisciplineWeekly) -> str:
-    """Format one header line for a discipline.
+def format_discipline_header_line(summary: DisciplineWeekly, tomorrow: date) -> str:
+    """Format one header line for a discipline with verdict-dependent templates.
     
-    Verdict thresholds by tomorrow_score:
-    - >= 70: ✅ <disc>: стоит
-    - 60..69: ⚠️ <disc>: сомнительно
-    - < 60: ⛔️ <disc>: не стоит
+    Verdict thresholds by tomorrow_score (t):
+    - t >= 70: ✅ стоит
+    - 60 <= t <= 69: ⚠️ сомнительно
+    - t < 60: ⛔️ лучше не ехать / лучше не завтра
     
-    If tomorrow_is_best:
-        "<ICON> <Disc>: <verdict> — завтра лучший день недели: <score>"
-    Else:
-        "<ICON> <Disc>: <verdict> — завтра <score>, но лучший день <DAY>: <best_score>"
-    
-    DAY is uppercase: ПН/ВТ/СР/ЧТ/ПТ/СБ/ВС.
-    No deltas anywhere.
+    Templates vary by verdict and gap (b - t).
     """
-    score = summary.tomorrow_score
+    t = summary.tomorrow_score
+    b = summary.best_day_score
+    gap = b - t
+    # Clamp days_to_best to 0 if best_day is in past relative to tomorrow
+    days_to_best = max(0, (summary.best_day - tomorrow).days) if summary.best_day else 0
+    
     disc_label = DISCIPLINE_LABELS.get(summary.discipline, summary.discipline)
+    best_weekday = WEEKDAY_NAMES_UPPER.get(summary.best_day.weekday(), "") if summary.best_day else ""
     
-    # Determine verdict
-    if score >= 70:
-        icon = "✅"
-        verdict = "стоит"
-    elif score >= 60:
-        icon = "⚠️"
-        verdict = "сомнительно"
-    else:
-        icon = "⛔️"
-        verdict = "не стоит"
+    # ✅ verdict (t >= 70)
+    if t >= 70:
+        if gap == 0:
+            return f"✅ {disc_label}: стоит — завтра лучший день недели: {t}"
+        elif gap <= 2:
+            return f"✅ {disc_label}: стоит — завтра почти лучший день недели: {t}"
+        else:
+            return f"✅ {disc_label}: стоит — завтра {t}, но лучший день {best_weekday}: {b}"
     
-    if summary.tomorrow_is_best:
-        return f"{icon} {disc_label}: {verdict} — завтра лучший день недели: {score}"
+    # ⚠️ verdict (60 <= t <= 69)
+    if t >= 60:
+        if gap == 0:
+            return f"⚠️ {disc_label}: сомнительно — завтра лучший вариант на неделе: {t}"
+        else:
+            return f"⚠️ {disc_label}: сомнительно — завтра {t}. Лучший вариант на неделе: {b} ({best_weekday})"
+    
+    # ⛔️ verdict (t < 60)
+    # "Good day soon": b >= 70 AND 0 < days_to_best <= 7
+    good_day_soon = b >= 70 and 0 < days_to_best <= 7
+    if good_day_soon:
+        return f"⛔️ {disc_label}: лучше не завтра — подождать до {best_weekday} ({b})"
+    elif gap > 0 and b < 70:
+        # Tomorrow not best AND best day is also weak
+        return f"⛔️ {disc_label}: не стоит — завтра {t}; лучший день {best_weekday} тоже слабый: {b}"
     else:
-        best_weekday = WEEKDAY_NAMES_UPPER.get(summary.best_day.weekday(), "")
-        return f"{icon} {disc_label}: {verdict} — завтра {score}, но лучший день {best_weekday}: {summary.best_day_score}"
+        return f"⛔️ {disc_label}: не стоит — завтра {t}"
 
 
 def format_costs_line(resort: Resort) -> Optional[str]:
@@ -198,7 +208,7 @@ def format_message(
     # Discipline header lines (alpine first, then xc)
     for disc in ["alpine", "xc"]:
         if disc in discipline_weekly:
-            lines.append(format_discipline_header_line(discipline_weekly[disc]))
+            lines.append(format_discipline_header_line(discipline_weekly[disc], tomorrow))
     
     # Check if all resorts have low scores
     all_scores = [r.score.score for r in ranked_resorts]

@@ -190,3 +190,58 @@ class TestResortScore:
         )
         result = calculate_resort_score(weather, weather)
         assert result.confidence == 0.4
+
+
+class TestSnow24Scoring:
+    """Tests for snow24_to_9_cm scoring wiring (P0 - must implement before merge)."""
+    
+    def test_scorer_uses_snow24_to_9(self):
+        """Scorer should use snow24_to_9_cm for fresh snow bonus."""
+        weather = PointWeather(
+            date=date(2025, 1, 15),
+            temp_c_avg_9_16=0,           # No penalty
+            wind_gust_kmh_max_9_16=0,    # No penalty
+            precip_mm_sum_9_16=0,        # No penalty
+            snow_depth_cm=0,             # No bonus
+            snowfall_cm=10.0,            # DEPRECATED - should be ignored
+            snow24_to_9_cm=20.0,         # This should be used
+            snow24_quality="ok",
+        )
+        score = calculate_point_score(weather)
+        # Base=50 + snow24 bonus: 20 * 0.4 = 8
+        # If snowfall_cm was used instead: 10 * 0.4 = 4
+        assert score.score == 58.0
+        assert score.has_snow_data is True
+    
+    def test_snow24_clamp_at_30(self):
+        """snow24_to_9_cm > 30 should be clamped."""
+        weather = PointWeather(
+            date=date(2025, 1, 15),
+            temp_c_avg_9_16=0,
+            wind_gust_kmh_max_9_16=0,
+            precip_mm_sum_9_16=0,
+            snow_depth_cm=0,
+            snowfall_cm=None,
+            snow24_to_9_cm=40.0,         # Should clamp to 30
+            snow24_quality="ok",
+        )
+        score = calculate_point_score(weather)
+        # Base=50 + clamped bonus: 30 * 0.4 = 12 (not 40 * 0.4 = 16)
+        assert score.score == 62.0
+    
+    def test_fallback_to_snowfall_cm(self):
+        """When snow24_to_9_cm is None, fallback to snowfall_cm."""
+        weather = PointWeather(
+            date=date(2025, 1, 15),
+            temp_c_avg_9_16=0,
+            wind_gust_kmh_max_9_16=0,
+            precip_mm_sum_9_16=0,
+            snow_depth_cm=0,
+            snowfall_cm=15.0,            # Fallback value
+            snow24_to_9_cm=None,         # Not available
+            snow24_quality="missing",
+        )
+        score = calculate_point_score(weather)
+        # Base=50 + fallback bonus: 15 * 0.4 = 6
+        assert score.score == 56.0
+        assert score.has_snow_data is True

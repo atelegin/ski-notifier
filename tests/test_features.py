@@ -15,8 +15,8 @@ from ski_notifier.fetch import PointWeather
 
 
 class TestComputeResortFeatures:
-    def test_snow24_index(self):
-        """snow24 should be daily_snowfall[1] (tomorrow)."""
+    def test_snow24_from_weather(self):
+        """snow24 should come from max of low/high snow24_to_9_cm."""
         weather = PointWeather(
             date=date(2025, 1, 15),
             temp_c_avg_9_16=-5,
@@ -24,16 +24,43 @@ class TestComputeResortFeatures:
             precip_mm_sum_9_16=0,
             snow_depth_cm=50,
             snowfall_cm=10,
+            snow24_to_9_cm=5.0,
+            snow24_quality="ok",
         )
-        # day0=2, day1=5, day2=3
-        daily_snowfall = [2.0, 5.0, 3.0]
         
-        features = compute_resort_features(weather, weather, daily_snowfall)
+        features = compute_resort_features(weather, weather)
         
         assert features.snow24_cm == 5.0
     
-    def test_snow48_sum(self):
-        """snow48 should be daily_snowfall[1] + daily_snowfall[2]."""
+    def test_snow24_max_of_points(self):
+        """snow24 should be max of low and high point values."""
+        weather_low = PointWeather(
+            date=date(2025, 1, 15),
+            temp_c_avg_9_16=-5,
+            wind_gust_kmh_max_9_16=20,
+            precip_mm_sum_9_16=0,
+            snow_depth_cm=50,
+            snowfall_cm=10,
+            snow24_to_9_cm=3.0,
+            snow24_quality="ok",
+        )
+        weather_high = PointWeather(
+            date=date(2025, 1, 15),
+            temp_c_avg_9_16=-8,
+            wind_gust_kmh_max_9_16=25,
+            precip_mm_sum_9_16=0,
+            snow_depth_cm=100,
+            snowfall_cm=15,
+            snow24_to_9_cm=8.0,
+            snow24_quality="ok",
+        )
+        
+        features = compute_resort_features(weather_low, weather_high)
+        
+        assert features.snow24_cm == 8.0  # max of 3.0 and 8.0
+    
+    def test_snow48_is_doubled_snow24(self):
+        """snow48 is simplified to 2*snow24 for now."""
         weather = PointWeather(
             date=date(2025, 1, 15),
             temp_c_avg_9_16=-5,
@@ -41,13 +68,13 @@ class TestComputeResortFeatures:
             precip_mm_sum_9_16=0,
             snow_depth_cm=50,
             snowfall_cm=10,
+            snow24_to_9_cm=5.0,
+            snow24_quality="ok",
         )
-        # day0=2, day1=5, day2=3 -> snow48 = 5+3 = 8
-        daily_snowfall = [2.0, 5.0, 3.0]
         
-        features = compute_resort_features(weather, weather, daily_snowfall)
+        features = compute_resort_features(weather, weather)
         
-        assert features.snow48_cm == 8.0
+        assert features.snow48_cm == 10.0  # 5.0 * 2
     
     def test_slush_risk_triggered(self):
         """slush_risk when temp in [-0.5, +2] AND rain > 0.5."""
@@ -60,7 +87,7 @@ class TestComputeResortFeatures:
             snowfall_cm=0,
         )
         
-        features = compute_resort_features(weather, weather, [])
+        features = compute_resort_features(weather, weather)
         
         assert features.slush_risk is True
     
@@ -75,7 +102,7 @@ class TestComputeResortFeatures:
             snowfall_cm=0,
         )
         
-        features = compute_resort_features(weather, weather, [])
+        features = compute_resort_features(weather, weather)
         
         assert features.slush_risk is False
     
@@ -90,7 +117,7 @@ class TestComputeResortFeatures:
             snowfall_cm=0,
         )
         
-        features = compute_resort_features(weather, weather, [])
+        features = compute_resort_features(weather, weather)
         
         assert features.slush_risk is False
     
@@ -113,7 +140,7 @@ class TestComputeResortFeatures:
             snowfall_cm=5,
         )
         
-        features = compute_resort_features(weather_low, weather_high, [])
+        features = compute_resort_features(weather_low, weather_high)
         
         assert features.temp_min == -5.0
         assert features.temp_max == -2.0
