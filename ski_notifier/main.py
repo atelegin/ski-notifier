@@ -7,9 +7,9 @@ from datetime import date, datetime, timedelta
 from typing import Dict, List
 from zoneinfo import ZoneInfo
 
-from .features import compute_resort_features, compute_weekly_best, ResortFeatures, WeeklyBest
+from .features import compute_resort_features, compute_discipline_weekly, ResortFeatures, DisciplineWeekly
 from .fetch import fetch_all_resorts_weather, FetchResult
-from .message import RankedResort, DisciplineItem, DisciplineBests, compute_discipline_bests, format_message
+from .message import RankedResort, format_message
 from .resorts import load_resorts, LoadResult, Resort
 from .score import calculate_resort_score
 from .telegram import send_message
@@ -121,7 +121,8 @@ def main() -> None:
     
     # Calculate scores for each resort with weather data
     ranked_resorts: List[RankedResort] = []
-    all_scores_by_day: Dict[date, List[float]] = {}
+    # Track best score per day per discipline for weekly analysis
+    scores_by_day_by_disc: Dict[str, Dict[date, int]] = {"alpine": {}, "xc": {}}
     
     for resort in resorts:
         if resort.id not in fetch_result.weather:
@@ -129,17 +130,17 @@ def main() -> None:
         
         weather = fetch_result.weather[resort.id]
         
-        # Calculate scores for all days
-        for d in weather.low.keys():
-            if d not in weather.high:
-                continue
-            
+        # Use intersection of low and high keys for safety
+        valid_dates = sorted(set(weather.low.keys()) & set(weather.high.keys()))
+        
+        for d in valid_dates:
             score = calculate_resort_score(weather.low[d], weather.high[d])
             
-            # Track for best-day-of-week calculation
-            if d not in all_scores_by_day:
-                all_scores_by_day[d] = []
-            all_scores_by_day[d].append(score.score)
+            # Track best-of-day per discipline (using round for consistency)
+            score_int = round(score.score)
+            disc_dict = scores_by_day_by_disc[resort.type]
+            if d not in disc_dict or score_int > disc_dict[d]:
+                disc_dict[d] = score_int
             
             # Store tomorrow's score for ranking
             if d == tomorrow:
@@ -149,28 +150,14 @@ def main() -> None:
     ranked_resorts.sort(key=lambda r: r.score.score, reverse=True)
     
     # Apply selection logic: TOP-3 + ensure both types represented
-    selected_resorts = select_top_with_coverage(ranked_resorts, n_top=3)
+    selected_ranked_resorts = select_top_with_coverage(ranked_resorts, n_top=3)
     
-    # Build best scores by day (for "best day of week" logic)
-    best_scores_by_day = {d: max(scores) for d, scores in all_scores_by_day.items()}
-    
-    # Compute WeeklyBest
-    weekly_best = compute_weekly_best(best_scores_by_day, tomorrow)
-    
-    # Compute discipline bests from ALL ranked resorts (for warnings)
-    discipline_items = [
-        DisciplineItem(
-            resort_type=r.resort.type,
-            score=r.score.score,
-            confidence=r.score.confidence,
-        )
-        for r in ranked_resorts
-    ]
-    discipline_bests = compute_discipline_bests(discipline_items)
+    # Compute discipline weekly summaries
+    discipline_weekly = compute_discipline_weekly(scores_by_day_by_disc, tomorrow)
     
     # Compute ResortFeatures for each selected resort
     resort_features: Dict[str, ResortFeatures] = {}
-    for ranked in selected_resorts:
+    for ranked in selected_ranked_resorts:
         resort = ranked.resort
         if resort.id in fetch_result.weather:
             weather = fetch_result.weather[resort.id]
@@ -196,11 +183,10 @@ def main() -> None:
     # Format message (always attempt, even with low success rate)
     message = format_message(
         tomorrow, 
-        selected_resorts,
-        weekly_best,
+        selected_ranked_resorts,
+        discipline_weekly,
         resort_features,
         costs,
-        discipline_bests,
         missing_resort_names=missing_resort_names,
         success_rate=success_rate,
     )

@@ -5,9 +5,9 @@ from typing import Dict
 
 import pytest
 
-from ski_notifier.features import ResortFeatures, WeeklyBest
+from ski_notifier.features import ResortFeatures, DisciplineWeekly
 from ski_notifier.fetch import PointWeather
-from ski_notifier.message import RankedResort, DisciplineBests, format_message, format_costs_line
+from ski_notifier.message import RankedResort, format_message, format_costs_line, format_discipline_header_line
 from ski_notifier.resorts import Costs, Point, Resort
 from ski_notifier.score import ResortScore, PointScore
 
@@ -71,32 +71,51 @@ def make_features() -> ResortFeatures:
     )
 
 
-def make_weekly_best(is_best: bool = True) -> WeeklyBest:
-    """Create WeeklyBest for testing."""
-    if is_best:
-        return WeeklyBest(
-            tomorrow_score=78,
-            best_day=date(2025, 1, 15),
-            best_day_score=78,
-            message="✅ Завтра — лучший день недели (78)",
-        )
-    else:
-        return WeeklyBest(
-            tomorrow_score=68,
-            best_day=date(2025, 1, 16),
-            best_day_score=82,
-            message="ℹ️ Лучший день: чт (82). Завтра: 68 (−14)",
-        )
-
-
-def make_discipline_bests(alpine: float = 80, xc: float = 75) -> DisciplineBests:
-    """Create DisciplineBests for testing."""
-    return DisciplineBests(
-        best_alpine_score=alpine if alpine is not None else None,
-        best_xc_score=xc if xc is not None else None,
-        best_alpine_confidence=0.9 if alpine is not None else None,
-        best_xc_confidence=0.9 if xc is not None else None,
-    )
+def make_discipline_weekly(
+    alpine_score: int = 80, 
+    xc_score: int = 75,
+    alpine_is_best: bool = True,
+    xc_is_best: bool = True,
+) -> Dict[str, DisciplineWeekly]:
+    """Create discipline weekly summaries for testing."""
+    result: Dict[str, DisciplineWeekly] = {}
+    
+    tomorrow = date(2025, 1, 15)  # Wednesday
+    
+    if alpine_score is not None:
+        if alpine_is_best:
+            result["alpine"] = DisciplineWeekly(
+                discipline="alpine",
+                tomorrow_score=alpine_score,
+                best_day=tomorrow,
+                best_day_score=alpine_score,
+            )
+        else:
+            # Best day is Thursday (day after tomorrow)
+            result["alpine"] = DisciplineWeekly(
+                discipline="alpine",
+                tomorrow_score=alpine_score,
+                best_day=date(2025, 1, 16),  # Thursday
+                best_day_score=alpine_score + 10,
+            )
+    
+    if xc_score is not None:
+        if xc_is_best:
+            result["xc"] = DisciplineWeekly(
+                discipline="xc",
+                tomorrow_score=xc_score,
+                best_day=tomorrow,
+                best_day_score=xc_score,
+            )
+        else:
+            result["xc"] = DisciplineWeekly(
+                discipline="xc",
+                tomorrow_score=xc_score,
+                best_day=date(2025, 1, 16),  # Thursday
+                best_day_score=xc_score + 5,
+            )
+    
+    return result
 
 
 class TestFormatMessage:
@@ -114,10 +133,9 @@ class TestFormatMessage:
         message = format_message(
             date(2025, 1, 15),
             [r1, r2],
-            make_weekly_best(),
+            make_discipline_weekly(),
             features,
             costs,
-            make_discipline_bests(),
         )
         
         # No --- separators
@@ -141,10 +159,9 @@ class TestFormatMessage:
         message = format_message(
             date(2025, 1, 15),
             [r1, r2],
-            make_weekly_best(),
+            make_discipline_weekly(),
             features,
             costs,
-            make_discipline_bests(),
         )
         
         assert "🎿" in message  # alpine
@@ -160,10 +177,9 @@ class TestFormatMessage:
         message = format_message(
             date(2025, 1, 15),
             [r1],
-            make_weekly_best(),
+            make_discipline_weekly(),
             features,
             costs,
-            make_discipline_bests(),
         )
         
         assert message.startswith("🟦 Ski forecast")
@@ -200,10 +216,9 @@ class TestFormatMessage:
         message = format_message(
             date(2025, 1, 15),
             [r1],
-            make_weekly_best(),
+            make_discipline_weekly(),
             features,
             costs,
-            make_discipline_bests(),
         )
         
         assert "(каша)" in message
@@ -224,10 +239,9 @@ class TestFormatMessage:
         message = format_message(
             date(2025, 1, 15),
             [r1, r2, r3],
-            make_weekly_best(),
+            make_discipline_weekly(),
             features,
             costs,
-            make_discipline_bests(),
         )
         
         lines = message.split("\n")
@@ -268,10 +282,9 @@ class TestFormatMessage:
         message = format_message(
             date(2025, 1, 15),
             [r1],
-            make_weekly_best(),
+            make_discipline_weekly(),
             features,
             costs,
-            make_discipline_bests(),
         )
         
         # Find the resort line and costs line
@@ -298,17 +311,16 @@ class TestFormatMessage:
         message = format_message(
             date(2025, 1, 15),
             [r1],
-            make_weekly_best(),
+            make_discipline_weekly(),
             features,
             costs,
-            make_discipline_bests(),
         )
         
         # This line should NOT exist in the message
         assert "Условия завтра:" not in message
 
-    def test_header_structure_compact(self):
-        """Header: title line + weekly-best line + blank line + first resort."""
+    def test_header_structure_with_disciplines(self):
+        """Header: title line + discipline lines + blank line + first resort."""
         r1 = make_ranked(make_resort("a"), 80)
         
         features: Dict[str, ResortFeatures] = {"a": make_features()}
@@ -317,10 +329,9 @@ class TestFormatMessage:
         message = format_message(
             date(2025, 1, 15),
             [r1],
-            make_weekly_best(),
+            make_discipline_weekly(),
             features,
             costs,
-            make_discipline_bests(),
         )
         
         lines = message.split("\n")
@@ -328,48 +339,191 @@ class TestFormatMessage:
         # Line 0: title
         assert lines[0].startswith("🟦 Ski forecast")
         
-        # Line 1: weekly best (starts with ✅ or ℹ️)
-        assert lines[1].startswith("✅") or lines[1].startswith("ℹ️")
+        # Line 1: alpine discipline (starts with ✅, ⚠️, or ⛔️)
+        assert lines[1].startswith("✅") or lines[1].startswith("⚠️") or lines[1].startswith("⛔️")
+        assert "Горные:" in lines[1]
         
-        # Line 2: blank line
+        # Line 2: xc discipline
+        assert lines[2].startswith("✅") or lines[2].startswith("⚠️") or lines[2].startswith("⛔️")
+        assert "Беговые:" in lines[2]
+        
+        # Line 3: blank line
+        assert lines[3] == ""
+        
+        # Line 4: first resort (🎿 or ⛷️)
+        assert "🎿" in lines[4] or "⛷️" in lines[4]
+
+
+# Tests for discipline header line formatting
+class TestDisciplineHeaderLine:
+    def test_header_line_tomorrow_is_best(self):
+        """When tomorrow is best day, show 'Завтра — лучший день недели: <score>'."""
+        summary = DisciplineWeekly(
+            discipline="alpine",
+            tomorrow_score=85,
+            best_day=date(2025, 1, 15),
+            best_day_score=85,
+        )
+        
+        line = format_discipline_header_line(summary)
+        
+        assert "Завтра — лучший день недели: 85" in line
+        assert "✅ Горные: стоит" in line
+    
+    def test_header_line_tomorrow_worse(self):
+        """When tomorrow is worse than best, show delta and best day."""
+        summary = DisciplineWeekly(
+            discipline="alpine",
+            tomorrow_score=58,
+            best_day=date(2025, 1, 15),  # Wednesday
+            best_day_score=62,
+        )
+        
+        line = format_discipline_header_line(summary)
+        
+        assert "Завтра 58 (-4)" in line
+        assert "Лучший день ср: 62" in line
+        assert "⛔️ Горные: не стоит" in line
+    
+    def test_header_verdict_threshold_stoit(self):
+        """Score >= 70 shows 'стоит' with ✅."""
+        for score in [70, 75, 85, 100]:
+            summary = DisciplineWeekly(
+                discipline="alpine",
+                tomorrow_score=score,
+                best_day=date(2025, 1, 15),
+                best_day_score=score,
+            )
+            line = format_discipline_header_line(summary)
+            assert "✅" in line
+            assert "стоит" in line
+    
+    def test_header_verdict_threshold_somnitelno(self):
+        """Score 60-69 shows 'сомнительно' with ⚠️."""
+        for score in [60, 65, 69]:
+            summary = DisciplineWeekly(
+                discipline="alpine",
+                tomorrow_score=score,
+                best_day=date(2025, 1, 15),
+                best_day_score=score,
+            )
+            line = format_discipline_header_line(summary)
+            assert "⚠️" in line
+            assert "сомнительно" in line
+    
+    def test_header_verdict_threshold_ne_stoit(self):
+        """Score < 60 shows 'не стоит' with ⛔️."""
+        for score in [55, 50, 30, 0]:
+            summary = DisciplineWeekly(
+                discipline="alpine",
+                tomorrow_score=score,
+                best_day=date(2025, 1, 15),
+                best_day_score=score,
+            )
+            line = format_discipline_header_line(summary)
+            assert "⛔️" in line
+            assert "не стоит" in line
+    
+    def test_header_xc_label(self):
+        """XC discipline shows 'Беговые' label."""
+        summary = DisciplineWeekly(
+            discipline="xc",
+            tomorrow_score=75,
+            best_day=date(2025, 1, 15),
+            best_day_score=75,
+        )
+        
+        line = format_discipline_header_line(summary)
+        
+        assert "Беговые:" in line
+    
+    def test_header_has_one_line_per_present_discipline_alpine_only(self):
+        """If only alpine data exists, only 1 discipline line."""
+        r1 = make_ranked(make_resort("a", "alpine"), 80)
+        
+        features: Dict[str, ResortFeatures] = {"a": make_features()}
+        costs = Costs(ferry_konstanz_meersburg_rt_eur=24, at_vignette_1day_eur=10)
+        
+        # Only alpine in discipline_weekly
+        discipline_weekly = {
+            "alpine": DisciplineWeekly(
+                discipline="alpine",
+                tomorrow_score=80,
+                best_day=date(2025, 1, 15),
+                best_day_score=80,
+            )
+        }
+        
+        message = format_message(
+            date(2025, 1, 15),
+            [r1],
+            discipline_weekly,
+            features,
+            costs,
+        )
+        
+        lines = message.split("\n")
+        
+        # Line 0: title
+        assert lines[0].startswith("🟦 Ski forecast")
+        # Line 1: alpine only
+        assert "Горные:" in lines[1]
+        # Line 2: should be blank (no xc line)
         assert lines[2] == ""
+        # No Беговые line anywhere before the blank
+        assert "Беговые:" not in lines[1]
+    
+    def test_header_has_one_line_per_present_discipline_both(self):
+        """If both disciplines have data, 2 lines in order: Горные then Беговые."""
+        r1 = make_ranked(make_resort("a", "alpine"), 80)
+        r2 = make_ranked(make_resort("b", "xc"), 75)
         
-        # Line 3: first resort (🎿 or ⛷️)
-        assert "🎿" in lines[3] or "⛷️" in lines[3]
-
-
-def test_discipline_warning_thresholds():
-    """Test discipline warning lines at correct thresholds."""
-    from ski_notifier.message import format_discipline_warnings, DisciplineBests
+        features: Dict[str, ResortFeatures] = {
+            "a": make_features(),
+            "b": make_features(),
+        }
+        costs = Costs(ferry_konstanz_meersburg_rt_eur=24, at_vignette_1day_eur=10)
+        
+        message = format_message(
+            date(2025, 1, 15),
+            [r1, r2],
+            make_discipline_weekly(),
+            features,
+            costs,
+        )
+        
+        lines = message.split("\n")
+        
+        # Line 1: alpine
+        assert "Горные:" in lines[1]
+        # Line 2: xc
+        assert "Беговые:" in lines[2]
     
-    bests = DisciplineBests(
-        best_alpine_score=58,
-        best_xc_score=66,
-        best_alpine_confidence=0.8,
-        best_xc_confidence=0.8,
-    )
-    
-    warnings = format_discipline_warnings(bests)
-    
-    assert len(warnings) == 2
-    assert warnings[0] == "⛔ Горные: не стоит (58)"
-    assert warnings[1] == "⚠️ Беговые: сомнительно (66)"
-
-
-def test_discipline_warning_no_warning_high_scores():
-    """No warnings when scores >= 70."""
-    from ski_notifier.message import format_discipline_warnings, DisciplineBests
-    
-    bests = DisciplineBests(
-        best_alpine_score=75,
-        best_xc_score=80,
-        best_alpine_confidence=0.9,
-        best_xc_confidence=0.9,
-    )
-    
-    warnings = format_discipline_warnings(bests)
-    
-    assert len(warnings) == 0
+    def test_header_does_not_include_old_strings(self):
+        """Header should NOT contain old format strings."""
+        r1 = make_ranked(make_resort("a", "alpine"), 80)
+        r2 = make_ranked(make_resort("b", "xc"), 75)
+        
+        features: Dict[str, ResortFeatures] = {
+            "a": make_features(),
+            "b": make_features(),
+        }
+        costs = Costs(ferry_konstanz_meersburg_rt_eur=24, at_vignette_1day_eur=10)
+        
+        message = format_message(
+            date(2025, 1, 15),
+            [r1, r2],
+            make_discipline_weekly(alpine_is_best=False, xc_is_best=False),
+            features,
+            costs,
+        )
+        
+        # Old format patterns should NOT exist
+        assert "ℹ️ Лучший день:" not in message  # old weekly-best format with icon
+        assert "Условия завтра:" not in message  # old conditions line
+        
+        # New format "Лучший день <day>:" IS allowed
+        # (this appears in the new format: "Лучший день чт: 90")
 
 
 def test_xc_costs_still_present_e2e():
@@ -379,18 +533,25 @@ def test_xc_costs_still_present_e2e():
     ranked = [make_ranked(xc_resort, 70)]
     features: Dict[str, ResortFeatures] = {"xc1": make_features()}
     costs = Costs(ferry_konstanz_meersburg_rt_eur=24, at_vignette_1day_eur=10)
-    discipline_bests = make_discipline_bests(alpine=None, xc=70)
+    
+    # Only xc discipline
+    discipline_weekly = {
+        "xc": DisciplineWeekly(
+            discipline="xc",
+            tomorrow_score=70,
+            best_day=date(2025, 1, 15),
+            best_day_score=70,
+        )
+    }
     
     message = format_message(
         date(2025, 1, 15),
         ranked,
-        make_weekly_best(),
+        discipline_weekly,
         features,
         costs,
-        discipline_bests,
     )
     
     assert "↳ 💶" in message
     assert "ferry" in message
     assert "Skipass" not in message
-

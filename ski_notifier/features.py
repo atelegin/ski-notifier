@@ -98,6 +98,62 @@ class WeeklyBest:
     message: str
 
 
+@dataclass
+class DisciplineWeekly:
+    """Weekly analysis for a single discipline (alpine or xc)."""
+    discipline: str  # "alpine" or "xc"
+    tomorrow_score: int
+    best_day: date
+    best_day_score: int
+    
+    @property
+    def tomorrow_is_best(self) -> bool:
+        """Check if tomorrow is the best day (or tied for best)."""
+        # Use == because best_day_score is the max, tomorrow can only equal it (not exceed)
+        return self.tomorrow_score == self.best_day_score
+
+
+def compute_discipline_weekly(
+    scores_by_day_by_discipline: Dict[str, Dict[date, int]],
+    tomorrow: date,
+) -> Dict[str, "DisciplineWeekly"]:
+    """Compute weekly best analysis per discipline.
+    
+    Args:
+        scores_by_day_by_discipline: {"alpine": {date: max_score}, "xc": {date: max_score}}
+        tomorrow: tomorrow's date
+        
+    Returns:
+        Dict mapping discipline to DisciplineWeekly.
+        Only includes disciplines that have data for tomorrow.
+        If a discipline has no tomorrow_score, it is omitted from the result.
+    """
+    result: Dict[str, DisciplineWeekly] = {}
+    
+    for disc, scores_by_day in scores_by_day_by_discipline.items():
+        if not scores_by_day:
+            continue
+        
+        # Skip discipline if no data for tomorrow
+        if tomorrow not in scores_by_day:
+            continue
+        
+        tomorrow_score = scores_by_day[tomorrow]
+        
+        # Find best day (earliest wins on tie)
+        sorted_days = sorted(scores_by_day.items(), key=lambda x: (-x[1], x[0]))
+        best_day, best_day_score = sorted_days[0]
+        
+        result[disc] = DisciplineWeekly(
+            discipline=disc,
+            tomorrow_score=tomorrow_score,
+            best_day=best_day,
+            best_day_score=best_day_score,
+        )
+    
+    return result
+
+
 def compute_weekly_best(
     best_scores_by_day: Dict[date, float],
     tomorrow: date,

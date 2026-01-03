@@ -4,9 +4,13 @@ from dataclasses import dataclass
 from datetime import date
 from typing import Dict, List, Optional
 
-from .features import ResortFeatures, WeeklyBest
+from .features import ResortFeatures, DisciplineWeekly
 from .resorts import Costs, Resort
 from .score import ResortScore
+
+# Constants for discipline header formatting
+WEEKDAY_NAMES = {0: "пн", 1: "вт", 2: "ср", 3: "чт", 4: "пт", 5: "сб", 6: "вс"}
+DISCIPLINE_LABELS = {"alpine": "Горные", "xc": "Беговые"}
 
 
 @dataclass
@@ -16,86 +20,39 @@ class RankedResort:
     score: ResortScore
 
 
-@dataclass
-class DisciplineItem:
-    """Input item for discipline-best computation."""
-    resort_type: str  # "alpine" or "xc"
-    score: float
-    confidence: float
-
-
-@dataclass
-class DisciplineBests:
-    """Best scores by discipline for tomorrow."""
-    best_alpine_score: Optional[float]
-    best_xc_score: Optional[float]
-    best_alpine_confidence: Optional[float]
-    best_xc_confidence: Optional[float]
-
-
-def compute_discipline_bests(items: List[DisciplineItem]) -> DisciplineBests:
-    """Compute best scores per discipline.
+def format_discipline_header_line(summary: DisciplineWeekly) -> str:
+    """Format one header line for a discipline.
     
-    Note: Lives in message.py as utility since it's only used for formatting.
+    Verdict thresholds by tomorrow_score:
+    - >= 70: ✅ <disc>: стоит
+    - 60..69: ⚠️ <disc>: сомнительно
+    - < 60: ⛔️ <disc>: не стоит
+    
+    If tomorrow_is_best:
+        "<ICON> <Disc>: <verdict>. Завтра — лучший день недели: <score>"
+    Else:
+        "<ICON> <Disc>: <verdict>. Завтра <score> (<diff>). Лучший день <day>: <best_score>"
     """
-    alpine_items = [i for i in items if i.resort_type == "alpine"]
-    xc_items = [i for i in items if i.resort_type == "xc"]
+    score = summary.tomorrow_score
+    disc_label = DISCIPLINE_LABELS.get(summary.discipline, summary.discipline)
     
-    best_alpine = max(alpine_items, key=lambda i: i.score) if alpine_items else None
-    best_xc = max(xc_items, key=lambda i: i.score) if xc_items else None
+    # Determine verdict
+    if score >= 70:
+        icon = "✅"
+        verdict = "стоит"
+    elif score >= 60:
+        icon = "⚠️"
+        verdict = "сомнительно"
+    else:
+        icon = "⛔️"
+        verdict = "не стоит"
     
-    return DisciplineBests(
-        best_alpine_score=best_alpine.score if best_alpine else None,
-        best_xc_score=best_xc.score if best_xc else None,
-        best_alpine_confidence=best_alpine.confidence if best_alpine else None,
-        best_xc_confidence=best_xc.confidence if best_xc else None,
-    )
-
-
-def format_discipline_warnings(discipline_bests: DisciplineBests) -> List[str]:
-    """Generate 0-2 discipline warning lines.
-    
-    Thresholds:
-    - >= 70: no warning
-    - 60..69: "сомнительно" (⚠️)
-    - < 60: "не стоит" (⛔)
-    
-    Format: "⛔ Горные: не стоит (58)"
-    Append ", низкая уверенность" if confidence < 0.7.
-    """
-    warnings = []
-    
-    # Alpine first
-    if discipline_bests.best_alpine_score is not None:
-        score = discipline_bests.best_alpine_score
-        conf = discipline_bests.best_alpine_confidence or 1.0
-        if score < 60:
-            line = f"⛔ Горные: не стоит ({score:.0f})"
-            if conf < 0.7:
-                line += ", низкая уверенность"
-            warnings.append(line)
-        elif score < 70:
-            line = f"⚠️ Горные: сомнительно ({score:.0f})"
-            if conf < 0.7:
-                line += ", низкая уверенность"
-            warnings.append(line)
-    
-    # XC second
-    if discipline_bests.best_xc_score is not None:
-        score = discipline_bests.best_xc_score
-        conf = discipline_bests.best_xc_confidence or 1.0
-        if score < 60:
-            line = f"⛔ Беговые: не стоит ({score:.0f})"
-            if conf < 0.7:
-                line += ", низкая уверенность"
-            warnings.append(line)
-        elif score < 70:
-            line = f"⚠️ Беговые: сомнительно ({score:.0f})"
-            if conf < 0.7:
-                line += ", низкая уверенность"
-            warnings.append(line)
-    
-    return warnings
+    if summary.tomorrow_is_best:
+        return f"{icon} {disc_label}: {verdict}. Завтра — лучший день недели: {score}"
+    else:
+        diff = summary.tomorrow_score - summary.best_day_score  # negative
+        best_weekday = WEEKDAY_NAMES.get(summary.best_day.weekday(), "")
+        return f"{icon} {disc_label}: {verdict}. Завтра {score} ({diff:+d}). Лучший день {best_weekday}: {summary.best_day_score}"
 
 
 def format_costs_line(resort: Resort) -> Optional[str]:
@@ -207,10 +164,9 @@ def format_missing_block(missing_names: List[str], max_show: int = 5) -> str:
 def format_message(
     tomorrow: date,
     ranked_resorts: List[RankedResort],
-    weekly_best: WeeklyBest,
+    discipline_weekly: Dict[str, DisciplineWeekly],
     resort_features: Dict[str, ResortFeatures],
     costs: Costs,
-    discipline_bests: DisciplineBests,
     missing_resort_names: Optional[List[str]] = None,
     success_rate: float = 1.0,
 ) -> str:
@@ -218,8 +174,7 @@ def format_message(
     
     Format:
     - Header with date
-    - Weekly best line
-    - Discipline warnings (0-2 lines)
+    - Discipline lines (1-2, alpine then xc if present)
     - Blank line
     - Resort blocks
     - Missing warning (if any)
@@ -238,12 +193,10 @@ def format_message(
             lines.append(format_missing_block(missing_resort_names))
         return "\n".join(lines)
     
-    # Weekly best line
-    lines.append(weekly_best.message)
-    
-    # Discipline warnings (0-2 lines)
-    warnings = format_discipline_warnings(discipline_bests)
-    lines.extend(warnings)
+    # Discipline header lines (alpine first, then xc)
+    for disc in ["alpine", "xc"]:
+        if disc in discipline_weekly:
+            lines.append(format_discipline_header_line(discipline_weekly[disc]))
     
     # Check if all resorts have low scores
     all_scores = [r.score.score for r in ranked_resorts]
@@ -276,3 +229,4 @@ def format_message(
         lines.append(format_missing_block(missing_resort_names))
     
     return "\n".join(lines)
+
