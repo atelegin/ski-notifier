@@ -59,8 +59,7 @@ resorts:
       lon: 8.022222
       elev_m: 1448
   costs:
-    assume_ferry_used: true
-    ferry_roundtrip_eur: 24.2
+    assume_ferry_used: false
     austria_vignette_1day_eur: 0.0
     requires_ch_vignette: false
     ski_pass_day_adult_eur: 59.0
@@ -91,34 +90,6 @@ resorts:
     austria_vignette_1day_eur: 0.0
     requires_ch_vignette: false
     ski_pass_day_adult_eur: 52.0
-    ski_pass_currency: EUR
-- id: de_oberstdorf_nebelhorn
-  name: Oberstdorf (DE) — Nebelhorn
-  country: DE
-  type: alpine
-  drive_time_min_from_konstanz: 120
-  website: https://www.nebelhorn.de/
-  notes: Big resort area; famous Nordic/biathlon as well. Peak-season day ticket reference.
-  access:
-    requires_ch_vignette: false
-    requires_at_vignette: false
-  points:
-    low:
-      label: Nebelhornbahn Talstation
-      lat: 47.40479
-      lon: 10.285134
-      elev_m: 828
-    high:
-      label: Nebelhorn summit
-      lat: 47.4218361
-      lon: 10.3422401
-      elev_m: 2224
-  costs:
-    assume_ferry_used: true
-    ferry_roundtrip_eur: 24.2
-    austria_vignette_1day_eur: 0.0
-    requires_ch_vignette: false
-    ski_pass_day_adult_eur: 68.7
     ski_pass_currency: EUR
 - id: de_scheidegg_alpine
   name: Scheidegg (Westallgäu, DE) — Alpine
@@ -1103,34 +1074,6 @@ resorts:
     ferry_roundtrip_eur: 24.2
     austria_vignette_1day_eur: 9.3
     requires_ch_vignette: false
-- id: at_warth_schroecken
-  name: Warth–Schröcken (AT) — Ski Arlberg access
-  country: AT
-  type: alpine
-  drive_time_min_from_konstanz: 120
-  website: https://www.warth-schroecken.at/
-  notes: 'Alpine (part of Ski Arlberg via Auenfeldjet). IMPORTANT routing: the L198 Lech–Warth road is closed in winter; access
-    Warth only via Bregenzerwald (L200).'
-  access:
-    requires_ch_vignette: false
-    requires_at_vignette: true
-  points:
-    low:
-      label: Steffisalp-Express Talstation (Warth)
-      lat: 47.260053
-      lon: 10.175657
-    high:
-      label: Warther Horn
-      lat: 47.25164
-      lon: 10.15645
-      elev_m: 2256
-  costs:
-    assume_ferry_used: true
-    ferry_roundtrip_eur: 24.2
-    austria_vignette_1day_eur: 9.3
-    requires_ch_vignette: false
-    ski_pass_day_adult_eur: 75.0
-    ski_pass_currency: EUR
 - id: at_sulzberg_nordic_sport_park
   name: Nordic Sport Park Sulzberg (AT)
   country: AT
@@ -1153,33 +1096,6 @@ resorts:
       lat: 47.53
       lon: 9.92
       elev_m: 1007
-  costs:
-    assume_ferry_used: true
-    ferry_roundtrip_eur: 24.2
-    austria_vignette_1day_eur: 9.3
-    requires_ch_vignette: false
-- id: at_silvretta_bielerhoehe
-  name: Silvretta-Bielerhöhe (AT)
-  country: AT
-  type: xc
-  drive_time_min_from_konstanz: 115
-  website: https://www.silvretta-bielerhoehe.at/en
-  notes: 'Nordic & ski touring focus at 2032 m on the Silvretta reservoir. Winter access: the Silvretta-Hochalpenstraße is
-    closed; reach via Partenen using Vermuntbahn + tunnel bus (special logistics).'
-  access:
-    requires_at_vignette: true
-    requires_ch_vignette: false
-  points:
-    low:
-      label: Vermuntbahn Talstation (Partenen)
-      lat: 46.9685
-      lon: 10.05675
-      elev_m: 1038
-    high:
-      label: Bielerhöhe / Silvretta-Stausee
-      lat: 46.91806
-      lon: 10.09556
-      elev_m: 2032
   costs:
     assume_ferry_used: true
     ferry_roundtrip_eur: 24.2
