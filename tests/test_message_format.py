@@ -357,7 +357,7 @@ class TestFormatMessage:
 # Tests for discipline header line formatting
 class TestDisciplineHeaderLine:
     def test_header_line_tomorrow_is_best(self):
-        """When tomorrow is best day, show 'Завтра — лучший день недели: <score>'."""
+        """When tomorrow is best day, show '— завтра лучший день недели: <score>'."""
         summary = DisciplineWeekly(
             discipline="alpine",
             tomorrow_score=85,
@@ -367,23 +367,31 @@ class TestDisciplineHeaderLine:
         
         line = format_discipline_header_line(summary)
         
-        assert "Завтра — лучший день недели: 85" in line
+        assert "— завтра лучший день недели: 85" in line
         assert "✅ Горные: стоит" in line
+        # Must NOT contain "но лучший день" when tomorrow is best
+        assert "но лучший день" not in line
     
     def test_header_line_tomorrow_worse(self):
-        """When tomorrow is worse than best, show delta and best day."""
+        """When tomorrow is worse than best, show 'но лучший день <DAY>: <score>' (no delta)."""
         summary = DisciplineWeekly(
             discipline="alpine",
-            tomorrow_score=58,
-            best_day=date(2025, 1, 15),  # Wednesday
-            best_day_score=62,
+            tomorrow_score=74,
+            best_day=date(2025, 1, 18),  # Saturday
+            best_day_score=84,
         )
         
         line = format_discipline_header_line(summary)
         
-        assert "Завтра 58 (-4)" in line
-        assert "Лучший день ср: 62" in line
-        assert "⛔️ Горные: не стоит" in line
+        # New format: "— завтра 74, но лучший день СБ: 84"
+        assert ", но лучший день СБ: 84" in line
+        assert "✅ Горные: стоит" in line
+        # No delta tokens
+        assert "(-" not in line
+        assert "(+" not in line
+        assert "хуже" not in line
+        # Day must be uppercase
+        assert "СБ" in line
     
     def test_header_verdict_threshold_stoit(self):
         """Score >= 70 shows 'стоит' with ✅."""

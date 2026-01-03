@@ -9,7 +9,7 @@ from .resorts import Costs, Resort
 from .score import ResortScore
 
 # Constants for discipline header formatting
-WEEKDAY_NAMES = {0: "пн", 1: "вт", 2: "ср", 3: "чт", 4: "пт", 5: "сб", 6: "вс"}
+WEEKDAY_NAMES_UPPER = {0: "ПН", 1: "ВТ", 2: "СР", 3: "ЧТ", 4: "ПТ", 5: "СБ", 6: "ВС"}
 DISCIPLINE_LABELS = {"alpine": "Горные", "xc": "Беговые"}
 
 
@@ -29,9 +29,12 @@ def format_discipline_header_line(summary: DisciplineWeekly) -> str:
     - < 60: ⛔️ <disc>: не стоит
     
     If tomorrow_is_best:
-        "<ICON> <Disc>: <verdict>. Завтра — лучший день недели: <score>"
+        "<ICON> <Disc>: <verdict> — завтра лучший день недели: <score>"
     Else:
-        "<ICON> <Disc>: <verdict>. Завтра <score> (<diff>). Лучший день <day>: <best_score>"
+        "<ICON> <Disc>: <verdict> — завтра <score>, но лучший день <DAY>: <best_score>"
+    
+    DAY is uppercase: ПН/ВТ/СР/ЧТ/ПТ/СБ/ВС.
+    No deltas anywhere.
     """
     score = summary.tomorrow_score
     disc_label = DISCIPLINE_LABELS.get(summary.discipline, summary.discipline)
@@ -48,11 +51,10 @@ def format_discipline_header_line(summary: DisciplineWeekly) -> str:
         verdict = "не стоит"
     
     if summary.tomorrow_is_best:
-        return f"{icon} {disc_label}: {verdict}. Завтра — лучший день недели: {score}"
+        return f"{icon} {disc_label}: {verdict} — завтра лучший день недели: {score}"
     else:
-        diff = summary.tomorrow_score - summary.best_day_score  # negative
-        best_weekday = WEEKDAY_NAMES.get(summary.best_day.weekday(), "")
-        return f"{icon} {disc_label}: {verdict}. Завтра {score} ({diff:+d}). Лучший день {best_weekday}: {summary.best_day_score}"
+        best_weekday = WEEKDAY_NAMES_UPPER.get(summary.best_day.weekday(), "")
+        return f"{icon} {disc_label}: {verdict} — завтра {score}, но лучший день {best_weekday}: {summary.best_day_score}"
 
 
 def format_costs_line(resort: Resort) -> Optional[str]:
