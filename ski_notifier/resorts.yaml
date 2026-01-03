@@ -262,8 +262,7 @@ resorts:
       lat: 47.565
       lon: 9.83
   costs:
-    assume_ferry_used: true
-    ferry_roundtrip_eur: 24.2
+    assume_ferry_used: false
     austria_vignette_1day_eur: 0.0
     requires_ch_vignette: false
 - id: de_schonach
@@ -503,8 +502,7 @@ resorts:
       lon: 9.14194
       elev_m: 2105
   costs:
-    assume_ferry_used: true
-    ferry_roundtrip_eur: 24.2
+    assume_ferry_used: false
     austria_vignette_1day_eur: 0.0
     requires_ch_vignette: false
 - id: ch_engelberg_brunni
@@ -582,7 +580,7 @@ resorts:
       lon: 9.252982
       elev_m: 2020
   costs:
-    assume_ferry_used: true
+    assume_ferry_used: false
     requires_ch_vignette: true
     ski_pass_day_adult_eur: 70
     ski_pass_currency: CHF
@@ -617,8 +615,8 @@ resorts:
   name: Hoch-Ybrig (CH)
   country: CH
   type: alpine
-  drive_time_min_from_konstanz: 110
-  drive_time_note: Estimate (~1h45–1h55; varies by route/traffic)
+  drive_time_min_from_konstanz: 100
+  drive_time_note: Estimate (~1h40–1h55; varies by route/traffic)
   website: https://www.hoch-ybrig.ch/
   notes:
   - Access via Talstation Weglosen (Unteriberg).
@@ -634,8 +632,7 @@ resorts:
       lon: 8.801092
       elev_m: 1864
   costs:
-    assume_ferry_used: true
-    ferry_roundtrip_eur: 24.2
+    assume_ferry_used: false
     austria_vignette_1day_eur: 0.0
     requires_ch_vignette: true
     ski_pass_day_adult_eur: 62
