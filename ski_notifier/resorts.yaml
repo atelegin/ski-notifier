@@ -4,11 +4,248 @@ defaults:
   costs:
     assume_ferry_used: true
     ferry_roundtrip_eur: 24.2
-    austria_vignette_1day_eur: 9.6
+    austria_vignette_1day_eur: 9.3
   assumptions:
     car_max_length_m: 4.0
     drive_time_min_from_konstanz_is_estimate: true
 resorts:
+- id: de_balderschwang
+  name: Balderschwang (DE)
+  country: DE
+  type: alpine
+  drive_time_min_from_konstanz: 100
+  website: https://www.skigebiet-balderschwang.de/
+  notes: Very snowy village; alpine + XC network. Price is for Ski-Total (incl. Riedbergerhorn) — peak-season reference.
+  access:
+    requires_ch_vignette: false
+    requires_at_vignette: false
+  points:
+    low:
+      label: Schelpenalp bottom station
+      lat: 47.46155
+      lon: 10.11039
+      elev_m: 1044
+    high:
+      label: Schelpenalp top station
+      lat: 47.45237
+      lon: 10.10931
+      elev_m: 1520
+  costs:
+    assume_ferry_used: true
+    ferry_roundtrip_eur: 24.2
+    austria_vignette_1day_eur: 0.0
+    requires_ch_vignette: false
+    ski_pass_day_adult_eur: 42.0
+    ski_pass_currency: EUR
+- id: de_feldberg
+  name: Feldberg (Schwarzwald, DE)
+  country: DE
+  type: alpine
+  drive_time_min_from_konstanz: 105
+  website: https://www.feldberg-erlebnis.de/en
+  notes: Alpine. Largest ski area in the Black Forest; can be crowded on weekends and foggy. Good backup when Alps are too
+    far.
+  access:
+    requires_ch_vignette: false
+    requires_at_vignette: false
+  points:
+    low:
+      label: Feldberg (base area)
+      lat: 47.862331
+      lon: 8.033947
+    high:
+      label: Seebuck summit
+      lat: 47.864444
+      lon: 8.022222
+      elev_m: 1448
+  costs:
+    assume_ferry_used: true
+    ferry_roundtrip_eur: 24.2
+    austria_vignette_1day_eur: 0.0
+    requires_ch_vignette: false
+    ski_pass_day_adult_eur: 59.0
+    ski_pass_currency: EUR
+- id: de_oberstaufen_steibis
+  name: Oberstaufen (Steibis, DE) — Imbergbahn
+  country: DE
+  type: alpine
+  drive_time_min_from_konstanz: 108
+  website: https://www.imbergbahn.de
+  notes: Family resort in Allgäu; ~18 km pistes; ferry can save time but we assume ferry=true per project. Imberg day ticket
+    (winter 2025/26 reference).
+  access:
+    requires_ch_vignette: false
+    requires_at_vignette: false
+  points:
+    low:
+      label: Imbergbahn Talstation
+      lat: 47.5207786
+      lon: 10.0231676
+    high:
+      label: Imbergbahn Bergstation (Imberghaus)
+      lat: 47.50998
+      lon: 10.01867
+  costs:
+    assume_ferry_used: true
+    ferry_roundtrip_eur: 24.2
+    austria_vignette_1day_eur: 0.0
+    requires_ch_vignette: false
+    ski_pass_day_adult_eur: 52.0
+    ski_pass_currency: EUR
+- id: de_oberstdorf_nebelhorn
+  name: Oberstdorf (DE) — Nebelhorn
+  country: DE
+  type: alpine
+  drive_time_min_from_konstanz: 120
+  website: https://www.nebelhorn.de/
+  notes: Big resort area; famous Nordic/biathlon as well. Peak-season day ticket reference.
+  access:
+    requires_ch_vignette: false
+    requires_at_vignette: false
+  points:
+    low:
+      label: Nebelhornbahn Talstation
+      lat: 47.40479
+      lon: 10.285134
+      elev_m: 828
+    high:
+      label: Nebelhorn summit
+      lat: 47.4218361
+      lon: 10.3422401
+      elev_m: 2224
+  costs:
+    assume_ferry_used: true
+    ferry_roundtrip_eur: 24.2
+    austria_vignette_1day_eur: 0.0
+    requires_ch_vignette: false
+    ski_pass_day_adult_eur: 68.7
+    ski_pass_currency: EUR
+- id: de_scheidegg_alpine
+  name: Scheidegg (Westallgäu, DE) — Alpine
+  country: DE
+  type: alpine
+  drive_time_min_from_konstanz: 85
+  website: https://www.scheidegg.de/
+  notes: Small alpine lifts suitable mainly for learning / short sessions. Best paired with the XC Superloipe network.
+  access:
+    requires_ch_vignette: false
+    requires_at_vignette: false
+  points:
+    low:
+      label: Scheidegg
+      lat: 47.582299
+      lon: 9.851159
+    high:
+      label: Local lift area (approx)
+      lat: 47.588
+      lon: 9.856
+  costs:
+    assume_ferry_used: true
+    ferry_roundtrip_eur: 24.2
+    austria_vignette_1day_eur: 0.0
+    requires_ch_vignette: false
+- id: de_heuberg_messstetten_xc
+  name: Heuberg / Meßstetten (Schwäbische Alb, DE) — XC
+  country: DE
+  type: xc
+  drive_time_min_from_konstanz: 75
+  website: https://skiwanderwege-heuberg.de/
+  notes: XC network on the Heuberg plateau (often very extensive in snowy winters). Good alternative when southbound roads
+    are crowded.
+  access:
+    requires_ch_vignette: false
+    requires_at_vignette: false
+  points:
+    low:
+      label: Meßstetten
+      lat: 48.1808093
+      lon: 8.9629934
+      elev_m: 900
+    high:
+      label: Heuberg plateau (approx)
+      lat: 48.17
+      lon: 8.94
+      elev_m: 1000
+  costs:
+    assume_ferry_used: true
+    ferry_roundtrip_eur: 24.2
+    austria_vignette_1day_eur: 0.0
+    requires_ch_vignette: false
+- id: de_balderschwang_loipe
+  name: Loipe Balderschwang (DE) — XC
+  country: DE
+  type: xc
+  drive_time_min_from_konstanz: 117
+  notes: null
+  access:
+    requires_ch_vignette: false
+    requires_at_vignette: false
+  points:
+    low:
+      label: Balderschwang
+      lat: 47.4621544
+      lon: 10.0950563
+      elev_m: 1044
+    high:
+      label: Schelpen area
+      lat: 47.4496139
+      lon: 10.1061999
+      elev_m: 1250
+  costs:
+    assume_ferry_used: true
+    ferry_roundtrip_eur: 24.2
+    austria_vignette_1day_eur: 0.0
+    requires_ch_vignette: false
+- id: de_oberstaufen_loipe
+  name: Loipe Oberstaufen (DE) — XC
+  country: DE
+  type: xc
+  drive_time_min_from_konstanz: 108
+  notes: null
+  access:
+    requires_ch_vignette: false
+    requires_at_vignette: false
+  points:
+    low:
+      label: Oberstaufen
+      lat: 47.559764
+      lon: 10.0285405
+      elev_m: 791
+    high:
+      label: Steibis area
+      lat: 47.5207822
+      lon: 10.0231676
+      elev_m: 1100
+  costs:
+    assume_ferry_used: true
+    ferry_roundtrip_eur: 24.2
+    austria_vignette_1day_eur: 0.0
+    requires_ch_vignette: false
+- id: de_notschrei
+  name: Nordic Center Notschrei (DE)
+  country: DE
+  type: xc
+  drive_time_min_from_konstanz: 84
+  website: https://www.nordic-center-notschrei.de
+  notes: XC/biathlon center (DSV base). Elevation ~1100–1130 m. Loipennetz ~40–47 km; evening floodlit loop (~2.5 km, typically
+    Tue–Fri). Good snow reliability for the Black Forest.
+  access:
+    requires_ch_vignette: false
+    requires_at_vignette: false
+  points:
+    low:
+      label: Nordic Center Notschrei (parking)
+      lat: 47.876251
+      lon: 7.909534
+    high:
+      label: Nordic/biathlon area (nearby)
+      lat: 47.876772
+      lon: 7.921087
+  costs:
+    assume_ferry_used: true
+    ferry_roundtrip_eur: 24.2
+    austria_vignette_1day_eur: 0.0
+    requires_ch_vignette: false
 - id: de_rothaus_loipenzentrum_schoenwald
   name: Rothaus Loipenzentrum Schönwald (DE)
   country: DE
@@ -28,6 +265,31 @@ resorts:
       label: Zugang Martinskapelle (near)
       lat: 48.105567
       lon: 8.172066
+  costs:
+    assume_ferry_used: true
+    ferry_roundtrip_eur: 24.2
+    austria_vignette_1day_eur: 0.0
+    requires_ch_vignette: false
+- id: de_scheidegg_xc
+  name: Scheidegg (Westallgäu, DE) — XC
+  country: DE
+  type: xc
+  drive_time_min_from_konstanz: 85
+  website: https://www.scheidegg.de/winter/langlaufen/
+  notes: 'XC highlight: Superloipe Waldsee–Alpsee (network ~50 km) on a sunny plateau. Great choice when you want long classic/skating
+    loops without high alpine logistics.'
+  access:
+    requires_ch_vignette: false
+    requires_at_vignette: false
+  points:
+    low:
+      label: Scheidegg
+      lat: 47.582299
+      lon: 9.851159
+    high:
+      label: Waldsee–Alpsee area (approx)
+      lat: 47.565
+      lon: 9.83
   costs:
     assume_ferry_used: true
     ferry_roundtrip_eur: 24.2
@@ -57,490 +319,33 @@ resorts:
     ferry_roundtrip_eur: 24.2
     austria_vignette_1day_eur: 0.0
     requires_ch_vignette: false
-- id: de_notschrei
-  name: Nordic Center Notschrei (DE)
+- id: de_hinterzarten_thurnerspur
+  name: Thurnerspur (Hinterzarten, DE) — XC
   country: DE
   type: xc
-  drive_time_min_from_konstanz: 84
-  website: https://www.nordic-center-notschrei.de
-  notes: Black Forest Nordic & biathlon center.
+  drive_time_min_from_konstanz: 75
+  website: https://www.thurnerspur.de/
+  notes: 'XC: Thurnerspur is one of the classic Black Forest networks (~1100 m altitude). Good snow reliability and multiple
+    loop lengths.'
   access:
     requires_ch_vignette: false
     requires_at_vignette: false
   points:
     low:
-      label: Nordic Center Notschrei (parking)
-      lat: 47.876251
-      lon: 7.909534
+      label: Hinterzarten
+      lat: 47.9057159
+      lon: 8.1055964
+      elev_m: 893
     high:
-      label: Nordic/biathlon area (nearby)
-      lat: 47.876772
-      lon: 7.921087
-  costs:
-    assume_ferry_used: true
-    ferry_roundtrip_eur: 24.2
-    austria_vignette_1day_eur: 0.0
-    requires_ch_vignette: false
-- id: de_balderschwang
-  name: Balderschwang (DE)
-  country: DE
-  type: alpine
-  drive_time_min_from_konstanz: 100
-  website: https://www.skigebiet-balderschwang.de/
-  notes: Very snowy village; alpine + XC network.
-  access:
-    requires_ch_vignette: false
-    requires_at_vignette: false
-  points:
-    low:
-      label: Schelpenalp bottom station
-      lat: 47.46155
-      lon: 10.11039
-      elev_m: 1044
-    high:
-      label: Schelpenalp top station
-      lat: 47.45237
-      lon: 10.10931
-      elev_m: 1520
-  costs:
-    assume_ferry_used: true
-    ferry_roundtrip_eur: 24.2
-    austria_vignette_1day_eur: 0.0
-    requires_ch_vignette: false
-    ski_pass_day_adult_eur: null
-    ski_pass_currency: EUR
-- id: de_balderschwang_loipe
-  name: Loipe Balderschwang (DE) — XC
-  country: DE
-  type: xc
-  drive_time_min_from_konstanz: 117
-  notes: 
-  access:
-    requires_ch_vignette: false
-    requires_at_vignette: false
-  points:
-    low:
-      label: Balderschwang
-      lat: 47.4621544
-      lon: 10.0950563
-      elev_m: 1044
-    high:
-      label: Schelpen area
-      lat: 47.4496139
-      lon: 10.1061999
-      elev_m: 1250
-  costs:
-    assume_ferry_used: false
-    ferry_roundtrip_eur: 24.2
-    austria_vignette_1day_eur: 0.0
-    requires_ch_vignette: false
-- id: de_feldberg
-  name: Feldberg (Schwarzwald, DE)
-  country: DE
-  type: alpine
-  drive_time_min_from_konstanz: 105
-  website: https://www.feldberg-erlebnis.de/en
-  notes: Largest non-Alpine ski area in Germany; XC also available.
-  access:
-    requires_ch_vignette: false
-    requires_at_vignette: false
-  points:
-    low:
-      label: Feldberg (base area)
-      lat: 47.862331
-      lon: 8.033947
-    high:
-      label: Seebuck summit
-      lat: 47.864444
-      lon: 8.022222
-      elev_m: 1448
-  costs:
-    assume_ferry_used: true
-    ferry_roundtrip_eur: 24.2
-    austria_vignette_1day_eur: 0.0
-    requires_ch_vignette: false
-    ski_pass_day_adult_eur: null
-    ski_pass_currency: EUR
-- id: de_oberstaufen_loipe
-  name: Loipe Oberstaufen (DE) — XC
-  country: DE
-  type: xc
-  drive_time_min_from_konstanz: 108
-  notes: 
-  access:
-    requires_ch_vignette: false
-    requires_at_vignette: false
-  points:
-    low:
-      label: Oberstaufen
-      lat: 47.559764
-      lon: 10.0285405
-      elev_m: 791
-    high:
-      label: Steibis area
-      lat: 47.5207822
-      lon: 10.0231676
+      label: Thurner area (approx)
+      lat: 47.938
+      lon: 8.027
       elev_m: 1100
   costs:
     assume_ferry_used: true
     ferry_roundtrip_eur: 24.2
     austria_vignette_1day_eur: 0.0
     requires_ch_vignette: false
-- id: de_oberstaufen_steibis
-  name: Oberstaufen (Steibis, DE) — Imbergbahn
-  country: DE
-  type: alpine
-  drive_time_min_from_konstanz: 108
-  website: https://www.imbergbahn.de
-  notes: Family resort in Allgäu; ~18 km pistes; ferry can save time but we assume ferry=true per project.
-  access:
-    requires_ch_vignette: false
-    requires_at_vignette: false
-  points:
-    low:
-      label: Imbergbahn Talstation
-      lat: 47.5207786
-      lon: 10.0231676
-    high:
-      label: Imbergbahn Bergstation (Imberghaus)
-      lat: 47.50998
-      lon: 10.01867
-  costs:
-    assume_ferry_used: true
-    ferry_roundtrip_eur: 24.2
-    austria_vignette_1day_eur: 0.0
-    requires_ch_vignette: false
-    ski_pass_day_adult_eur: null
-    ski_pass_currency: EUR
-- id: de_oberstdorf_nebelhorn
-  name: Oberstdorf (DE) — Nebelhorn
-  country: DE
-  type: alpine
-  drive_time_min_from_konstanz: 120
-  website: https://www.nebelhorn.de/
-  notes: Big resort area; famous Nordic/biathlon as well.
-  access:
-    requires_ch_vignette: false
-    requires_at_vignette: false
-  points:
-    low:
-      label: Nebelhornbahn Talstation
-      lat: 47.40479
-      lon: 10.285134
-      elev_m: 828
-    high:
-      label: Nebelhorn summit
-      lat: 47.4218361
-      lon: 10.3422401
-      elev_m: 2224
-  costs:
-    assume_ferry_used: true
-    ferry_roundtrip_eur: 24.2
-    austria_vignette_1day_eur: 0.0
-    requires_ch_vignette: false
-    ski_pass_day_adult_eur: null
-    ski_pass_currency: EUR
-- id: at_laterns_gapfohl
-  name: Laterns–Gapfohl (AT)
-  country: AT
-  type: alpine
-  drive_time_min_from_konstanz: 90
-  website: https://www.laterns.net
-  notes: Family resort (~27 km pistes).
-  access:
-    requires_ch_vignette: false
-    requires_at_vignette: true
-  points:
-    low:
-      label: Laterns–Gapfohl Talstation
-      lat: 47.2607147903
-      lon: 9.7429389693
-    high:
-      label: Gapfohl (top station area)
-      lat: 47.274189
-      lon: 9.760222
-  costs:
-    assume_ferry_used: true
-    ferry_roundtrip_eur: 24.2
-    austria_vignette_1day_eur: 9.6
-    requires_ch_vignette: false
-    ski_pass_day_adult_eur: null
-    ski_pass_currency: EUR
-- id: at_boedele
-  name: Bödele (Dornbirn, AT)
-  country: AT
-  type: alpine
-  drive_time_min_from_konstanz: 93
-  website: https://www.boedele.info
-  notes: Nearby family area (~25 km pistes); views over Lake Constance.
-  access:
-    requires_ch_vignette: false
-    requires_at_vignette: true
-  points:
-    low:
-      label: Bödele Pass (ski area)
-      lat: 47.410665
-      lon: 9.823666
-      elev_m: 1139
-    high:
-      label: Hochälpele
-      lat: 47.399678
-      lon: 9.819458
-      elev_m: 1464
-  costs:
-    assume_ferry_used: true
-    ferry_roundtrip_eur: 24.2
-    austria_vignette_1day_eur: 9.6
-    requires_ch_vignette: false
-    ski_pass_day_adult_eur: null
-    ski_pass_currency: EUR
-  drive_time_note: 'User-provided: 1h33m (Jan 2026)'
-- id: at_damuels_mellau
-  name: Damüls–Mellau (AT)
-  country: AT
-  type: alpine
-  drive_time_min_from_konstanz: 100
-  website: https://www.damuels-mellau.at/en/
-  notes: Large Bregenzerwald resort (~109 km pistes); very snow reliable.
-  access:
-    requires_ch_vignette: false
-    requires_at_vignette: true
-  points:
-    low:
-      label: Uga Express Talstation (Damüls)
-      lat: 47.280205
-      lon: 9.89183
-      elev_m: 1428
-    high:
-      label: Uga Express Bergstation area
-      lat: 47.299824
-      lon: 9.891236
-      elev_m: 2000
-  costs:
-    assume_ferry_used: true
-    ferry_roundtrip_eur: 24.2
-    austria_vignette_1day_eur: 9.6
-    requires_ch_vignette: false
-    ski_pass_day_adult_eur: null
-    ski_pass_currency: EUR
-- id: at_silvretta_montafon
-  name: Silvretta Montafon (AT)
-  country: AT
-  type: alpine
-  drive_time_min_from_konstanz: 110
-  website: https://www.silvretta-montafon.at/
-  notes: Large Montafon resort; routes often via CH+AT motorways.
-  access:
-    requires_ch_vignette: true
-    requires_at_vignette: true
-  points:
-    low:
-      label: Valisera Bahn Talstation (St. Gallenkirch)
-      lat: 47.0222
-      lon: 9.96459
-    high:
-      label: Versettla / Nova Stoba area
-      lat: 46.98012
-      lon: 9.99206
-      elev_m: 2000
-  costs:
-    assume_ferry_used: true
-    ferry_roundtrip_eur: 24.2
-    austria_vignette_1day_eur: 9.6
-    requires_ch_vignette: true
-    ski_pass_day_adult_eur: null
-    ski_pass_currency: EUR
-- id: at_warth_schroecken
-  name: Warth–Schröcken (AT) — Ski Arlberg access
-  country: AT
-  type: alpine
-  drive_time_min_from_konstanz: 120
-  website: https://www.warth-schroecken.at/
-  notes: High-alpine area; part of Ski Arlberg; XC options on Hochtannbergpass.
-  access:
-    requires_ch_vignette: false
-    requires_at_vignette: true
-  points:
-    low:
-      label: Steffisalp-Express Talstation (Warth)
-      lat: 47.260053
-      lon: 10.175657
-    high:
-      label: Warther Horn
-      lat: 47.25164
-      lon: 10.15645
-      elev_m: 2256
-  costs:
-    assume_ferry_used: true
-    ferry_roundtrip_eur: 24.2
-    austria_vignette_1day_eur: 9.6
-    requires_ch_vignette: false
-    ski_pass_day_adult_eur: null
-    ski_pass_currency: EUR
-- id: at_lech_zuers
-  name: Lech–Zürs (AT) — Ski Arlberg
-  country: AT
-  type: alpine
-  drive_time_min_from_konstanz: 135
-  website: https://www.lechzuers.com
-  notes: Part of Ski Arlberg; likely >2h from Konstanz.
-  access:
-    requires_ch_vignette: false
-    requires_at_vignette: true
-  points:
-    low:
-      label: Lech
-      lat: 47.2
-      lon: 10.15
-      elev_m: 1444
-    high:
-      label: Zürs (Flexenpass area)
-      lat: 47.16889
-      lon: 10.16333
-      elev_m: 1717
-  costs:
-    assume_ferry_used: true
-    ferry_roundtrip_eur: 24.2
-    austria_vignette_1day_eur: 9.6
-    requires_ch_vignette: false
-    ski_pass_day_adult_eur: null
-    ski_pass_currency: EUR
-- id: ch_heiden_loipe
-  name: Heiden (CH) — Panoramic XC loop
-  country: CH
-  type: xc
-  drive_time_min_from_konstanz: 45
-  website: https://loipen-heiden-bodensee.ch
-  notes: ~9 km classic + ~3.5 km skating; night loop.
-  access:
-    requires_ch_vignette: false
-    requires_at_vignette: false
-  points:
-    low:
-      label: Heiden
-      lat: 47.4426
-      lon: 9.5329
-      elev_m: 787
-    high:
-      label: Kaien parking / loipe access
-      lat: 47.426943
-      lon: 9.507004
-      elev_m: 1115
-  costs:
-    assume_ferry_used: true
-    ferry_roundtrip_eur: 24.2
-    austria_vignette_1day_eur: 0.0
-    requires_ch_vignette: false
-- id: ch_toggenburg_wildhaus
-  name: Wildhaus-Toggenburg (CH)
-  country: CH
-  type: alpine
-  drive_time_min_from_konstanz: 83
-  drive_time_note: 'Rome2Rio: ~1h23m by car (varies by traffic)'
-  website: https://wildhaus.ch/
-  notes:
-  - 'Ski area: Wildhaus (Toggenburg).'
-  points:
-    low:
-      name: Wildhaus (Talstation / Parking Bergbahnen)
-      lat: 47.19227
-      lon: 9.345343
-      elev_m: 1020
-    high:
-      name: Gamserrugg (top area)
-      lat: 47.15895
-      lon: 9.33785
-      elev_m: 2070
-  costs:
-    assume_ferry_used: true
-    ferry_roundtrip_eur: 24.2
-    austria_vignette_1day_eur: 0.0
-    requires_ch_vignette: true
-    ski_pass_day_adult_eur: 61
-    ski_pass_currency: CHF
-- id: ch_toggenburg_wildhaus
-  name: Toggenburg (Wildhaus–Chäserrugg, CH)
-  country: CH
-  type: alpine
-  drive_time_min_from_konstanz: 88
-  website: https://www.wildhaus.ch
-  notes: ~50 km pistes; alpine + XC in the valley.
-  access:
-    requires_ch_vignette: true
-    requires_at_vignette: false
-  points:
-    low:
-      label: Wildhaus
-      lat: 47.2033339
-      lon: 9.350492
-      elev_m: 1095
-    high:
-      label: Chäserrugg
-      lat: 47.155
-      lon: 9.31254
-      elev_m: 2262
-  costs:
-    assume_ferry_used: true
-    ferry_roundtrip_eur: 24.2
-    austria_vignette_1day_eur: 0.0
-    requires_ch_vignette: true
-    ski_pass_day_adult_eur: null
-    ski_pass_currency: CHF
-- id: ch_toggenburg_chaeserrugg
-  name: Chäserrugg-Toggenburg (Unterwasser, CH)
-  country: CH
-  type: alpine
-  drive_time_min_from_konstanz: 90
-  drive_time_note: Estimate (similar to Wildhaus; depends on exact start/traffic)
-  website: https://www.chaeserrugg.ch/
-  notes:
-  - 'Base: Unterwasser (Iltiosbahn).'
-  - 'Summit: Chäserrugg.'
-  points:
-    low:
-      name: Unterwasser Talstation Iltiosbahn
-      lat: 47.194664
-      lon: 9.309258
-      elev_m: 911
-    high:
-      name: Chäserrugg Summit
-      lat: 47.154863
-      lon: 9.313735
-      elev_m: 2261
-  costs:
-    assume_ferry_used: true
-    ferry_roundtrip_eur: 24.2
-    austria_vignette_1day_eur: 0.0
-    requires_ch_vignette: true
-    ski_pass_day_adult_eur: 61
-    ski_pass_currency: CHF
-- id: ch_einsiedeln_schwedentritt
-  name: Einsiedeln-Loipe Schwedentritt (CH)
-  country: CH
-  type: xc
-  drive_time_min_from_konstanz: 92
-  drive_time_note: 'Rome2Rio: ~1h32m by car (varies by traffic)'
-  website: https://www.einsiedeln.ch/de/sport-freizeit/langlauf.html
-  notes:
-  - 'Trailhead / parking: Brüel (Schwedentritt).'
-  points:
-    low:
-      name: Parkplatz Schwedentritt (Brüel)
-      lat: 47.12886
-      lon: 8.753628
-      elev_m: 910
-    high:
-      name: Schwedentritt loop (higher section)
-      lat: 47.123
-      lon: 8.76
-      elev_m: 1030
-  costs:
-    assume_ferry_used: true
-    ferry_roundtrip_eur: 24.2
-    austria_vignette_1day_eur: 0.0
-    requires_ch_vignette: true
-    ski_pass_day_adult_eur: null
-    ski_pass_currency: CHF
 - id: ch_toggenburg_alt_st_johann
   name: Alt St.Johann-Toggenburg (Sellamatt, CH)
   country: CH
@@ -567,85 +372,6 @@ resorts:
     austria_vignette_1day_eur: 0.0
     requires_ch_vignette: true
     ski_pass_day_adult_eur: 61
-    ski_pass_currency: CHF
-- id: ch_pizol
-  name: Pizol (Bad Ragaz – Wangs, CH)
-  country: CH
-  type: alpine
-  drive_time_min_from_konstanz: 100
-  website: https://pizol.com
-  notes: ~40 km pistes; panoramic views over Rhine valley.
-  access:
-    requires_ch_vignette: true
-    requires_at_vignette: false
-  points:
-    low:
-      label: Pizolbahnen Bad Ragaz (Talstation)
-      lat: 47.017142
-      lon: 9.473644
-    high:
-      label: Pizolhütte area
-      lat: 46.9791342
-      lon: 9.41718997
-      elev_m: 2227
-  costs:
-    assume_ferry_used: true
-    ferry_roundtrip_eur: 24.2
-    austria_vignette_1day_eur: 0.0
-    requires_ch_vignette: true
-    ski_pass_day_adult_eur: null
-    ski_pass_currency: CHF
-- id: ch_flumserberg
-  name: Flumserberg (CH)
-  country: CH
-  type: alpine
-  drive_time_min_from_konstanz: 117
-  website: https://flumserberg.ch
-  notes: Largest ski resort in Eastern Switzerland (~65 km pistes).
-  access:
-    requires_ch_vignette: true
-    requires_at_vignette: false
-  points:
-    low:
-      label: Flumserberg (resort area / base)
-      lat: 47.0828508
-      lon: 9.2765894
-    high:
-      label: Maschgenkamm
-      lat: 47.069318
-      lon: 9.252982
-      elev_m: 2020
-  costs:
-    assume_ferry_used: false
-    requires_ch_vignette: true
-    ski_pass_day_adult_eur: 70
-    ski_pass_currency: CHF
-- id: ch_hoch_ybrig
-  name: Hoch-Ybrig (CH)
-  country: CH
-  type: alpine
-  drive_time_min_from_konstanz: 110
-  drive_time_note: Estimate (~1h45–1h55; varies by route/traffic)
-  website: https://www.hoch-ybrig.ch/
-  notes:
-  - Access via Talstation Weglosen (Unteriberg).
-  points:
-    low:
-      name: Talstation Weglosen (Unteriberg)
-      lat: 46.999857
-      lon: 8.797631
-      elev_m: 1034
-    high:
-      name: Hoch-Ybrig (Sternen/Startplatz area)
-      lat: 46.99955
-      lon: 8.801092
-      elev_m: 1864
-  costs:
-    assume_ferry_used: true
-    ferry_roundtrip_eur: 24.2
-    austria_vignette_1day_eur: 0.0
-    requires_ch_vignette: true
-    ski_pass_day_adult_eur: 62
     ski_pass_currency: CHF
 - id: ch_arosa_lenzerheide
   name: Arosa Lenzerheide (CH)
@@ -674,38 +400,61 @@ resorts:
     requires_ch_vignette: true
     ski_pass_day_adult_eur: 84
     ski_pass_currency: CHF
-- id: ch_laax_flims
-  name: Laax / Flims (CH)
+- id: ch_braunwald
+  name: Braunwald (CH, car-free)
   country: CH
   type: alpine
-  drive_time_min_from_konstanz: 124
-  website: https://www.laax.com
-  notes: Bigger resort, may exceed 2h depending on traffic.
+  drive_time_min_from_konstanz: 117
+  website: https://www.braunwald.ch
+  notes: Alpine. Car-free resort; access only by Braunwaldbahn funicular from Linthal (adds logistics). ~26 km pistes; elevation
+    ~1236–1901 m.
   access:
-    requires_ch_vignette: true
+    requires_ch_vignette: false
     requires_at_vignette: false
   points:
     low:
-      label: Laax
-      lat: 46.8
-      lon: 9.25
-      elev_m: 1050
+      label: Braunwaldbahn Talstation (Linthal)
+      lat: 46.92861
+      lon: 9.0023
+      elev_m: 650
     high:
-      label: Crap Sogn Gion
-      lat: 46.835343
-      lon: 9.215291
-      elev_m: 2252
+      label: Gumen (upper area, approx)
+      lat: 46.95546
+      lon: 8.98446
+      elev_m: 1901
+  costs:
+    assume_ferry_used: true
+    ferry_roundtrip_eur: 24.2
+    austria_vignette_1day_eur: 0.0
+    requires_ch_vignette: false
+- id: ch_toggenburg_chaeserrugg
+  name: Chäserrugg-Toggenburg (Unterwasser, CH)
+  country: CH
+  type: alpine
+  drive_time_min_from_konstanz: 90
+  drive_time_note: Estimate (similar to Wildhaus; depends on exact start/traffic)
+  website: https://www.chaeserrugg.ch/
+  notes:
+  - 'Base: Unterwasser (Iltiosbahn).'
+  - 'Summit: Chäserrugg.'
+  points:
+    low:
+      name: Unterwasser Talstation Iltiosbahn
+      lat: 47.194664
+      lon: 9.309258
+      elev_m: 911
+    high:
+      name: Chäserrugg Summit
+      lat: 47.154863
+      lon: 9.313735
+      elev_m: 2261
   costs:
     assume_ferry_used: true
     ferry_roundtrip_eur: 24.2
     austria_vignette_1day_eur: 0.0
     requires_ch_vignette: true
-    ski_pass_day_adult_eur: null
+    ski_pass_day_adult_eur: 61
     ski_pass_currency: CHF
-  drive_time_note: 'User-provided: 2h04m (Jan 2026)'
-  aliases:
-  - Laax
-  - Flims
 - id: ch_davos_jakobshorn
   name: Davos (Jakobshorn, CH)
   country: CH
@@ -760,6 +509,33 @@ resorts:
     requires_ch_vignette: true
     ski_pass_day_adult_eur: 68
     ski_pass_currency: CHF
+- id: ch_elm
+  name: Elm (CH)
+  country: CH
+  type: alpine
+  drive_time_min_from_konstanz: 110
+  website: https://www.sportbahnenelm.ch
+  notes: Alpine. Elevation ~1020–2105 m (large vertical). ~40 km pistes; strong intermediate mix and scenic ‘Martinsloch’
+    area. Good for a full-day trip.
+  access:
+    requires_ch_vignette: false
+    requires_at_vignette: false
+  points:
+    low:
+      label: Elm Talstation (approx)
+      lat: 46.91278
+      lon: 9.16167
+      elev_m: 1020
+    high:
+      label: Elm upper area (Steinibach/Pleus, approx)
+      lat: 46.92944
+      lon: 9.14194
+      elev_m: 2105
+  costs:
+    assume_ferry_used: true
+    ferry_roundtrip_eur: 24.2
+    austria_vignette_1day_eur: 0.0
+    requires_ch_vignette: false
 - id: ch_engelberg_brunni
   name: Engelberg-Brunni (CH)
   country: CH
@@ -814,3 +590,625 @@ resorts:
     requires_ch_vignette: true
     ski_pass_day_adult_eur: 44
     ski_pass_currency: CHF
+- id: ch_flumserberg
+  name: Flumserberg (CH)
+  country: CH
+  type: alpine
+  drive_time_min_from_konstanz: 117
+  website: https://flumserberg.ch
+  notes: Largest ski resort in Eastern Switzerland (~65 km pistes).
+  access:
+    requires_ch_vignette: true
+    requires_at_vignette: false
+  points:
+    low:
+      label: Flumserberg (resort area / base)
+      lat: 47.0828508
+      lon: 9.2765894
+    high:
+      label: Maschgenkamm
+      lat: 47.069318
+      lon: 9.252982
+      elev_m: 2020
+  costs:
+    assume_ferry_used: true
+    requires_ch_vignette: true
+    ski_pass_day_adult_eur: 70
+    ski_pass_currency: CHF
+- id: ch_gruesch_danusa
+  name: Grüsch–Danusa (CH)
+  country: CH
+  type: alpine
+  drive_time_min_from_konstanz: 90
+  website: https://www.gruesch-danusa.ch
+  notes: Alpine. ~31 km pistes on a high plateau (~1800 m). Big “valley-to-plateau” gondola from Grüsch; also has short XC
+    loops (~4.8 km) at altitude. Good “first GR stop” before Davos traffic.
+  access:
+    requires_ch_vignette: false
+    requires_at_vignette: false
+  points:
+    low:
+      label: Talstation Grüsch-Danusa
+      lat: 46.97265
+      lon: 9.63996
+      elev_m: 613
+    high:
+      label: Danusa plateau (Schwänzelegg)
+      lat: 46.945945
+      lon: 9.650458
+      elev_m: 1800
+  costs:
+    assume_ferry_used: true
+    ferry_roundtrip_eur: 24.2
+    austria_vignette_1day_eur: 0.0
+    requires_ch_vignette: false
+- id: ch_hoch_ybrig
+  name: Hoch-Ybrig (CH)
+  country: CH
+  type: alpine
+  drive_time_min_from_konstanz: 110
+  drive_time_note: Estimate (~1h45–1h55; varies by route/traffic)
+  website: https://www.hoch-ybrig.ch/
+  notes:
+  - Access via Talstation Weglosen (Unteriberg).
+  points:
+    low:
+      name: Talstation Weglosen (Unteriberg)
+      lat: 46.999857
+      lon: 8.797631
+      elev_m: 1034
+    high:
+      name: Hoch-Ybrig (Sternen/Startplatz area)
+      lat: 46.99955
+      lon: 8.801092
+      elev_m: 1864
+  costs:
+    assume_ferry_used: true
+    ferry_roundtrip_eur: 24.2
+    austria_vignette_1day_eur: 0.0
+    requires_ch_vignette: true
+    ski_pass_day_adult_eur: 62
+    ski_pass_currency: CHF
+- id: ch_laax_flims
+  name: Laax / Flims (CH)
+  country: CH
+  type: alpine
+  drive_time_min_from_konstanz: 124
+  website: https://www.laax.com
+  notes: Bigger resort, may exceed 2h depending on traffic. Baseline adult day ticket reference (dynamic pricing may vary).
+  access:
+    requires_ch_vignette: true
+    requires_at_vignette: false
+  points:
+    low:
+      label: Laax
+      lat: 46.8
+      lon: 9.25
+      elev_m: 1050
+    high:
+      label: Crap Sogn Gion
+      lat: 46.835343
+      lon: 9.215291
+      elev_m: 2252
+  costs:
+    assume_ferry_used: true
+    ferry_roundtrip_eur: 24.2
+    austria_vignette_1day_eur: 0.0
+    requires_ch_vignette: true
+    ski_pass_day_adult_eur: 89.0
+    ski_pass_currency: CHF
+  drive_time_note: 'User-provided: 2h04m (Jan 2026)'
+  aliases:
+  - Laax
+  - Flims
+- id: ch_pizol
+  name: Pizol (Bad Ragaz – Wangs, CH)
+  country: CH
+  type: alpine
+  drive_time_min_from_konstanz: 100
+  website: https://pizol.com
+  notes: ~40 km pistes; panoramic views over Rhine valley. 1-day adult ticket reference (winter 25/26).
+  access:
+    requires_ch_vignette: true
+    requires_at_vignette: false
+  points:
+    low:
+      label: Pizolbahnen Bad Ragaz (Talstation)
+      lat: 47.017142
+      lon: 9.473644
+    high:
+      label: Pizolhütte area
+      lat: 46.9791342
+      lon: 9.41718997
+      elev_m: 2227
+  costs:
+    assume_ferry_used: true
+    ferry_roundtrip_eur: 24.2
+    austria_vignette_1day_eur: 0.0
+    requires_ch_vignette: true
+    ski_pass_day_adult_eur: 69.0
+    ski_pass_currency: CHF
+- id: ch_toggenburg_wildhaus
+  name: Wildhaus-Toggenburg (CH)
+  country: CH
+  type: alpine
+  drive_time_min_from_konstanz: 83
+  drive_time_note: 'Rome2Rio: ~1h23m by car (varies by traffic)'
+  website: https://wildhaus.ch/
+  notes:
+  - 'Ski area: Wildhaus (Toggenburg).'
+  points:
+    low:
+      name: Wildhaus (Talstation / Parking Bergbahnen)
+      lat: 47.19227
+      lon: 9.345343
+      elev_m: 1020
+    high:
+      name: Gamserrugg (top area)
+      lat: 47.15895
+      lon: 9.33785
+      elev_m: 2070
+  costs:
+    assume_ferry_used: true
+    ferry_roundtrip_eur: 24.2
+    austria_vignette_1day_eur: 0.0
+    requires_ch_vignette: true
+    ski_pass_day_adult_eur: 61
+    ski_pass_currency: CHF
+- id: ch_einsiedeln_schwedentritt
+  name: Einsiedeln-Loipe Schwedentritt (CH)
+  country: CH
+  type: xc
+  drive_time_min_from_konstanz: 92
+  drive_time_note: 'Rome2Rio: ~1h32m by car (varies by traffic)'
+  website: https://www.einsiedeln.ch/de/sport-freizeit/langlauf.html
+  notes:
+  - 'Trailhead / parking: Brüel (Schwedentritt).'
+  points:
+    low:
+      name: Parkplatz Schwedentritt (Brüel)
+      lat: 47.12886
+      lon: 8.753628
+      elev_m: 910
+    high:
+      name: Schwedentritt loop (higher section)
+      lat: 47.123
+      lon: 8.76
+      elev_m: 1030
+  costs:
+    assume_ferry_used: true
+    ferry_roundtrip_eur: 24.2
+    austria_vignette_1day_eur: 0.0
+    requires_ch_vignette: true
+    ski_pass_day_adult_eur: null
+    ski_pass_currency: CHF
+- id: ch_heiden_loipe
+  name: Heiden (CH) — Panoramic XC loop
+  country: CH
+  type: xc
+  drive_time_min_from_konstanz: 45
+  website: https://loipen-heiden-bodensee.ch
+  notes: ~9 km classic + ~3.5 km skating; night loop.
+  access:
+    requires_ch_vignette: false
+    requires_at_vignette: false
+  points:
+    low:
+      label: Heiden
+      lat: 47.4426
+      lon: 9.5329
+      elev_m: 787
+    high:
+      label: Kaien parking / loipe access
+      lat: 47.426943
+      lon: 9.507004
+      elev_m: 1115
+  costs:
+    assume_ferry_used: true
+    ferry_roundtrip_eur: 24.2
+    austria_vignette_1day_eur: 0.0
+    requires_ch_vignette: false
+- id: ch_gais_langlaufzentrum
+  name: Langlaufzentrum Gais (CH)
+  country: CH
+  type: xc
+  drive_time_min_from_konstanz: 55
+  website: https://langlauf-gais.ch/
+  notes: XC center close to Konstanz. Night skiing available (floodlit loop); rolling terrain around ~900 m elevation.
+  access:
+    requires_ch_vignette: false
+    requires_at_vignette: false
+  points:
+    low:
+      label: Gais
+      lat: 47.3616
+      lon: 9.4526
+      elev_m: 900
+    high:
+      label: Nachtloipe area (approx)
+      lat: 47.366
+      lon: 9.46
+  costs:
+    assume_ferry_used: true
+    ferry_roundtrip_eur: 24.2
+    austria_vignette_1day_eur: 0.0
+    requires_ch_vignette: false
+- id: at_brandnertal
+  name: Brandnertal (Brand/Bürserberg, AT)
+  country: AT
+  type: alpine
+  drive_time_min_from_konstanz: 90
+  website: https://www.vorarlberg-alpenregion.at/en/brandnertal/
+  notes: Alpine. Scenic valley resort under Schesaplana; two base villages (Brand & Bürserberg) linked by lifts. Good variety
+    of forest runs and open plateaus.
+  access:
+    requires_at_vignette: true
+    requires_ch_vignette: false
+  points:
+    low:
+      label: Brand (village)
+      lat: 47.111
+      lon: 9.75
+      elev_m: 1037
+    high:
+      label: Brandnertal upper area (approx)
+      lat: 47.12
+      lon: 9.76
+      elev_m: 2000
+  costs:
+    assume_ferry_used: true
+    ferry_roundtrip_eur: 24.2
+    austria_vignette_1day_eur: 9.3
+    requires_ch_vignette: false
+- id: at_boedele
+  name: Bödele (Dornbirn, AT)
+  country: AT
+  type: alpine
+  drive_time_min_from_konstanz: 93
+  website: https://www.boedele.info
+  notes: 'Close-by Alpine + strong XC option. Good for half-day trips; grass base helps early-season skiing. Note: drive time
+    varies; can be faster off-peak.'
+  access:
+    requires_ch_vignette: false
+    requires_at_vignette: true
+  points:
+    low:
+      label: Bödele Pass (ski area)
+      lat: 47.410665
+      lon: 9.823666
+      elev_m: 1139
+    high:
+      label: Hochälpele
+      lat: 47.399678
+      lon: 9.819458
+      elev_m: 1464
+  costs:
+    assume_ferry_used: true
+    ferry_roundtrip_eur: 24.2
+    austria_vignette_1day_eur: 9.3
+    requires_ch_vignette: false
+    ski_pass_day_adult_eur: 46.5
+    ski_pass_currency: EUR
+  drive_time_note: 'User-provided: 1h33m (Jan 2026)'
+- id: at_damuels_mellau
+  name: Damüls–Mellau (AT)
+  country: AT
+  type: alpine
+  drive_time_min_from_konstanz: 100
+  website: https://www.damuels-mellau.at/en/
+  notes: Large Bregenzerwald resort (~109 km pistes); very snow reliable. Hauptsaison 2025/26 day ticket reference.
+  access:
+    requires_ch_vignette: false
+    requires_at_vignette: true
+  points:
+    low:
+      label: Uga Express Talstation (Damüls)
+      lat: 47.280205
+      lon: 9.89183
+      elev_m: 1428
+    high:
+      label: Uga Express Bergstation area
+      lat: 47.299824
+      lon: 9.891236
+      elev_m: 2000
+  costs:
+    assume_ferry_used: true
+    ferry_roundtrip_eur: 24.2
+    austria_vignette_1day_eur: 9.3
+    requires_ch_vignette: false
+    ski_pass_day_adult_eur: 72.5
+    ski_pass_currency: EUR
+- id: at_diedamskopf
+  name: Diedamskopf (Au–Schoppernau, AT)
+  country: AT
+  type: alpine
+  drive_time_min_from_konstanz: 100
+  website: https://www.diedamskopf.at
+  notes: Alpine. Highest lifts in Bregenzerwald (~2020 m), generally good snow quality. Good freeride reputation.
+  access:
+    requires_at_vignette: true
+    requires_ch_vignette: false
+  points:
+    low:
+      label: Diedamskopf base (Schoppernau)
+      lat: 47.3172
+      lon: 10.0084
+    high:
+      label: Diedamskopf summit area (approx)
+      lat: 47.3464
+      lon: 10.0256
+      elev_m: 2020
+  costs:
+    assume_ferry_used: true
+    ferry_roundtrip_eur: 24.2
+    austria_vignette_1day_eur: 9.3
+    requires_ch_vignette: false
+- id: at_gargellen
+  name: Gargellen (Montafon, AT)
+  country: AT
+  type: alpine
+  drive_time_min_from_konstanz: 110
+  website: https://www.gargellen.at
+  notes: Alpine. Highest village in Montafon (~1423 m) and very snow-reliable; a strong “plan B” in warm winters.
+  access:
+    requires_at_vignette: true
+    requires_ch_vignette: false
+  points:
+    low:
+      label: Gargellen (village)
+      lat: 46.97088
+      lon: 9.91818
+      elev_m: 1423
+    high:
+      label: Gargellen upper area (approx)
+      lat: 46.97786
+      lon: 9.91793
+  costs:
+    assume_ferry_used: true
+    ferry_roundtrip_eur: 24.2
+    austria_vignette_1day_eur: 9.3
+    requires_ch_vignette: false
+- id: at_laterns_gapfohl
+  name: Laterns–Gapfohl (AT)
+  country: AT
+  type: alpine
+  drive_time_min_from_konstanz: 85
+  website: https://www.laterns.net
+  notes: Alpine. Elevation 1040–1785 m (745 m vertical). ~27 km pistes + ~11 km marked skiroutes. Mostly red terrain; modern
+    6-seat chair 'Nob'. Quick access via A14 (Feldkirch/Rankweil).
+  access:
+    requires_ch_vignette: false
+    requires_at_vignette: true
+  points:
+    low:
+      label: Laterns–Gapfohl Talstation
+      lat: 47.2607147903
+      lon: 9.7429389693
+    high:
+      label: Gapfohl (top station area)
+      lat: 47.274189
+      lon: 9.760222
+  costs:
+    assume_ferry_used: true
+    ferry_roundtrip_eur: 24.2
+    austria_vignette_1day_eur: 9.3
+    requires_ch_vignette: false
+    ski_pass_day_adult_eur: 51.0
+    ski_pass_currency: EUR
+- id: at_lech_zuers
+  name: Lech–Zürs (AT) — Ski Arlberg
+  country: AT
+  type: alpine
+  drive_time_min_from_konstanz: 135
+  website: https://www.lechzuers.com
+  notes: Part of Ski Arlberg; likely >2h from Konstanz. Ski Arlberg day ticket reference (high season 2025/26).
+  access:
+    requires_ch_vignette: false
+    requires_at_vignette: true
+  points:
+    low:
+      label: Lech
+      lat: 47.2
+      lon: 10.15
+      elev_m: 1444
+    high:
+      label: Zürs (Flexenpass area)
+      lat: 47.16889
+      lon: 10.16333
+      elev_m: 1717
+  costs:
+    assume_ferry_used: true
+    ferry_roundtrip_eur: 24.2
+    austria_vignette_1day_eur: 9.3
+    requires_ch_vignette: false
+    ski_pass_day_adult_eur: 81.5
+    ski_pass_currency: EUR
+- id: at_schetteregg
+  name: Schetteregg (Bregenzerwald, AT)
+  country: AT
+  type: alpine
+  drive_time_min_from_konstanz: 75
+  website: https://www.schetteregg.at
+  notes: Family-focused alpine resort. Elevation ~1100–1400 m (~300 m vertical). ~11 km pistes (blue-heavy with some red;
+    small black section). Dense lift network; good for quiet days and beginners.
+  access:
+    requires_at_vignette: true
+    requires_ch_vignette: false
+  points:
+    low:
+      label: Schetteregg Talstation
+      lat: 47.4169653
+      lon: 9.9836748
+      elev_m: 1100
+    high:
+      label: Schetteregg upper area (approx)
+      lat: 47.43
+      lon: 9.996
+      elev_m: 1400
+  costs:
+    assume_ferry_used: true
+    ferry_roundtrip_eur: 24.2
+    austria_vignette_1day_eur: 9.3
+    requires_ch_vignette: false
+- id: at_silvretta_montafon
+  name: Silvretta Montafon (AT)
+  country: AT
+  type: alpine
+  drive_time_min_from_konstanz: 110
+  website: https://www.silvretta-montafon.at/
+  notes: Large Montafon resort; routes often via CH+AT motorways. Online shop "Top price" 1-day ticket reference (winter 2025/26).
+  access:
+    requires_ch_vignette: true
+    requires_at_vignette: true
+  points:
+    low:
+      label: Valisera Bahn Talstation (St. Gallenkirch)
+      lat: 47.0222
+      lon: 9.96459
+    high:
+      label: Versettla / Nova Stoba area
+      lat: 46.98012
+      lon: 9.99206
+      elev_m: 2000
+  costs:
+    assume_ferry_used: true
+    ferry_roundtrip_eur: 24.2
+    austria_vignette_1day_eur: 9.3
+    requires_ch_vignette: true
+    ski_pass_day_adult_eur: 63.0
+    ski_pass_currency: EUR
+- id: at_st_anton_am_arlberg
+  name: St. Anton am Arlberg (AT)
+  country: AT
+  type: alpine
+  drive_time_min_from_konstanz: 125
+  website: https://www.stantonamarlberg.com
+  notes: Alpine (world-class). Borderline for “≤2h” and highly traffic-sensitive near Arlberg tunnel; keep as an option with
+    a traffic caveat.
+  access:
+    requires_at_vignette: true
+    requires_ch_vignette: false
+  points:
+    low:
+      label: St. Anton am Arlberg
+      lat: 47.129635
+      lon: 10.268179
+    high:
+      label: Ski area upper (approx)
+      lat: 47.14
+      lon: 10.23
+      elev_m: 2811
+  costs:
+    assume_ferry_used: true
+    ferry_roundtrip_eur: 24.2
+    austria_vignette_1day_eur: 9.3
+    requires_ch_vignette: false
+- id: at_warth_schroecken
+  name: Warth–Schröcken (AT) — Ski Arlberg access
+  country: AT
+  type: alpine
+  drive_time_min_from_konstanz: 120
+  website: https://www.warth-schroecken.at/
+  notes: 'Alpine (part of Ski Arlberg via Auenfeldjet). IMPORTANT routing: the L198 Lech–Warth road is closed in winter; access
+    Warth only via Bregenzerwald (L200).'
+  access:
+    requires_ch_vignette: false
+    requires_at_vignette: true
+  points:
+    low:
+      label: Steffisalp-Express Talstation (Warth)
+      lat: 47.260053
+      lon: 10.175657
+    high:
+      label: Warther Horn
+      lat: 47.25164
+      lon: 10.15645
+      elev_m: 2256
+  costs:
+    assume_ferry_used: true
+    ferry_roundtrip_eur: 24.2
+    austria_vignette_1day_eur: 9.3
+    requires_ch_vignette: false
+    ski_pass_day_adult_eur: 75.0
+    ski_pass_currency: EUR
+- id: at_sulzberg_nordic_sport_park
+  name: Nordic Sport Park Sulzberg (AT)
+  country: AT
+  type: xc
+  drive_time_min_from_konstanz: 60
+  website: https://www.vorarlberg.travel/en/activity/nordic-sport-park-sulzberg/
+  notes: XC center in Bregenzerwald. ~20 km groomed classic + skating trails; day fee applies (per local operators). Good
+    panoramas; links towards Westallgäu network.
+  access:
+    requires_at_vignette: true
+    requires_ch_vignette: false
+  points:
+    low:
+      label: Sulzberg
+      lat: 47.5244329
+      lon: 9.9097887
+      elev_m: 960
+    high:
+      label: Sulzberg Nordic area (approx)
+      lat: 47.53
+      lon: 9.92
+      elev_m: 1007
+  costs:
+    assume_ferry_used: true
+    ferry_roundtrip_eur: 24.2
+    austria_vignette_1day_eur: 9.3
+    requires_ch_vignette: false
+- id: at_silvretta_bielerhoehe
+  name: Silvretta-Bielerhöhe (AT)
+  country: AT
+  type: xc
+  drive_time_min_from_konstanz: 115
+  website: https://www.silvretta-bielerhoehe.at/en
+  notes: 'Nordic & ski touring focus at 2032 m on the Silvretta reservoir. Winter access: the Silvretta-Hochalpenstraße is
+    closed; reach via Partenen using Vermuntbahn + tunnel bus (special logistics).'
+  access:
+    requires_at_vignette: true
+    requires_ch_vignette: false
+  points:
+    low:
+      label: Vermuntbahn Talstation (Partenen)
+      lat: 46.9685
+      lon: 10.05675
+      elev_m: 1038
+    high:
+      label: Bielerhöhe / Silvretta-Stausee
+      lat: 46.91806
+      lon: 10.09556
+      elev_m: 2032
+  costs:
+    assume_ferry_used: true
+    ferry_roundtrip_eur: 24.2
+    austria_vignette_1day_eur: 9.3
+    requires_ch_vignette: false
+- id: fl_malbun
+  name: Malbun (Liechtenstein)
+  country: FL
+  type: alpine
+  drive_time_min_from_konstanz: 85
+  website: https://tourismus.li
+  notes: Alpine. Only ski area in Liechtenstein. Very high base (~1600 m) and top ~2100 m; ~23 km pistes. Access road from
+    Vaduz is steep/serpentine in winter.
+  access:
+    requires_ch_vignette: false
+    requires_at_vignette: false
+  points:
+    low:
+      label: Malbun (village)
+      lat: 47.102
+      lon: 9.608
+      elev_m: 1600
+    high:
+      label: Sareiserjoch (top area)
+      lat: 47.09521
+      lon: 9.62539
+      elev_m: 2000
+  costs:
+    assume_ferry_used: true
+    ferry_roundtrip_eur: 24.2
+    austria_vignette_1day_eur: 0.0
+    requires_ch_vignette: false
