@@ -24,15 +24,20 @@ def format_discipline_header_line(summary: DisciplineWeekly, tomorrow: date) -> 
     """Format one header line for a discipline with verdict-dependent templates.
     
     Verdict thresholds by tomorrow_score (t):
-    - t >= 70: ✅ стоит
-    - 60 <= t <= 69: ⚠️ сомнительно
-    - t < 60: ⛔️ лучше не ехать / лучше не завтра
+    - alpine: t >= 70 ✅, 60..69 ⚠️, <60 ⛔️
+    - xc: t >= 68 ✅, 58..67 ⚠️, <58 ⛔️
     
     Templates vary by verdict and gap (b - t).
     """
     t = summary.tomorrow_score
     b = summary.best_day_score
     gap = b - t
+    if summary.discipline == "xc":
+        ok_threshold = 68
+        warning_threshold = 58
+    else:
+        ok_threshold = 70
+        warning_threshold = 60
     # Clamp days_to_best to 0 if best_day is in past relative to tomorrow
     days_to_best = max(0, (summary.best_day - tomorrow).days) if summary.best_day else 0
     
@@ -40,7 +45,7 @@ def format_discipline_header_line(summary: DisciplineWeekly, tomorrow: date) -> 
     best_weekday = WEEKDAY_NAMES_UPPER.get(summary.best_day.weekday(), "") if summary.best_day else ""
     
     # ✅ verdict (t >= 70)
-    if t >= 70:
+    if t >= ok_threshold:
         if gap == 0:
             return f"✅ {disc_label}: стоит — завтра лучший день недели: {t}"
         elif gap <= 2:
@@ -49,7 +54,7 @@ def format_discipline_header_line(summary: DisciplineWeekly, tomorrow: date) -> 
             return f"✅ {disc_label}: стоит — завтра {t}, но лучший день {best_weekday}: {b}"
     
     # ⚠️ verdict (60 <= t <= 69)
-    if t >= 60:
+    if t >= warning_threshold:
         if gap == 0:
             return f"⚠️ {disc_label}: сомнительно — завтра лучший вариант на неделе: {t}"
         else:
@@ -57,10 +62,10 @@ def format_discipline_header_line(summary: DisciplineWeekly, tomorrow: date) -> 
     
     # ⛔️ verdict (t < 60)
     # "Good day soon": b >= 70 AND 0 < days_to_best <= 7
-    good_day_soon = b >= 70 and 0 < days_to_best <= 7
+    good_day_soon = b >= ok_threshold and 0 < days_to_best <= 7
     if good_day_soon:
         return f"⛔️ {disc_label}: лучше не завтра — подождать до {best_weekday} ({b})"
-    elif gap > 0 and b < 70:
+    elif gap > 0 and b < ok_threshold:
         # Tomorrow not best AND best day is also weak
         return f"⛔️ {disc_label}: не стоит — завтра {t}; лучший день {best_weekday} тоже слабый: {b}"
     else:
@@ -241,4 +246,3 @@ def format_message(
         lines.append(format_missing_block(missing_resort_names))
     
     return "\n".join(lines)
-

@@ -447,6 +447,33 @@ class TestDisciplineHeaderLine:
         line = format_discipline_header_line(summary, tomorrow)
         
         assert "Беговые:" in line
+
+    def test_header_xc_thresholds(self):
+        """XC uses dedicated thresholds: >=68 ok, 58-67 warning, <58 skip."""
+        tomorrow = date(2025, 1, 15)
+
+        ok = DisciplineWeekly(
+            discipline="xc",
+            tomorrow_score=68,
+            best_day=tomorrow,
+            best_day_score=68,
+        )
+        warning = DisciplineWeekly(
+            discipline="xc",
+            tomorrow_score=58,
+            best_day=tomorrow,
+            best_day_score=58,
+        )
+        skip = DisciplineWeekly(
+            discipline="xc",
+            tomorrow_score=57,
+            best_day=tomorrow,
+            best_day_score=57,
+        )
+
+        assert "стоит" in format_discipline_header_line(ok, tomorrow)
+        assert "сомнительно" in format_discipline_header_line(warning, tomorrow)
+        assert "не стоит" in format_discipline_header_line(skip, tomorrow)
     
     def test_header_has_one_line_per_present_discipline_alpine_only(self):
         """If only alpine data exists, only 1 discipline line."""
@@ -701,11 +728,11 @@ class TestVerdictDependentTemplates:
         assert "подождать" not in line
     
     def test_wait_rule_up_to_7_days(self):
-        """⛔️ good day within 7 days: t=59, b=78, days_to_best=6 → 'подождать до СБ (78)'."""
+        """⛔️ good day within 7 days: t=57, b=78, days_to_best=6 → 'подождать до СБ (78)'."""
         tomorrow = date(2025, 1, 15)  # Wednesday
         summary = DisciplineWeekly(
             discipline="xc",
-            tomorrow_score=59,
+            tomorrow_score=57,
             best_day=date(2025, 1, 21),  # Tuesday, 6 days later
             best_day_score=78,
         )
@@ -715,17 +742,17 @@ class TestVerdictDependentTemplates:
         assert "лучше не завтра" in line
     
     def test_wait_rule_over_7_days_no_best_mention(self):
-        """⛔️ good day beyond 7 days: t=59, b=78, days_to_best=8 → no 'подождать', no 'лучший день'."""
+        """⛔️ good day beyond 7 days: t=57, b=78, days_to_best=8 → no 'подождать', no 'лучший день'."""
         tomorrow = date(2025, 1, 15)  # Wednesday
         summary = DisciplineWeekly(
             discipline="xc",
-            tomorrow_score=59,
+            tomorrow_score=57,
             best_day=date(2025, 1, 23),  # Thursday, 8 days later
             best_day_score=78,
         )
         line = format_discipline_header_line(summary, tomorrow)
         
-        assert "не стоит — завтра 59" in line
+        assert "не стоит — завтра 57" in line
         assert "подождать" not in line
         assert "лучший день" not in line
     
@@ -744,4 +771,3 @@ class TestVerdictDependentTemplates:
         assert "СБ" in line
         # Ensure lowercase "сб" is not in the original line
         assert "сб" not in line
-

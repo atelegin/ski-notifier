@@ -134,7 +134,7 @@ def main() -> None:
         valid_dates = sorted(set(weather.low.keys()) & set(weather.high.keys()))
         
         for d in valid_dates:
-            score = calculate_resort_score(weather.low[d], weather.high[d])
+            score = calculate_resort_score(weather.low[d], weather.high[d], discipline=resort.type)
             
             # Track best-of-day per discipline (using round for consistency)
             score_int = round(score.score)

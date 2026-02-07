@@ -7,6 +7,7 @@ import pytest
 from ski_notifier.fetch import PointWeather
 from ski_notifier.score import (
     calculate_point_score,
+    calculate_point_score_xc,
     calculate_resort_score,
     clamp,
 )
@@ -191,6 +192,33 @@ class TestResortScore:
         result = calculate_resort_score(weather, weather)
         assert result.confidence == 0.4
 
+    def test_weighted_combination_xc(self):
+        """XC resort score is weighted 60% low + 40% high."""
+        weather_low = PointWeather(
+            date=date(2025, 1, 15),
+            temp_c_avg_9_16=0,
+            wind_gust_kmh_max_9_16=0,
+            precip_mm_sum_9_16=0,
+            snow_depth_cm=20,   # low should score higher
+            snowfall_cm=0,
+            snow24_to_9_cm=0,
+        )
+        weather_high = PointWeather(
+            date=date(2025, 1, 15),
+            temp_c_avg_9_16=0,
+            wind_gust_kmh_max_9_16=0,
+            precip_mm_sum_9_16=0,
+            snow_depth_cm=10,
+            snowfall_cm=0,
+            snow24_to_9_cm=0,
+        )
+
+        low_score = calculate_point_score_xc(weather_low).score
+        high_score = calculate_point_score_xc(weather_high).score
+        result = calculate_resort_score(weather_low, weather_high, discipline="xc")
+
+        assert result.score == round(0.6 * low_score + 0.4 * high_score, 1)
+
 
 class TestSnow24Scoring:
     """Tests for snow24_to_9_cm scoring wiring (P0 - must implement before merge)."""
@@ -245,3 +273,33 @@ class TestSnow24Scoring:
         # Base=50 + fallback bonus: 15 * 0.4 = 6
         assert score.score == 56.0
         assert score.has_snow_data is True
+
+
+class TestXcPointScore:
+    def test_thin_base_penalty_applies_when_depth_known(self):
+        weather = PointWeather(
+            date=date(2025, 1, 15),
+            temp_c_avg_9_16=0,
+            wind_gust_kmh_max_9_16=0,
+            precip_mm_sum_9_16=0,
+            snow_depth_cm=6,   # 6 cm below 12 -> -7.2
+            snowfall_cm=0,
+            snow24_to_9_cm=0,
+        )
+        score = calculate_point_score_xc(weather)
+        # 55 + (6*0.8) - (6*1.2) = 52.6
+        assert score.score == 52.6
+
+    def test_warm_penalty_piecewise(self):
+        weather = PointWeather(
+            date=date(2025, 1, 15),
+            temp_c_avg_9_16=8,  # warm penalty: (8-2)*2 + (8-6)*4 = 20
+            wind_gust_kmh_max_9_16=0,
+            precip_mm_sum_9_16=0,
+            snow_depth_cm=20,   # +16
+            snowfall_cm=0,
+            snow24_to_9_cm=0,
+        )
+        score = calculate_point_score_xc(weather)
+        # 55 + 16 - 20 = 51
+        assert score.score == 51.0
