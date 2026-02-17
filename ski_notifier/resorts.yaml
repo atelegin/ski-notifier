@@ -15,7 +15,8 @@ resorts:
   type: alpine
   drive_time_min_from_konstanz: 100
   website: https://www.skigebiet-balderschwang.de/
-  notes: Very snowy village; alpine + XC network. Price is for Ski-Total (incl. Riedbergerhorn) — peak-season reference.
+  notes: Very snowy village; alpine + XC network. Price is for Ski-Total (incl. Riedbergerhorn)
+    — peak-season reference.
   access:
     requires_ch_vignette: false
     requires_at_vignette: false
@@ -43,8 +44,8 @@ resorts:
   type: alpine
   drive_time_min_from_konstanz: 105
   website: https://www.feldberg-erlebnis.de/en
-  notes: Alpine. Largest ski area in the Black Forest; can be crowded on weekends and foggy. Good backup when Alps are too
-    far.
+  notes: Alpine. Largest ski area in the Black Forest; can be crowded on weekends
+    and foggy. Good backup when Alps are too far.
   access:
     requires_ch_vignette: false
     requires_at_vignette: false
@@ -70,8 +71,8 @@ resorts:
   type: alpine
   drive_time_min_from_konstanz: 108
   website: https://www.imbergbahn.de
-  notes: Family resort in Allgäu; ~18 km pistes; ferry can save time but we assume ferry=true per project. Imberg day ticket
-    (winter 2025/26 reference).
+  notes: Family resort in Allgäu; ~18 km pistes; ferry can save time but we assume
+    ferry=true per project. Imberg day ticket (winter 2025/26 reference).
   access:
     requires_ch_vignette: false
     requires_at_vignette: false
@@ -97,7 +98,8 @@ resorts:
   type: alpine
   drive_time_min_from_konstanz: 85
   website: https://www.scheidegg.de/
-  notes: Small alpine lifts suitable mainly for learning / short sessions. Best paired with the XC Superloipe network.
+  notes: Small alpine lifts suitable mainly for learning / short sessions. Best paired
+    with the XC Superloipe network.
   access:
     requires_ch_vignette: false
     requires_at_vignette: false
@@ -121,14 +123,14 @@ resorts:
   type: xc
   drive_time_min_from_konstanz: 75
   website: https://skiwanderwege-heuberg.de/
-  notes: XC network on the Heuberg plateau (often very extensive in snowy winters). Good alternative when southbound roads
-    are crowded.
+  notes: XC network on the Heuberg plateau (often very extensive in snowy winters).
+    Good alternative when southbound roads are crowded.
   access:
     requires_ch_vignette: false
     requires_at_vignette: false
   points:
     low:
-      label: Meßstetten
+      label: Meßstetten trailhead / parking
       lat: 48.1808093
       lon: 8.9629934
       elev_m: 900
@@ -147,13 +149,14 @@ resorts:
   country: DE
   type: xc
   drive_time_min_from_konstanz: 117
-  notes: null
+  website: https://www.hoernerdoerfer.de/balderschwang
+  notes: XC access in Balderschwang valley with multiple connected tracks.
   access:
     requires_ch_vignette: false
     requires_at_vignette: false
   points:
     low:
-      label: Balderschwang
+      label: Balderschwang trailhead / parking
       lat: 47.4621544
       lon: 10.0950563
       elev_m: 1044
@@ -172,13 +175,14 @@ resorts:
   country: DE
   type: xc
   drive_time_min_from_konstanz: 108
-  notes: null
+  website: https://www.oberstaufen.de/
+  notes: XC access around Oberstaufen/Steibis with several local loop options.
   access:
     requires_ch_vignette: false
     requires_at_vignette: false
   points:
     low:
-      label: Oberstaufen
+      label: Oberstaufen trailhead / parking
       lat: 47.559764
       lon: 10.0285405
       elev_m: 791
@@ -198,8 +202,9 @@ resorts:
   type: xc
   drive_time_min_from_konstanz: 84
   website: https://www.nordic-center-notschrei.de
-  notes: XC/biathlon center (DSV base). Elevation ~1100–1130 m. Loipennetz ~40–47 km; evening floodlit loop (~2.5 km, typically
-    Tue–Fri). Good snow reliability for the Black Forest.
+  notes: XC/biathlon center (DSV base). Elevation ~1100–1130 m. Loipennetz ~40–47
+    km; evening floodlit loop (~2.5 km, typically Tue–Fri). Good snow reliability
+    for the Black Forest.
   access:
     requires_ch_vignette: false
     requires_at_vignette: false
@@ -222,14 +227,14 @@ resorts:
   country: DE
   type: xc
   drive_time_min_from_konstanz: 76
-  website: https://www.rothaus-loipenzentrum.de
+  website: https://www.schoenwald.net/
   notes: XC center near Schönwald.
   access:
     requires_ch_vignette: false
     requires_at_vignette: false
   points:
     low:
-      label: Rothaus Loipenzentrum
+      label: Rothaus Loipenzentrum parking
       lat: 48.105081
       lon: 8.174171
     high:
@@ -247,14 +252,14 @@ resorts:
   type: xc
   drive_time_min_from_konstanz: 85
   website: https://www.scheidegg.de/winter/langlaufen/
-  notes: 'XC highlight: Superloipe Waldsee–Alpsee (network ~50 km) on a sunny plateau. Great choice when you want long classic/skating
-    loops without high alpine logistics.'
+  notes: 'XC highlight: Superloipe Waldsee–Alpsee (network ~50 km) on a sunny plateau.
+    Great choice when you want long classic/skating loops without high alpine logistics.'
   access:
     requires_ch_vignette: false
     requires_at_vignette: false
   points:
     low:
-      label: Scheidegg
+      label: Scheidegg trailhead / parking
       lat: 47.582299
       lon: 9.851159
     high:
@@ -295,14 +300,14 @@ resorts:
   type: xc
   drive_time_min_from_konstanz: 75
   website: https://www.thurnerspur.de/
-  notes: 'XC: Thurnerspur is one of the classic Black Forest networks (~1100 m altitude). Good snow reliability and multiple
-    loop lengths.'
+  notes: 'XC: Thurnerspur is one of the classic Black Forest networks (~1100 m altitude).
+    Good snow reliability and multiple loop lengths.'
   access:
     requires_ch_vignette: false
     requires_at_vignette: false
   points:
     low:
-      label: Hinterzarten
+      label: Hinterzarten trailhead (Thurnerspur access)
       lat: 47.9057159
       lon: 8.1055964
       elev_m: 893
@@ -376,8 +381,8 @@ resorts:
   type: alpine
   drive_time_min_from_konstanz: 117
   website: https://www.braunwald.ch
-  notes: Alpine. Car-free resort; access only by Braunwaldbahn funicular from Linthal (adds logistics). ~26 km pistes; elevation
-    ~1236–1901 m.
+  notes: Alpine. Car-free resort; access only by Braunwaldbahn funicular from Linthal
+    (adds logistics). ~26 km pistes; elevation ~1236–1901 m.
   access:
     requires_ch_vignette: false
     requires_at_vignette: false
@@ -485,8 +490,8 @@ resorts:
   type: alpine
   drive_time_min_from_konstanz: 110
   website: https://www.sportbahnenelm.ch
-  notes: Alpine. Elevation ~1020–2105 m (large vertical). ~40 km pistes; strong intermediate mix and scenic ‘Martinsloch’
-    area. Good for a full-day trip.
+  notes: Alpine. Elevation ~1020–2105 m (large vertical). ~40 km pistes; strong intermediate
+    mix and scenic ‘Martinsloch’ area. Good for a full-day trip.
   access:
     requires_ch_vignette: false
     requires_at_vignette: false
@@ -590,8 +595,9 @@ resorts:
   type: alpine
   drive_time_min_from_konstanz: 90
   website: https://www.gruesch-danusa.ch
-  notes: Alpine. ~31 km pistes on a high plateau (~1800 m). Big “valley-to-plateau” gondola from Grüsch; also has short XC
-    loops (~4.8 km) at altitude. Good “first GR stop” before Davos traffic.
+  notes: Alpine. ~31 km pistes on a high plateau (~1800 m). Big “valley-to-plateau”
+    gondola from Grüsch; also has short XC loops (~4.8 km) at altitude. Good “first
+    GR stop” before Davos traffic.
   access:
     requires_ch_vignette: false
     requires_at_vignette: false
@@ -643,7 +649,8 @@ resorts:
   type: alpine
   drive_time_min_from_konstanz: 124
   website: https://www.laax.com
-  notes: Bigger resort, may exceed 2h depending on traffic. Baseline adult day ticket reference (dynamic pricing may vary).
+  notes: Bigger resort, may exceed 2h depending on traffic. Baseline adult day ticket
+    reference (dynamic pricing may vary).
   access:
     requires_ch_vignette: true
     requires_at_vignette: false
@@ -675,7 +682,8 @@ resorts:
   type: alpine
   drive_time_min_from_konstanz: 100
   website: https://pizol.com
-  notes: ~40 km pistes; panoramic views over Rhine valley. 1-day adult ticket reference (winter 25/26).
+  notes: ~40 km pistes; panoramic views over Rhine valley. 1-day adult ticket reference
+    (winter 25/26).
   access:
     requires_ch_vignette: true
     requires_at_vignette: false
@@ -729,7 +737,7 @@ resorts:
   type: xc
   drive_time_min_from_konstanz: 92
   drive_time_note: 'Rome2Rio: ~1h32m by car (varies by traffic)'
-  website: https://www.einsiedeln.ch/de/sport-freizeit/langlauf.html
+  website: https://www.einsiedeln.ch/home
   notes:
   - 'Trailhead / parking: Brüel (Schwedentritt).'
   points:
@@ -762,7 +770,7 @@ resorts:
     requires_at_vignette: false
   points:
     low:
-      label: Heiden
+      label: Heiden trailhead / parking
       lat: 47.4426
       lon: 9.5329
       elev_m: 787
@@ -782,13 +790,14 @@ resorts:
   type: xc
   drive_time_min_from_konstanz: 55
   website: https://langlauf-gais.ch/
-  notes: XC center close to Konstanz. Night skiing available (floodlit loop); rolling terrain around ~900 m elevation.
+  notes: XC center close to Konstanz. Night skiing available (floodlit loop); rolling
+    terrain around ~900 m elevation.
   access:
     requires_ch_vignette: false
     requires_at_vignette: false
   points:
     low:
-      label: Gais
+      label: Gais trailhead / parking
       lat: 47.3616
       lon: 9.4526
       elev_m: 900
@@ -807,8 +816,8 @@ resorts:
   type: alpine
   drive_time_min_from_konstanz: 90
   website: https://www.vorarlberg-alpenregion.at/en/brandnertal/
-  notes: Alpine. Scenic valley resort under Schesaplana; two base villages (Brand & Bürserberg) linked by lifts. Good variety
-    of forest runs and open plateaus.
+  notes: Alpine. Scenic valley resort under Schesaplana; two base villages (Brand
+    & Bürserberg) linked by lifts. Good variety of forest runs and open plateaus.
   access:
     requires_at_vignette: true
     requires_ch_vignette: false
@@ -834,8 +843,8 @@ resorts:
   type: alpine
   drive_time_min_from_konstanz: 93
   website: https://www.boedele.info
-  notes: 'Close-by Alpine + strong XC option. Good for half-day trips; grass base helps early-season skiing. Note: drive time
-    varies; can be faster off-peak.'
+  notes: 'Close-by Alpine + strong XC option. Good for half-day trips; grass base
+    helps early-season skiing. Note: drive time varies; can be faster off-peak.'
   access:
     requires_ch_vignette: false
     requires_at_vignette: true
@@ -864,7 +873,8 @@ resorts:
   type: alpine
   drive_time_min_from_konstanz: 100
   website: https://www.damuels-mellau.at/en/
-  notes: Large Bregenzerwald resort (~109 km pistes); very snow reliable. Hauptsaison 2025/26 day ticket reference.
+  notes: Large Bregenzerwald resort (~109 km pistes); very snow reliable. Hauptsaison
+    2025/26 day ticket reference.
   access:
     requires_ch_vignette: false
     requires_at_vignette: true
@@ -892,7 +902,8 @@ resorts:
   type: alpine
   drive_time_min_from_konstanz: 100
   website: https://www.diedamskopf.at
-  notes: Alpine. Highest lifts in Bregenzerwald (~2020 m), generally good snow quality. Good freeride reputation.
+  notes: Alpine. Highest lifts in Bregenzerwald (~2020 m), generally good snow quality.
+    Good freeride reputation.
   access:
     requires_at_vignette: true
     requires_ch_vignette: false
@@ -917,7 +928,8 @@ resorts:
   type: alpine
   drive_time_min_from_konstanz: 110
   website: https://www.gargellen.at
-  notes: Alpine. Highest village in Montafon (~1423 m) and very snow-reliable; a strong “plan B” in warm winters.
+  notes: Alpine. Highest village in Montafon (~1423 m) and very snow-reliable; a strong
+    “plan B” in warm winters.
   access:
     requires_at_vignette: true
     requires_ch_vignette: false
@@ -942,8 +954,9 @@ resorts:
   type: alpine
   drive_time_min_from_konstanz: 85
   website: https://www.laterns.net
-  notes: Alpine. Elevation 1040–1785 m (745 m vertical). ~27 km pistes + ~11 km marked skiroutes. Mostly red terrain; modern
-    6-seat chair 'Nob'. Quick access via A14 (Feldkirch/Rankweil).
+  notes: Alpine. Elevation 1040–1785 m (745 m vertical). ~27 km pistes + ~11 km marked
+    skiroutes. Mostly red terrain; modern 6-seat chair 'Nob'. Quick access via A14
+    (Feldkirch/Rankweil).
   access:
     requires_ch_vignette: false
     requires_at_vignette: true
@@ -969,7 +982,8 @@ resorts:
   type: alpine
   drive_time_min_from_konstanz: 135
   website: https://www.lechzuers.com
-  notes: Part of Ski Arlberg; likely >2h from Konstanz. Ski Arlberg day ticket reference (high season 2025/26).
+  notes: Part of Ski Arlberg; likely >2h from Konstanz. Ski Arlberg day ticket reference
+    (high season 2025/26).
   access:
     requires_ch_vignette: false
     requires_at_vignette: true
@@ -997,8 +1011,9 @@ resorts:
   type: alpine
   drive_time_min_from_konstanz: 75
   website: https://www.schetteregg.at
-  notes: Family-focused alpine resort. Elevation ~1100–1400 m (~300 m vertical). ~11 km pistes (blue-heavy with some red;
-    small black section). Dense lift network; good for quiet days and beginners.
+  notes: Family-focused alpine resort. Elevation ~1100–1400 m (~300 m vertical). ~11
+    km pistes (blue-heavy with some red; small black section). Dense lift network;
+    good for quiet days and beginners.
   access:
     requires_at_vignette: true
     requires_ch_vignette: false
@@ -1024,7 +1039,8 @@ resorts:
   type: alpine
   drive_time_min_from_konstanz: 110
   website: https://www.silvretta-montafon.at/
-  notes: Large Montafon resort; routes often via CH+AT motorways. Online shop "Top price" 1-day ticket reference (winter 2025/26).
+  notes: Large Montafon resort; routes often via CH+AT motorways. Online shop "Top
+    price" 1-day ticket reference (winter 2025/26).
   access:
     requires_ch_vignette: true
     requires_at_vignette: true
@@ -1051,8 +1067,8 @@ resorts:
   type: alpine
   drive_time_min_from_konstanz: 125
   website: https://www.stantonamarlberg.com
-  notes: Alpine (world-class). Borderline for “≤2h” and highly traffic-sensitive near Arlberg tunnel; keep as an option with
-    a traffic caveat.
+  notes: Alpine (world-class). Borderline for “≤2h” and highly traffic-sensitive near
+    Arlberg tunnel; keep as an option with a traffic caveat.
   access:
     requires_at_vignette: true
     requires_ch_vignette: false
@@ -1077,14 +1093,14 @@ resorts:
   type: xc
   drive_time_min_from_konstanz: 60
   website: https://www.vorarlberg.travel/en/activity/nordic-sport-park-sulzberg/
-  notes: XC center in Bregenzerwald. ~20 km groomed classic + skating trails; day fee applies (per local operators). Good
-    panoramas; links towards Westallgäu network.
+  notes: XC center in Bregenzerwald. ~20 km groomed classic + skating trails; day
+    fee applies (per local operators). Good panoramas; links towards Westallgäu network.
   access:
     requires_at_vignette: true
     requires_ch_vignette: false
   points:
     low:
-      label: Sulzberg
+      label: Sulzberg Nordic trailhead / parking
       lat: 47.5244329
       lon: 9.9097887
       elev_m: 960
@@ -1104,8 +1120,8 @@ resorts:
   type: alpine
   drive_time_min_from_konstanz: 85
   website: https://tourismus.li
-  notes: Alpine. Only ski area in Liechtenstein. Very high base (~1600 m) and top ~2100 m; ~23 km pistes. Access road from
-    Vaduz is steep/serpentine in winter.
+  notes: Alpine. Only ski area in Liechtenstein. Very high base (~1600 m) and top
+    ~2100 m; ~23 km pistes. Access road from Vaduz is steep/serpentine in winter.
   access:
     requires_ch_vignette: false
     requires_at_vignette: false
@@ -1120,6 +1136,2114 @@ resorts:
       lat: 47.09521
       lon: 9.62539
       elev_m: 2000
+  costs:
+    assume_ferry_used: true
+    ferry_roundtrip_eur: 24.2
+    austria_vignette_1day_eur: 0.0
+    requires_ch_vignette: false
+- id: de_kniebis_loipenzentrum
+  name: Loipenzentrum Kniebis (DE)
+  country: DE
+  type: xc
+  drive_time_min_from_konstanz: 113
+  drive_time_note: OSRM estimate from Konstanz center (~1h53m, Feb 2026)
+  website: https://www.kniebis.de/wunderbare-winterwelt
+  notes: Black Forest high-plateau XC area with multiple loops and consistent grooming
+    in cold spells.
+  access:
+    requires_ch_vignette: false
+    requires_at_vignette: false
+  points:
+    low:
+      label: Kniebis Nordic center parking
+      lat: 48.4737
+      lon: 8.3043
+      elev_m: 930
+    high:
+      label: Kniebis upper loop section (approx)
+      lat: 48.486
+      lon: 8.324
+      elev_m: 980
+  costs:
+    assume_ferry_used: true
+    ferry_roundtrip_eur: 24.2
+    austria_vignette_1day_eur: 0.0
+    requires_ch_vignette: false
+- id: ch_steg_toggenburg_xc
+  name: Steg im Toggenburg (CH) — XC
+  country: CH
+  type: xc
+  drive_time_min_from_konstanz: 72
+  drive_time_note: OSRM estimate from Konstanz center (~1h12m, Feb 2026)
+  website: https://www.loipen-toggenburg.ch
+  notes: Valley-floor and gentle rolling XC options around Steg; useful fallback when
+    higher alpine wind is strong.
+  access:
+    requires_ch_vignette: false
+    requires_at_vignette: false
+  points:
+    low:
+      label: Steg trailhead / parking
+      lat: 47.1933904
+      lon: 9.2841293
+      elev_m: 817
+    high:
+      label: Steg upper loops (approx)
+      lat: 47.205
+      lon: 9.305
+      elev_m: 930
+  costs:
+    assume_ferry_used: true
+    ferry_roundtrip_eur: 24.2
+    austria_vignette_1day_eur: 0.0
+    requires_ch_vignette: false
+- id: ch_weissbad_bruelisau_xc
+  name: Weissbad–Brülisau (CH) — XC
+  country: CH
+  type: xc
+  drive_time_min_from_konstanz: 78
+  drive_time_note: OSRM estimate from Konstanz center (~1h18m, Feb 2026)
+  website: https://www.appenzell.ch
+  notes: Short-transfer Appenzell option for quick XC sessions and evening windows.
+  access:
+    requires_ch_vignette: false
+    requires_at_vignette: false
+  points:
+    low:
+      label: Weissbad trailhead / parking
+      lat: 47.3086841
+      lon: 9.4342407
+      elev_m: 820
+    high:
+      label: Brülisau-side loops (approx)
+      lat: 47.2970696
+      lon: 9.4561264
+      elev_m: 930
+  costs:
+    assume_ferry_used: true
+    ferry_roundtrip_eur: 24.2
+    austria_vignette_1day_eur: 0.0
+    requires_ch_vignette: false
+- id: at_boedele_loipen
+  name: Bödele (Dornbirn, AT) — XC
+  country: AT
+  type: xc
+  drive_time_min_from_konstanz: 86
+  drive_time_note: OSRM estimate from Konstanz center (~1h26m, Feb 2026)
+  website: https://www.boedele.info
+  notes: Close-by Vorarlberg XC option on the Bödele plateau; practical for half-day
+    windows.
+  access:
+    requires_ch_vignette: false
+    requires_at_vignette: true
+  points:
+    low:
+      label: Bödele pass parking / loipe access
+      lat: 47.410665
+      lon: 9.823666
+      elev_m: 1139
+    high:
+      label: Bödele upper loops (approx)
+      lat: 47.421
+      lon: 9.836
+      elev_m: 1210
+  costs:
+    assume_ferry_used: true
+    ferry_roundtrip_eur: 24.2
+    austria_vignette_1day_eur: 9.3
+    requires_ch_vignette: false
+- id: at_au_schoppernau_xc
+  name: Au–Schoppernau (AT) — XC
+  country: AT
+  type: xc
+  drive_time_min_from_konstanz: 119
+  drive_time_note: OSRM estimate from Konstanz center (~1h59m, Feb 2026)
+  website: https://www.au-schoppernau.at/de/winter
+  notes: Bregenzerwald valley XC tracks with relatively snow-reliable surroundings.
+  access:
+    requires_ch_vignette: false
+    requires_at_vignette: true
+  points:
+    low:
+      label: Au trailhead / parking
+      lat: 47.324
+      lon: 10.027
+      elev_m: 800
+    high:
+      label: Schoppernau-side loops (approx)
+      lat: 47.341
+      lon: 10.041
+      elev_m: 920
+  costs:
+    assume_ferry_used: true
+    ferry_roundtrip_eur: 24.2
+    austria_vignette_1day_eur: 9.3
+    requires_ch_vignette: false
+- id: de_feldberg_nordic_xc
+  name: Feldberg Nordic Area (Schwarzwald, DE) — XC
+  country: DE
+  type: xc
+  drive_time_min_from_konstanz: 105
+  website: https://www.feldberg-erlebnis.de/en
+  notes: XC option in the Feldberg area; practical fallback when Alpine routes are
+    less attractive.
+  access:
+    requires_ch_vignette: false
+    requires_at_vignette: false
+  points:
+    low:
+      label: Feldberg nordic trailhead / parking
+      lat: 47.862331
+      lon: 8.033947
+    high:
+      label: Feldberg high nordic sector (approx)
+      lat: 47.867
+      lon: 8.019
+      elev_m: 1450
+  costs:
+    assume_ferry_used: false
+    austria_vignette_1day_eur: 0.0
+    requires_ch_vignette: false
+- id: ch_gruesch_danusa_xc
+  name: Grüsch–Danusa (CH) — XC loops
+  country: CH
+  type: xc
+  drive_time_min_from_konstanz: 90
+  website: https://www.gruesch-danusa.ch
+  notes: Short altitude XC loops on Danusa plateau; useful in mixed weather.
+  access:
+    requires_ch_vignette: false
+    requires_at_vignette: false
+  points:
+    low:
+      label: Talstation Grüsch-Danusa
+      lat: 46.97265
+      lon: 9.63996
+      elev_m: 613
+    high:
+      label: Danusa plateau XC area (approx)
+      lat: 46.945945
+      lon: 9.650458
+      elev_m: 1800
+  costs:
+    assume_ferry_used: true
+    ferry_roundtrip_eur: 24.2
+    austria_vignette_1day_eur: 0.0
+    requires_ch_vignette: false
+- id: ch_flumserberg_xc
+  name: Flumserberg (CH) — XC
+  country: CH
+  type: xc
+  drive_time_min_from_konstanz: 117
+  website: https://flumserberg.ch
+  notes: XC option on/near the Flumserberg plateau; suitable for high-elevation backup
+    days.
+  access:
+    requires_ch_vignette: true
+    requires_at_vignette: false
+  points:
+    low:
+      label: Flumserberg trailhead / parking
+      lat: 47.0828508
+      lon: 9.2765894
+    high:
+      label: Flumserberg plateau XC area (approx)
+      lat: 47.071
+      lon: 9.259
+      elev_m: 1600
+  costs:
+    assume_ferry_used: false
+    requires_ch_vignette: true
+- id: ch_hoch_ybrig_xc
+  name: Hoch-Ybrig (CH) — XC
+  country: CH
+  type: xc
+  drive_time_min_from_konstanz: 100
+  website: https://www.hoch-ybrig.ch/
+  notes: Regional XC option near Hoch-Ybrig access areas; good alternate when lift-focused
+    plans are less optimal.
+  access:
+    requires_ch_vignette: false
+    requires_at_vignette: false
+  points:
+    low:
+      label: Unteriberg / Weglosen trailhead
+      lat: 47.0358
+      lon: 8.7894
+      elev_m: 925
+    high:
+      label: Hoch-Ybrig upper XC sector (approx)
+      lat: 47.0405
+      lon: 8.8015
+      elev_m: 1200
+  costs:
+    assume_ferry_used: true
+    ferry_roundtrip_eur: 24.2
+    austria_vignette_1day_eur: 0.0
+    requires_ch_vignette: false
+- id: de_loipe_hochsten_blau_xc
+  name: Loipe Höchsten blau (DE) — XC
+  country: DE
+  type: xc
+  drive_time_min_from_konstanz: 30
+  drive_time_note: Auto-promoted from OSM XC registry (needs field validation)
+  website: https://www.openstreetmap.org/?mlat=47.825137&mlon=9.399670#map=13/47.825137/9.399670
+  notes: Auto-promoted from extended OSM nordic candidate. Verify trail status/entry
+    point manually.
+  access:
+    requires_ch_vignette: false
+    requires_at_vignette: false
+  points:
+    low:
+      label: Trailhead / parking (OSM)
+      lat: 47.8251372
+      lon: 9.39967
+    high:
+      label: Nearby upper loop sector (approx)
+      lat: 47.835137
+      lon: 9.40967
+  costs:
+    assume_ferry_used: true
+    ferry_roundtrip_eur: 24.2
+    austria_vignette_1day_eur: 0.0
+    requires_ch_vignette: false
+- id: ch_juggenwaldloipe_xc
+  name: Juggenwaldloipe (CH) — XC
+  country: CH
+  type: xc
+  drive_time_min_from_konstanz: 34
+  drive_time_note: Auto-promoted from OSM XC registry (needs field validation)
+  website: https://www.openstreetmap.org/?mlat=47.451717&mlon=9.294061#map=13/47.451717/9.294061
+  notes: Auto-promoted from extended OSM nordic candidate. Verify trail status/entry
+    point manually.
+  access:
+    requires_ch_vignette: false
+    requires_at_vignette: false
+  points:
+    low:
+      label: Trailhead / parking (OSM)
+      lat: 47.4517168
+      lon: 9.2940609
+    high:
+      label: Nearby upper loop sector (approx)
+      lat: 47.461717
+      lon: 9.304061
+  costs:
+    assume_ferry_used: true
+    ferry_roundtrip_eur: 24.2
+    austria_vignette_1day_eur: 0.0
+    requires_ch_vignette: false
+- id: ch_city_loipe_st_gallen_xc
+  name: City-Loipe St. Gallen (CH) — XC
+  country: CH
+  type: xc
+  drive_time_min_from_konstanz: 41
+  drive_time_note: Auto-promoted from OSM XC registry (needs field validation)
+  website: https://www.openstreetmap.org/?mlat=47.419885&mlon=9.359343#map=13/47.419885/9.359343
+  notes: Auto-promoted from extended OSM nordic candidate. Verify trail status/entry
+    point manually.
+  access:
+    requires_ch_vignette: false
+    requires_at_vignette: false
+  points:
+    low:
+      label: Trailhead / parking (OSM)
+      lat: 47.4198847
+      lon: 9.3593427
+    high:
+      label: Nearby upper loop sector (approx)
+      lat: 47.429885
+      lon: 9.369343
+  costs:
+    assume_ferry_used: true
+    ferry_roundtrip_eur: 24.2
+    austria_vignette_1day_eur: 0.0
+    requires_ch_vignette: false
+- id: ch_loipe_moos_xc
+  name: Loipe Moos (CH) — XC
+  country: CH
+  type: xc
+  drive_time_min_from_konstanz: 42
+  drive_time_note: Auto-promoted from OSM XC registry (needs field validation)
+  website: https://www.openstreetmap.org/?mlat=47.383111&mlon=9.178693#map=13/47.383111/9.178693
+  notes: Auto-promoted from extended OSM nordic candidate. Verify trail status/entry
+    point manually.
+  access:
+    requires_ch_vignette: false
+    requires_at_vignette: false
+  points:
+    low:
+      label: Trailhead / parking (OSM)
+      lat: 47.3831107
+      lon: 9.178693
+    high:
+      label: Nearby upper loop sector (approx)
+      lat: 47.393111
+      lon: 9.188693
+  costs:
+    assume_ferry_used: true
+    ferry_roundtrip_eur: 24.2
+    austria_vignette_1day_eur: 0.0
+    requires_ch_vignette: false
+- id: ch_loipe_speicher_xc
+  name: Loipe Speicher (CH) — XC
+  country: CH
+  type: xc
+  drive_time_min_from_konstanz: 46
+  drive_time_note: Auto-promoted from OSM XC registry (needs field validation)
+  website: https://www.openstreetmap.org/?mlat=47.415017&mlon=9.447530#map=13/47.415017/9.447530
+  notes: Auto-promoted from extended OSM nordic candidate. Verify trail status/entry
+    point manually.
+  access:
+    requires_ch_vignette: false
+    requires_at_vignette: false
+  points:
+    low:
+      label: Trailhead / parking (OSM)
+      lat: 47.4150173
+      lon: 9.44753
+    high:
+      label: Nearby upper loop sector (approx)
+      lat: 47.425017
+      lon: 9.45753
+  costs:
+    assume_ferry_used: true
+    ferry_roundtrip_eur: 24.2
+    austria_vignette_1day_eur: 0.0
+    requires_ch_vignette: false
+- id: ch_einsigele_plus_nachtloipe_xc
+  name: Einsigele plus Nachtloipe (CH) — XC
+  country: CH
+  type: xc
+  drive_time_min_from_konstanz: 49
+  drive_time_note: Auto-promoted from OSM XC registry (needs field validation)
+  website: https://www.openstreetmap.org/?mlat=47.339768&mlon=9.251969#map=13/47.339768/9.251969
+  notes: Auto-promoted from extended OSM nordic candidate. Verify trail status/entry
+    point manually.
+  access:
+    requires_ch_vignette: false
+    requires_at_vignette: false
+  points:
+    low:
+      label: Trailhead / parking (OSM)
+      lat: 47.3397676
+      lon: 9.2519689
+    high:
+      label: Nearby upper loop sector (approx)
+      lat: 47.349768
+      lon: 9.261969
+  costs:
+    assume_ferry_used: true
+    ferry_roundtrip_eur: 24.2
+    austria_vignette_1day_eur: 0.0
+    requires_ch_vignette: false
+- id: de_emmingen_loipe_xc
+  name: Emmingen-Loipe (DE) — XC
+  country: DE
+  type: xc
+  drive_time_min_from_konstanz: 50
+  drive_time_note: Auto-promoted from OSM XC registry (needs field validation)
+  website: https://www.openstreetmap.org/?mlat=47.939764&mlon=8.841385#map=13/47.939764/8.841385
+  notes: Auto-promoted from extended OSM nordic candidate. Verify trail status/entry
+    point manually.
+  access:
+    requires_ch_vignette: false
+    requires_at_vignette: false
+  points:
+    low:
+      label: Trailhead / parking (OSM)
+      lat: 47.939764
+      lon: 8.8413849
+    high:
+      label: Nearby upper loop sector (approx)
+      lat: 47.949764
+      lon: 8.851385
+  costs:
+    assume_ferry_used: true
+    ferry_roundtrip_eur: 24.2
+    austria_vignette_1day_eur: 0.0
+    requires_ch_vignette: false
+- id: de_loipe_hegaublick_xc
+  name: Loipe Hegaublick (DE) — XC
+  country: DE
+  type: xc
+  drive_time_min_from_konstanz: 54
+  drive_time_note: Auto-promoted from OSM XC registry (needs field validation)
+  website: https://www.openstreetmap.org/?mlat=47.879988&mlon=8.708424#map=13/47.879988/8.708424
+  notes: Auto-promoted from extended OSM nordic candidate. Verify trail status/entry
+    point manually.
+  access:
+    requires_ch_vignette: false
+    requires_at_vignette: false
+  points:
+    low:
+      label: Trailhead / parking (OSM)
+      lat: 47.879988
+      lon: 8.7084235
+    high:
+      label: Nearby upper loop sector (approx)
+      lat: 47.889988
+      lon: 8.718424
+  costs:
+    assume_ferry_used: true
+    ferry_roundtrip_eur: 24.2
+    austria_vignette_1day_eur: 0.0
+    requires_ch_vignette: false
+- id: de_nendinger_loipe_xc
+  name: Nendinger Loipe (DE) — XC
+  country: DE
+  type: xc
+  drive_time_min_from_konstanz: 54
+  drive_time_note: Auto-promoted from OSM XC registry (needs field validation)
+  website: https://www.openstreetmap.org/?mlat=47.988613&mlon=8.852006#map=13/47.988613/8.852006
+  notes: Auto-promoted from extended OSM nordic candidate. Verify trail status/entry
+    point manually.
+  access:
+    requires_ch_vignette: false
+    requires_at_vignette: false
+  points:
+    low:
+      label: Trailhead / parking (OSM)
+      lat: 47.9886127
+      lon: 8.8520059
+    high:
+      label: Nearby upper loop sector (approx)
+      lat: 47.998613
+      lon: 8.862006
+  costs:
+    assume_ferry_used: true
+    ferry_roundtrip_eur: 24.2
+    austria_vignette_1day_eur: 0.0
+    requires_ch_vignette: false
+- id: ch_rueggental_loipe_xc
+  name: Rueggental-Loipe (CH) — XC
+  country: CH
+  type: xc
+  drive_time_min_from_konstanz: 56
+  drive_time_note: Auto-promoted from OSM XC registry (needs field validation)
+  website: https://www.openstreetmap.org/?mlat=47.338608&mlon=8.882151#map=13/47.338608/8.882151
+  notes: Auto-promoted from extended OSM nordic candidate. Verify trail status/entry
+    point manually.
+  access:
+    requires_ch_vignette: false
+    requires_at_vignette: false
+  points:
+    low:
+      label: Trailhead / parking (OSM)
+      lat: 47.3386077
+      lon: 8.8821512
+    high:
+      label: Nearby upper loop sector (approx)
+      lat: 47.348608
+      lon: 8.892151
+  costs:
+    assume_ferry_used: true
+    ferry_roundtrip_eur: 24.2
+    austria_vignette_1day_eur: 0.0
+    requires_ch_vignette: false
+- id: ch_loipe_eschheimertal_xc
+  name: Loipe Eschheimertal (CH) — XC
+  country: CH
+  type: xc
+  drive_time_min_from_konstanz: 57
+  drive_time_note: Auto-promoted from OSM XC registry (needs field validation)
+  website: https://www.openstreetmap.org/?mlat=47.711728&mlon=8.592042#map=13/47.711728/8.592042
+  notes: Auto-promoted from extended OSM nordic candidate. Verify trail status/entry
+    point manually.
+  access:
+    requires_ch_vignette: false
+    requires_at_vignette: false
+  points:
+    low:
+      label: Trailhead / parking (OSM)
+      lat: 47.7117282
+      lon: 8.5920416
+    high:
+      label: Nearby upper loop sector (approx)
+      lat: 47.721728
+      lon: 8.602042
+  costs:
+    assume_ferry_used: true
+    ferry_roundtrip_eur: 24.2
+    austria_vignette_1day_eur: 0.0
+    requires_ch_vignette: false
+- id: ch_thurloipe_xc
+  name: Thurloipe (CH) — XC
+  country: CH
+  type: xc
+  drive_time_min_from_konstanz: 58
+  drive_time_note: Auto-promoted from OSM XC registry (needs field validation)
+  website: https://www.openstreetmap.org/?mlat=47.277132&mlon=9.106850#map=13/47.277132/9.106850
+  notes: Auto-promoted from extended OSM nordic candidate. Verify trail status/entry
+    point manually.
+  access:
+    requires_ch_vignette: false
+    requires_at_vignette: false
+  points:
+    low:
+      label: Trailhead / parking (OSM)
+      lat: 47.2771317
+      lon: 9.1068504
+    high:
+      label: Nearby upper loop sector (approx)
+      lat: 47.287132
+      lon: 9.11685
+  costs:
+    assume_ferry_used: true
+    ferry_roundtrip_eur: 24.2
+    austria_vignette_1day_eur: 0.0
+    requires_ch_vignette: false
+- id: de_langlauf_und_flutlichtstadion_damoos_xc
+  name: Langlauf- und Flutlichtstadion Damoos (DE) — XC
+  country: DE
+  type: xc
+  drive_time_min_from_konstanz: 59
+  drive_time_note: Auto-promoted from OSM XC registry (needs field validation)
+  website: https://www.openstreetmap.org/?mlat=47.786671&mlon=9.766523#map=13/47.786671/9.766523
+  notes: Auto-promoted from extended OSM nordic candidate. Verify trail status/entry
+    point manually.
+  access:
+    requires_ch_vignette: false
+    requires_at_vignette: false
+  points:
+    low:
+      label: Trailhead / parking (OSM)
+      lat: 47.786671
+      lon: 9.7665228
+    high:
+      label: Nearby upper loop sector (approx)
+      lat: 47.796671
+      lon: 9.776523
+  costs:
+    assume_ferry_used: true
+    ferry_roundtrip_eur: 24.2
+    austria_vignette_1day_eur: 0.0
+    requires_ch_vignette: false
+- id: de_flutlichtloipe_niederwangen_xc
+  name: Flutlichtloipe Niederwangen (DE) — XC
+  country: DE
+  type: xc
+  drive_time_min_from_konstanz: 60
+  drive_time_note: Auto-promoted from OSM XC registry (needs field validation)
+  website: https://www.openstreetmap.org/?mlat=47.677368&mlon=9.796012#map=13/47.677368/9.796012
+  notes: Auto-promoted from extended OSM nordic candidate. Verify trail status/entry
+    point manually.
+  access:
+    requires_ch_vignette: false
+    requires_at_vignette: false
+  points:
+    low:
+      label: Trailhead / parking (OSM)
+      lat: 47.677368
+      lon: 9.7960125
+    high:
+      label: Nearby upper loop sector (approx)
+      lat: 47.687368
+      lon: 9.806012
+  costs:
+    assume_ferry_used: true
+    ferry_roundtrip_eur: 24.2
+    austria_vignette_1day_eur: 0.0
+    requires_ch_vignette: false
+- id: ch_rickenloipe_xc
+  name: Rickenloipe (CH) — XC
+  country: CH
+  type: xc
+  drive_time_min_from_konstanz: 62
+  drive_time_note: Auto-promoted from OSM XC registry (needs field validation)
+  website: https://www.openstreetmap.org/?mlat=47.255843&mlon=9.033044#map=13/47.255843/9.033044
+  notes: Auto-promoted from extended OSM nordic candidate. Verify trail status/entry
+    point manually.
+  access:
+    requires_ch_vignette: false
+    requires_at_vignette: false
+  points:
+    low:
+      label: Trailhead / parking (OSM)
+      lat: 47.2558427
+      lon: 9.0330444
+    high:
+      label: Nearby upper loop sector (approx)
+      lat: 47.265843
+      lon: 9.043044
+  costs:
+    assume_ferry_used: true
+    ferry_roundtrip_eur: 24.2
+    austria_vignette_1day_eur: 0.0
+    requires_ch_vignette: false
+- id: de_loipe_stetten_am_kalten_markt_xc
+  name: Loipe Stetten am kalten Markt (DE) — XC
+  country: DE
+  type: xc
+  drive_time_min_from_konstanz: 62
+  drive_time_note: Auto-promoted from OSM XC registry (needs field validation)
+  website: https://www.openstreetmap.org/?mlat=48.109452&mlon=9.110273#map=13/48.109452/9.110273
+  notes: Auto-promoted from extended OSM nordic candidate. Verify trail status/entry
+    point manually.
+  access:
+    requires_ch_vignette: false
+    requires_at_vignette: false
+  points:
+    low:
+      label: Trailhead / parking (OSM)
+      lat: 48.1094516
+      lon: 9.1102733
+    high:
+      label: Nearby upper loop sector (approx)
+      lat: 48.119452
+      lon: 9.120273
+  costs:
+    assume_ferry_used: true
+    ferry_roundtrip_eur: 24.2
+    austria_vignette_1day_eur: 0.0
+    requires_ch_vignette: false
+- id: ch_santisloipe_xc
+  name: Säntisloipe (CH) — XC
+  country: CH
+  type: xc
+  drive_time_min_from_konstanz: 63
+  drive_time_note: Auto-promoted from OSM XC registry (needs field validation)
+  website: https://www.openstreetmap.org/?mlat=47.245188&mlon=9.243866#map=13/47.245188/9.243866
+  notes: Auto-promoted from extended OSM nordic candidate. Verify trail status/entry
+    point manually.
+  access:
+    requires_ch_vignette: false
+    requires_at_vignette: false
+  points:
+    low:
+      label: Trailhead / parking (OSM)
+      lat: 47.2451882
+      lon: 9.2438661
+    high:
+      label: Nearby upper loop sector (approx)
+      lat: 47.255188
+      lon: 9.253866
+  costs:
+    assume_ferry_used: true
+    ferry_roundtrip_eur: 24.2
+    austria_vignette_1day_eur: 0.0
+    requires_ch_vignette: false
+- id: de_deutsche_bank_loipe_xc
+  name: Deutsche Bank Loipe (DE) — XC
+  country: DE
+  type: xc
+  drive_time_min_from_konstanz: 63
+  drive_time_note: Auto-promoted from OSM XC registry (needs field validation)
+  website: https://www.openstreetmap.org/?mlat=48.038086&mlon=8.802860#map=13/48.038086/8.802860
+  notes: Auto-promoted from extended OSM nordic candidate. Verify trail status/entry
+    point manually.
+  access:
+    requires_ch_vignette: false
+    requires_at_vignette: false
+  points:
+    low:
+      label: Trailhead / parking (OSM)
+      lat: 48.0380855
+      lon: 8.8028596
+    high:
+      label: Nearby upper loop sector (approx)
+      lat: 48.048085
+      lon: 8.81286
+  costs:
+    assume_ferry_used: true
+    ferry_roundtrip_eur: 24.2
+    austria_vignette_1day_eur: 0.0
+    requires_ch_vignette: false
+- id: de_loipe_hochberg_leicht_3_8_km_xc
+  name: Loipe Hochberg leicht 3,8 km (DE) — XC
+  country: DE
+  type: xc
+  drive_time_min_from_konstanz: 69
+  drive_time_note: Auto-promoted from OSM XC registry (needs field validation)
+  website: https://www.openstreetmap.org/?mlat=48.155466&mlon=9.252691#map=13/48.155466/9.252691
+  notes: Auto-promoted from extended OSM nordic candidate. Verify trail status/entry
+    point manually.
+  access:
+    requires_ch_vignette: false
+    requires_at_vignette: false
+  points:
+    low:
+      label: Trailhead / parking (OSM)
+      lat: 48.1554661
+      lon: 9.2526915
+    high:
+      label: Nearby upper loop sector (approx)
+      lat: 48.165466
+      lon: 9.262691
+  costs:
+    assume_ferry_used: true
+    ferry_roundtrip_eur: 24.2
+    austria_vignette_1day_eur: 0.0
+    requires_ch_vignette: false
+- id: ch_loipe_munzenriet_xc
+  name: Loipe Munzenriet (CH) — XC
+  country: CH
+  type: xc
+  drive_time_min_from_konstanz: 71
+  drive_time_note: Auto-promoted from OSM XC registry (needs field validation)
+  website: https://www.openstreetmap.org/?mlat=47.198476&mlon=9.351718#map=13/47.198476/9.351718
+  notes: Auto-promoted from extended OSM nordic candidate. Verify trail status/entry
+    point manually.
+  access:
+    requires_ch_vignette: false
+    requires_at_vignette: false
+  points:
+    low:
+      label: Trailhead / parking (OSM)
+      lat: 47.1984761
+      lon: 9.3517183
+    high:
+      label: Nearby upper loop sector (approx)
+      lat: 47.208476
+      lon: 9.361718
+  costs:
+    assume_ferry_used: true
+    ferry_roundtrip_eur: 24.2
+    austria_vignette_1day_eur: 0.0
+    requires_ch_vignette: false
+- id: de_bottinger_loipe_xc
+  name: Böttinger Loipe (DE) — XC
+  country: DE
+  type: xc
+  drive_time_min_from_konstanz: 71
+  drive_time_note: Auto-promoted from OSM XC registry (needs field validation)
+  website: https://www.openstreetmap.org/?mlat=48.099774&mlon=8.785421#map=13/48.099774/8.785421
+  notes: Auto-promoted from extended OSM nordic candidate. Verify trail status/entry
+    point manually.
+  access:
+    requires_ch_vignette: false
+    requires_at_vignette: false
+  points:
+    low:
+      label: Trailhead / parking (OSM)
+      lat: 48.0997744
+      lon: 8.7854212
+    high:
+      label: Nearby upper loop sector (approx)
+      lat: 48.109774
+      lon: 8.795421
+  costs:
+    assume_ferry_used: true
+    ferry_roundtrip_eur: 24.2
+    austria_vignette_1day_eur: 0.0
+    requires_ch_vignette: false
+- id: de_ratzenrieder_familienloipe_xc
+  name: Ratzenrieder Familienloipe (DE) — XC
+  country: DE
+  type: xc
+  drive_time_min_from_konstanz: 71
+  drive_time_note: Auto-promoted from OSM XC registry (needs field validation)
+  website: https://www.openstreetmap.org/?mlat=47.716552&mlon=9.910578#map=13/47.716552/9.910578
+  notes: Auto-promoted from extended OSM nordic candidate. Verify trail status/entry
+    point manually.
+  access:
+    requires_ch_vignette: false
+    requires_at_vignette: false
+  points:
+    low:
+      label: Trailhead / parking (OSM)
+      lat: 47.7165515
+      lon: 9.9105777
+    high:
+      label: Nearby upper loop sector (approx)
+      lat: 47.726551
+      lon: 9.920578
+  costs:
+    assume_ferry_used: true
+    ferry_roundtrip_eur: 24.2
+    austria_vignette_1day_eur: 0.0
+    requires_ch_vignette: false
+- id: de_loipe_immenried_xc
+  name: Loipe Immenried (DE) — XC
+  country: DE
+  type: xc
+  drive_time_min_from_konstanz: 72
+  drive_time_note: Auto-promoted from OSM XC registry (needs field validation)
+  website: https://www.openstreetmap.org/?mlat=47.809262&mlon=9.889531#map=13/47.809262/9.889531
+  notes: Auto-promoted from extended OSM nordic candidate. Verify trail status/entry
+    point manually.
+  access:
+    requires_ch_vignette: false
+    requires_at_vignette: false
+  points:
+    low:
+      label: Trailhead / parking (OSM)
+      lat: 47.8092623
+      lon: 9.8895309
+    high:
+      label: Nearby upper loop sector (approx)
+      lat: 47.819262
+      lon: 9.899531
+  costs:
+    assume_ferry_used: true
+    ferry_roundtrip_eur: 24.2
+    austria_vignette_1day_eur: 0.0
+    requires_ch_vignette: false
+- id: ch_loipe_guldenen_xc
+  name: Loipe Guldenen (CH) — XC
+  country: CH
+  type: xc
+  drive_time_min_from_konstanz: 73
+  drive_time_note: Auto-promoted from OSM XC registry (needs field validation)
+  website: https://www.openstreetmap.org/?mlat=47.283228&mlon=8.702334#map=13/47.283228/8.702334
+  notes: Auto-promoted from extended OSM nordic candidate. Verify trail status/entry
+    point manually.
+  access:
+    requires_ch_vignette: false
+    requires_at_vignette: false
+  points:
+    low:
+      label: Trailhead / parking (OSM)
+      lat: 47.2832277
+      lon: 8.7023341
+    high:
+      label: Nearby upper loop sector (approx)
+      lat: 47.293228
+      lon: 8.712334
+  costs:
+    assume_ferry_used: true
+    ferry_roundtrip_eur: 24.2
+    austria_vignette_1day_eur: 0.0
+    requires_ch_vignette: false
+- id: de_eisenharzer_dorfloipe_xc
+  name: Eisenharzer Dorfloipe (DE) — XC
+  country: DE
+  type: xc
+  drive_time_min_from_konstanz: 76
+  drive_time_note: Auto-promoted from OSM XC registry (needs field validation)
+  website: https://www.openstreetmap.org/?mlat=47.685675&mlon=9.963756#map=13/47.685675/9.963756
+  notes: Auto-promoted from extended OSM nordic candidate. Verify trail status/entry
+    point manually.
+  access:
+    requires_ch_vignette: false
+    requires_at_vignette: false
+  points:
+    low:
+      label: Trailhead / parking (OSM)
+      lat: 47.6856753
+      lon: 9.9637561
+    high:
+      label: Nearby upper loop sector (approx)
+      lat: 47.695675
+      lon: 9.973756
+  costs:
+    assume_ferry_used: true
+    ferry_roundtrip_eur: 24.2
+    austria_vignette_1day_eur: 0.0
+    requires_ch_vignette: false
+- id: de_verbindung_simmerberger_loipe_xc
+  name: Verbindung Simmerberger Loipe (DE) — XC
+  country: DE
+  type: xc
+  drive_time_min_from_konstanz: 77
+  drive_time_note: Auto-promoted from OSM XC registry (needs field validation)
+  website: https://www.openstreetmap.org/?mlat=47.583570&mlon=9.961603#map=13/47.583570/9.961603
+  notes: Auto-promoted from extended OSM nordic candidate. Verify trail status/entry
+    point manually.
+  access:
+    requires_ch_vignette: false
+    requires_at_vignette: false
+  points:
+    low:
+      label: Trailhead / parking (OSM)
+      lat: 47.5835704
+      lon: 9.9616028
+    high:
+      label: Nearby upper loop sector (approx)
+      lat: 47.59357
+      lon: 9.971603
+  costs:
+    assume_ferry_used: true
+    ferry_roundtrip_eur: 24.2
+    austria_vignette_1day_eur: 0.0
+    requires_ch_vignette: false
+- id: at_loipe_andelsbuch_xc
+  name: Loipe Andelsbuch (AT) — XC
+  country: AT
+  type: xc
+  drive_time_min_from_konstanz: 79
+  drive_time_note: Auto-promoted from OSM XC registry (needs field validation)
+  website: https://www.openstreetmap.org/?mlat=47.412346&mlon=9.890711#map=13/47.412346/9.890711
+  notes: Auto-promoted from extended OSM nordic candidate. Verify trail status/entry
+    point manually.
+  access:
+    requires_ch_vignette: false
+    requires_at_vignette: true
+  points:
+    low:
+      label: Trailhead / parking (OSM)
+      lat: 47.4123461
+      lon: 9.8907114
+    high:
+      label: Nearby upper loop sector (approx)
+      lat: 47.422346
+      lon: 9.900711
+  costs:
+    assume_ferry_used: true
+    ferry_roundtrip_eur: 24.2
+    austria_vignette_1day_eur: 9.3
+    requires_ch_vignette: false
+- id: de_loipe_trossingen_xc
+  name: Loipe Trossingen (DE) — XC
+  country: DE
+  type: xc
+  drive_time_min_from_konstanz: 79
+  drive_time_note: Auto-promoted from OSM XC registry (needs field validation)
+  website: https://www.openstreetmap.org/?mlat=48.088073&mlon=8.627263#map=13/48.088073/8.627263
+  notes: Auto-promoted from extended OSM nordic candidate. Verify trail status/entry
+    point manually.
+  access:
+    requires_ch_vignette: false
+    requires_at_vignette: false
+  points:
+    low:
+      label: Trailhead / parking (OSM)
+      lat: 48.0880734
+      lon: 8.6272629
+    high:
+      label: Nearby upper loop sector (approx)
+      lat: 48.098073
+      lon: 8.637263
+  costs:
+    assume_ferry_used: true
+    ferry_roundtrip_eur: 24.2
+    austria_vignette_1day_eur: 0.0
+    requires_ch_vignette: false
+- id: de_ochsenberg_loipe_xc
+  name: Ochsenberg-Loipe (DE) — XC
+  country: DE
+  type: xc
+  drive_time_min_from_konstanz: 81
+  drive_time_note: Auto-promoted from OSM XC registry (needs field validation)
+  website: https://www.openstreetmap.org/?mlat=48.228319&mlon=8.997915#map=13/48.228319/8.997915
+  notes: Auto-promoted from extended OSM nordic candidate. Verify trail status/entry
+    point manually.
+  access:
+    requires_ch_vignette: false
+    requires_at_vignette: false
+  points:
+    low:
+      label: Trailhead / parking (OSM)
+      lat: 48.2283195
+      lon: 8.997915
+    high:
+      label: Nearby upper loop sector (approx)
+      lat: 48.238319
+      lon: 9.007915
+  costs:
+    assume_ferry_used: true
+    ferry_roundtrip_eur: 24.2
+    austria_vignette_1day_eur: 0.0
+    requires_ch_vignette: false
+- id: de_hornleloipe_xc
+  name: Hörnleloipe (DE) — XC
+  country: DE
+  type: xc
+  drive_time_min_from_konstanz: 82
+  drive_time_note: Auto-promoted from OSM XC registry (needs field validation)
+  website: https://www.openstreetmap.org/?mlat=48.211214&mlon=8.882104#map=13/48.211214/8.882104
+  notes: Auto-promoted from extended OSM nordic candidate. Verify trail status/entry
+    point manually.
+  access:
+    requires_ch_vignette: false
+    requires_at_vignette: false
+  points:
+    low:
+      label: Trailhead / parking (OSM)
+      lat: 48.2112144
+      lon: 8.8821036
+    high:
+      label: Nearby upper loop sector (approx)
+      lat: 48.221214
+      lon: 8.892104
+  costs:
+    assume_ferry_used: true
+    ferry_roundtrip_eur: 24.2
+    austria_vignette_1day_eur: 0.0
+    requires_ch_vignette: false
+- id: de_degerfeld_loipe_xc
+  name: Degerfeld-Loipe (DE) — XC
+  country: DE
+  type: xc
+  drive_time_min_from_konstanz: 83
+  drive_time_note: Auto-promoted from OSM XC registry (needs field validation)
+  website: https://www.openstreetmap.org/?mlat=48.248173&mlon=9.058662#map=13/48.248173/9.058662
+  notes: Auto-promoted from extended OSM nordic candidate. Verify trail status/entry
+    point manually.
+  access:
+    requires_ch_vignette: false
+    requires_at_vignette: false
+  points:
+    low:
+      label: Trailhead / parking (OSM)
+      lat: 48.2481731
+      lon: 9.0586621
+    high:
+      label: Nearby upper loop sector (approx)
+      lat: 48.258173
+      lon: 9.068662
+  costs:
+    assume_ferry_used: true
+    ferry_roundtrip_eur: 24.2
+    austria_vignette_1day_eur: 0.0
+    requires_ch_vignette: false
+- id: de_kohlloipe_neufra_xc
+  name: Kohlloipe Neufra (DE) — XC
+  country: DE
+  type: xc
+  drive_time_min_from_konstanz: 83
+  drive_time_note: Auto-promoted from OSM XC registry (needs field validation)
+  website: https://www.openstreetmap.org/?mlat=48.254011&mlon=9.148269#map=13/48.254011/9.148269
+  notes: Auto-promoted from extended OSM nordic candidate. Verify trail status/entry
+    point manually.
+  access:
+    requires_ch_vignette: false
+    requires_at_vignette: false
+  points:
+    low:
+      label: Trailhead / parking (OSM)
+      lat: 48.2540106
+      lon: 9.1482691
+    high:
+      label: Nearby upper loop sector (approx)
+      lat: 48.264011
+      lon: 9.158269
+  costs:
+    assume_ferry_used: true
+    ferry_roundtrip_eur: 24.2
+    austria_vignette_1day_eur: 0.0
+    requires_ch_vignette: false
+- id: de_lengersauloipe_xc
+  name: Lengersauloipe (DE) — XC
+  country: DE
+  type: xc
+  drive_time_min_from_konstanz: 83
+  drive_time_note: Auto-promoted from OSM XC registry (needs field validation)
+  website: https://www.openstreetmap.org/?mlat=47.672813&mlon=10.031909#map=13/47.672813/10.031909
+  notes: Auto-promoted from extended OSM nordic candidate. Verify trail status/entry
+    point manually.
+  access:
+    requires_ch_vignette: false
+    requires_at_vignette: false
+  points:
+    low:
+      label: Trailhead / parking (OSM)
+      lat: 47.6728135
+      lon: 10.0319095
+    high:
+      label: Nearby upper loop sector (approx)
+      lat: 47.682813
+      lon: 10.041909
+  costs:
+    assume_ferry_used: true
+    ferry_roundtrip_eur: 24.2
+    austria_vignette_1day_eur: 0.0
+    requires_ch_vignette: false
+- id: at_hochmoor_loipe_xc
+  name: Hochmoor-Loipe (AT) — XC
+  country: AT
+  type: xc
+  drive_time_min_from_konstanz: 83
+  drive_time_note: Auto-promoted from OSM XC registry (needs field validation)
+  website: https://www.openstreetmap.org/?mlat=47.490489&mlon=9.984769#map=13/47.490489/9.984769
+  notes: Auto-promoted from extended OSM nordic candidate. Verify trail status/entry
+    point manually.
+  access:
+    requires_ch_vignette: false
+    requires_at_vignette: true
+  points:
+    low:
+      label: Trailhead / parking (OSM)
+      lat: 47.4904886
+      lon: 9.984769
+    high:
+      label: Nearby upper loop sector (approx)
+      lat: 47.500489
+      lon: 9.994769
+  costs:
+    assume_ferry_used: true
+    ferry_roundtrip_eur: 24.2
+    austria_vignette_1day_eur: 9.3
+    requires_ch_vignette: false
+- id: de_marchenwaldl_loipe_xc
+  name: Märchenwaldl-Loipe (DE) — XC
+  country: DE
+  type: xc
+  drive_time_min_from_konstanz: 83
+  drive_time_note: Auto-promoted from OSM XC registry (needs field validation)
+  website: https://www.openstreetmap.org/?mlat=47.782358&mlon=10.021219#map=13/47.782358/10.021219
+  notes: Auto-promoted from extended OSM nordic candidate. Verify trail status/entry
+    point manually.
+  access:
+    requires_ch_vignette: false
+    requires_at_vignette: false
+  points:
+    low:
+      label: Trailhead / parking (OSM)
+      lat: 47.7823581
+      lon: 10.021219
+    high:
+      label: Nearby upper loop sector (approx)
+      lat: 47.792358
+      lon: 10.031219
+  costs:
+    assume_ferry_used: true
+    ferry_roundtrip_eur: 24.2
+    austria_vignette_1day_eur: 0.0
+    requires_ch_vignette: false
+- id: ch_bischofsberg
+  name: Bischofsberg (CH)
+  country: CH
+  type: alpine
+  drive_time_min_from_konstanz: 51
+  drive_time_note: Auto-promoted from OSM alpine registry (needs field validation)
+  website: https://www.openstreetmap.org/?mlat=47.433219&mlon=9.531529#map=12/47.433219/9.531529
+  notes: Auto-promoted alpine candidate from OSM. Verify resort boundaries, parking,
+    and pass pricing manually.
+  access:
+    requires_ch_vignette: true
+    requires_at_vignette: false
+  points:
+    low:
+      label: Base area / parking (OSM)
+      lat: 47.4332191
+      lon: 9.5315288
+    high:
+      label: Upper area (approx)
+      lat: 47.453219
+      lon: 9.551529
+      elev_m: null
+  costs:
+    assume_ferry_used: true
+    ferry_roundtrip_eur: 24.2
+    austria_vignette_1day_eur: 0.0
+    requires_ch_vignette: true
+- id: de_skihang
+  name: Skihang (DE)
+  country: DE
+  type: alpine
+  drive_time_min_from_konstanz: 57
+  drive_time_note: Auto-promoted from OSM alpine registry (needs field validation)
+  website: https://www.openstreetmap.org/?mlat=47.993427&mlon=8.854993#map=12/47.993427/8.854993
+  notes: Auto-promoted alpine candidate from OSM. Verify resort boundaries, parking,
+    and pass pricing manually.
+  access:
+    requires_ch_vignette: false
+    requires_at_vignette: false
+  points:
+    low:
+      label: Base area / parking (OSM)
+      lat: 47.9934274
+      lon: 8.8549934
+    high:
+      label: Upper area (approx)
+      lat: 48.013427
+      lon: 8.874993
+      elev_m: null
+  costs:
+    assume_ferry_used: true
+    ferry_roundtrip_eur: 24.2
+    austria_vignette_1day_eur: 0.0
+    requires_ch_vignette: false
+- id: ch_hemberg
+  name: Hemberg (CH)
+  country: CH
+  type: alpine
+  drive_time_min_from_konstanz: 58
+  drive_time_note: Auto-promoted from OSM alpine registry (needs field validation)
+  website: https://www.openstreetmap.org/?mlat=47.288037&mlon=9.178517#map=12/47.288037/9.178517
+  notes: Auto-promoted alpine candidate from OSM. Verify resort boundaries, parking,
+    and pass pricing manually.
+  access:
+    requires_ch_vignette: true
+    requires_at_vignette: false
+  points:
+    low:
+      label: Base area / parking (OSM)
+      lat: 47.288037
+      lon: 9.1785165
+    high:
+      label: Upper area (approx)
+      lat: 47.308037
+      lon: 9.198517
+      elev_m: null
+  costs:
+    assume_ferry_used: true
+    ferry_roundtrip_eur: 24.2
+    austria_vignette_1day_eur: 0.0
+    requires_ch_vignette: true
+- id: ch_ebenalp_horn
+  name: Ebenalp-Horn (CH)
+  country: CH
+  type: alpine
+  drive_time_min_from_konstanz: 63
+  drive_time_note: Auto-promoted from OSM alpine registry (needs field validation)
+  website: https://www.openstreetmap.org/?mlat=47.288435&mlon=9.414891#map=12/47.288435/9.414891
+  notes: Auto-promoted alpine candidate from OSM. Verify resort boundaries, parking,
+    and pass pricing manually.
+  access:
+    requires_ch_vignette: true
+    requires_at_vignette: false
+  points:
+    low:
+      label: Base area / parking (OSM)
+      lat: 47.2884349
+      lon: 9.4148912
+    high:
+      label: Upper area (approx)
+      lat: 47.308435
+      lon: 9.434891
+      elev_m: null
+  costs:
+    assume_ferry_used: true
+    ferry_roundtrip_eur: 24.2
+    austria_vignette_1day_eur: 0.0
+    requires_ch_vignette: true
+- id: de_skihang_hausen
+  name: Skihang Hausen (DE)
+  country: DE
+  type: alpine
+  drive_time_min_from_konstanz: 71
+  drive_time_note: Auto-promoted from OSM alpine registry (needs field validation)
+  website: https://www.openstreetmap.org/?mlat=48.043337&mlon=8.717205#map=12/48.043337/8.717205
+  notes: Auto-promoted alpine candidate from OSM. Verify resort boundaries, parking,
+    and pass pricing manually.
+  access:
+    requires_ch_vignette: false
+    requires_at_vignette: false
+  points:
+    low:
+      label: Base area / parking (OSM)
+      lat: 48.0433372
+      lon: 8.7172048
+    high:
+      label: Upper area (approx)
+      lat: 48.063337
+      lon: 8.737205
+      elev_m: null
+  costs:
+    assume_ferry_used: true
+    ferry_roundtrip_eur: 24.2
+    austria_vignette_1day_eur: 0.0
+    requires_ch_vignette: false
+- id: at_hagenberg_sulzberg_thal
+  name: Hagenberg Sulzberg-Thal (AT)
+  country: AT
+  type: alpine
+  drive_time_min_from_konstanz: 75
+  drive_time_note: Auto-promoted from OSM alpine registry (needs field validation)
+  website: https://www.openstreetmap.org/?mlat=47.533103&mlon=9.891293#map=12/47.533103/9.891293
+  notes: Auto-promoted alpine candidate from OSM. Verify resort boundaries, parking,
+    and pass pricing manually.
+  access:
+    requires_ch_vignette: false
+    requires_at_vignette: true
+  points:
+    low:
+      label: Base area / parking (OSM)
+      lat: 47.5331032
+      lon: 9.8912932
+    high:
+      label: Upper area (approx)
+      lat: 47.553103
+      lon: 9.911293
+      elev_m: null
+  costs:
+    assume_ferry_used: true
+    ferry_roundtrip_eur: 24.2
+    austria_vignette_1day_eur: 9.3
+    requires_ch_vignette: false
+- id: de_skigebiet_awengen
+  name: Skigebiet Awengen (DE)
+  country: DE
+  type: alpine
+  drive_time_min_from_konstanz: 83
+  drive_time_note: Auto-promoted from OSM alpine registry (needs field validation)
+  website: https://www.openstreetmap.org/?mlat=48.019245&mlon=9.830083#map=12/48.019245/9.830083
+  notes: Auto-promoted alpine candidate from OSM. Verify resort boundaries, parking,
+    and pass pricing manually.
+  access:
+    requires_ch_vignette: false
+    requires_at_vignette: false
+  points:
+    low:
+      label: Base area / parking (OSM)
+      lat: 48.019245
+      lon: 9.830083
+    high:
+      label: Upper area (approx)
+      lat: 48.039245
+      lon: 9.850083
+      elev_m: null
+  costs:
+    assume_ferry_used: true
+    ferry_roundtrip_eur: 24.2
+    austria_vignette_1day_eur: 0.0
+    requires_ch_vignette: false
+- id: ch_kerenzerberg
+  name: Kerenzerberg (CH)
+  country: CH
+  type: alpine
+  drive_time_min_from_konstanz: 85
+  drive_time_note: Auto-promoted from OSM alpine registry (needs field validation)
+  website: https://www.openstreetmap.org/?mlat=47.108693&mlon=9.128300#map=12/47.108693/9.128300
+  notes: Auto-promoted alpine candidate from OSM. Verify resort boundaries, parking,
+    and pass pricing manually.
+  access:
+    requires_ch_vignette: true
+    requires_at_vignette: false
+  points:
+    low:
+      label: Base area / parking (OSM)
+      lat: 47.1086929
+      lon: 9.1282995
+    high:
+      label: Upper area (approx)
+      lat: 47.128693
+      lon: 9.1483
+      elev_m: null
+  costs:
+    assume_ferry_used: true
+    ferry_roundtrip_eur: 24.2
+    austria_vignette_1day_eur: 0.0
+    requires_ch_vignette: true
+- id: ch_friherrenberg
+  name: Friherrenberg (CH)
+  country: CH
+  type: alpine
+  drive_time_min_from_konstanz: 92
+  drive_time_note: Auto-promoted from OSM alpine registry (needs field validation)
+  website: https://www.openstreetmap.org/?mlat=47.125636&mlon=8.762949#map=12/47.125636/8.762949
+  notes: Auto-promoted alpine candidate from OSM. Verify resort boundaries, parking,
+    and pass pricing manually.
+  access:
+    requires_ch_vignette: true
+    requires_at_vignette: false
+  points:
+    low:
+      label: Base area / parking (OSM)
+      lat: 47.1256357
+      lon: 8.7629492
+    high:
+      label: Upper area (approx)
+      lat: 47.145636
+      lon: 8.782949
+      elev_m: null
+  costs:
+    assume_ferry_used: true
+    ferry_roundtrip_eur: 24.2
+    austria_vignette_1day_eur: 0.0
+    requires_ch_vignette: true
+- id: de_skigebiet_hennenstein
+  name: Skigebiet Hennenstein (DE)
+  country: DE
+  type: alpine
+  drive_time_min_from_konstanz: 92
+  drive_time_note: Auto-promoted from OSM alpine registry (needs field validation)
+  website: https://www.openstreetmap.org/?mlat=48.297717&mlon=9.234895#map=12/48.297717/9.234895
+  notes: Auto-promoted alpine candidate from OSM. Verify resort boundaries, parking,
+    and pass pricing manually.
+  access:
+    requires_ch_vignette: false
+    requires_at_vignette: false
+  points:
+    low:
+      label: Base area / parking (OSM)
+      lat: 48.2977173
+      lon: 9.2348954
+    high:
+      label: Upper area (approx)
+      lat: 48.317717
+      lon: 9.254895
+      elev_m: null
+  costs:
+    assume_ferry_used: true
+    ferry_roundtrip_eur: 24.2
+    austria_vignette_1day_eur: 0.0
+    requires_ch_vignette: false
+- id: de_gohrersberg_kreuzthal
+  name: Gohrersberg – Kreuzthal (DE)
+  country: DE
+  type: alpine
+  drive_time_min_from_konstanz: 95
+  drive_time_note: Auto-promoted from OSM alpine registry (needs field validation)
+  website: https://www.openstreetmap.org/?mlat=47.720591&mlon=10.120370#map=12/47.720591/10.120370
+  notes: Auto-promoted alpine candidate from OSM. Verify resort boundaries, parking,
+    and pass pricing manually.
+  access:
+    requires_ch_vignette: false
+    requires_at_vignette: false
+  points:
+    low:
+      label: Base area / parking (OSM)
+      lat: 47.7205911
+      lon: 10.1203695
+    high:
+      label: Upper area (approx)
+      lat: 47.740591
+      lon: 10.14037
+      elev_m: null
+  costs:
+    assume_ferry_used: true
+    ferry_roundtrip_eur: 24.2
+    austria_vignette_1day_eur: 0.0
+    requires_ch_vignette: false
+- id: at_ski_gleitweg_gottesacke
+  name: Ski-Gleitweg Gottesacke (AT)
+  country: AT
+  type: alpine
+  drive_time_min_from_konstanz: 106
+  drive_time_note: Auto-promoted from OSM alpine registry (needs field validation)
+  website: https://www.openstreetmap.org/?mlat=47.355920&mlon=10.119149#map=12/47.355920/10.119149
+  notes: Auto-promoted alpine candidate from OSM. Verify resort boundaries, parking,
+    and pass pricing manually.
+  access:
+    requires_ch_vignette: false
+    requires_at_vignette: true
+  points:
+    low:
+      label: Base area / parking (OSM)
+      lat: 47.3559201
+      lon: 10.1191492
+    high:
+      label: Upper area (approx)
+      lat: 47.37592
+      lon: 10.139149
+      elev_m: null
+  costs:
+    assume_ferry_used: true
+    ferry_roundtrip_eur: 24.2
+    austria_vignette_1day_eur: 9.3
+    requires_ch_vignette: false
+- id: de_6_alpe_eck
+  name: 6 Alpe-Eck (DE)
+  country: DE
+  type: alpine
+  drive_time_min_from_konstanz: 108
+  drive_time_note: Auto-promoted from OSM alpine registry (needs field validation)
+  website: https://www.openstreetmap.org/?mlat=47.504722&mlon=10.222247#map=12/47.504722/10.222247
+  notes: Auto-promoted alpine candidate from OSM. Verify resort boundaries, parking,
+    and pass pricing manually.
+  access:
+    requires_ch_vignette: false
+    requires_at_vignette: false
+  points:
+    low:
+      label: Base area / parking (OSM)
+      lat: 47.5047218
+      lon: 10.2222469
+    high:
+      label: Upper area (approx)
+      lat: 47.524722
+      lon: 10.242247
+      elev_m: null
+  costs:
+    assume_ferry_used: true
+    ferry_roundtrip_eur: 24.2
+    austria_vignette_1day_eur: 0.0
+    requires_ch_vignette: false
+- id: de_kalte_herberge
+  name: Kalte Herberge (DE)
+  country: DE
+  type: alpine
+  drive_time_min_from_konstanz: 109
+  drive_time_note: Auto-promoted from OSM alpine registry (needs field validation)
+  website: https://www.openstreetmap.org/?mlat=47.998195&mlon=8.198444#map=12/47.998195/8.198444
+  notes: Auto-promoted alpine candidate from OSM. Verify resort boundaries, parking,
+    and pass pricing manually.
+  access:
+    requires_ch_vignette: false
+    requires_at_vignette: false
+  points:
+    low:
+      label: Base area / parking (OSM)
+      lat: 47.9981949
+      lon: 8.1984436
+    high:
+      label: Upper area (approx)
+      lat: 48.018195
+      lon: 8.218444
+      elev_m: null
+  costs:
+    assume_ferry_used: true
+    ferry_roundtrip_eur: 24.2
+    austria_vignette_1day_eur: 0.0
+    requires_ch_vignette: false
+- id: ch_ibergeregg_handgruobi
+  name: Ibergeregg-Handgruobi (CH)
+  country: CH
+  type: alpine
+  drive_time_min_from_konstanz: 109
+  drive_time_note: Auto-promoted from OSM alpine registry (needs field validation)
+  website: https://www.openstreetmap.org/?mlat=47.013164&mlon=8.720717#map=12/47.013164/8.720717
+  notes: Auto-promoted alpine candidate from OSM. Verify resort boundaries, parking,
+    and pass pricing manually.
+  access:
+    requires_ch_vignette: true
+    requires_at_vignette: false
+  points:
+    low:
+      label: Base area / parking (OSM)
+      lat: 47.0131644
+      lon: 8.7207168
+    high:
+      label: Upper area (approx)
+      lat: 47.033164
+      lon: 8.740717
+      elev_m: null
+  costs:
+    assume_ferry_used: true
+    ferry_roundtrip_eur: 24.2
+    austria_vignette_1day_eur: 0.0
+    requires_ch_vignette: true
+- id: at_kuchl_korb_jageralpe
+  name: Kuchl + Körb/Jägeralpe (AT)
+  country: AT
+  type: alpine
+  drive_time_min_from_konstanz: 114
+  drive_time_note: Auto-promoted from OSM alpine registry (needs field validation)
+  website: https://www.openstreetmap.org/?mlat=47.263087&mlon=10.131586#map=12/47.263087/10.131586
+  notes: Auto-promoted alpine candidate from OSM. Verify resort boundaries, parking,
+    and pass pricing manually.
+  access:
+    requires_ch_vignette: false
+    requires_at_vignette: true
+  points:
+    low:
+      label: Base area / parking (OSM)
+      lat: 47.2630874
+      lon: 10.1315858
+    high:
+      label: Upper area (approx)
+      lat: 47.283087
+      lon: 10.151586
+      elev_m: null
+  costs:
+    assume_ferry_used: true
+    ferry_roundtrip_eur: 24.2
+    austria_vignette_1day_eur: 9.3
+    requires_ch_vignette: false
+- id: de_alpe_schrattenwang
+  name: Alpe Schrattenwang (DE)
+  country: DE
+  type: alpine
+  drive_time_min_from_konstanz: 116
+  drive_time_note: Auto-promoted from OSM alpine registry (needs field validation)
+  website: https://www.openstreetmap.org/?mlat=47.378386&mlon=10.239313#map=12/47.378386/10.239313
+  notes: Auto-promoted alpine candidate from OSM. Verify resort boundaries, parking,
+    and pass pricing manually.
+  access:
+    requires_ch_vignette: false
+    requires_at_vignette: false
+  points:
+    low:
+      label: Base area / parking (OSM)
+      lat: 47.3783864
+      lon: 10.2393126
+    high:
+      label: Upper area (approx)
+      lat: 47.398386
+      lon: 10.259313
+      elev_m: null
+  costs:
+    assume_ferry_used: true
+    ferry_roundtrip_eur: 24.2
+    austria_vignette_1day_eur: 0.0
+    requires_ch_vignette: false
+- id: ch_rigi_seebodenalp
+  name: Rigi-Seebodenalp (CH)
+  country: CH
+  type: alpine
+  drive_time_min_from_konstanz: 116
+  drive_time_note: Auto-promoted from OSM alpine registry (needs field validation)
+  website: https://www.openstreetmap.org/?mlat=47.062996&mlon=8.469539#map=12/47.062996/8.469539
+  notes: Auto-promoted alpine candidate from OSM. Verify resort boundaries, parking,
+    and pass pricing manually.
+  access:
+    requires_ch_vignette: true
+    requires_at_vignette: false
+  points:
+    low:
+      label: Base area / parking (OSM)
+      lat: 47.0629958
+      lon: 8.4695387
+    high:
+      label: Upper area (approx)
+      lat: 47.082996
+      lon: 8.489539
+      elev_m: null
+  costs:
+    assume_ferry_used: true
+    ferry_roundtrip_eur: 24.2
+    austria_vignette_1day_eur: 0.0
+    requires_ch_vignette: true
+- id: de_skigebiet_spitzenberg_und_kopfle
+  name: Skigebiet Spitzenberg und Köpfle (DE)
+  country: DE
+  type: alpine
+  drive_time_min_from_konstanz: 116
+  drive_time_note: Auto-promoted from OSM alpine registry (needs field validation)
+  website: https://www.openstreetmap.org/?mlat=47.802343&mlon=8.029395#map=12/47.802343/8.029395
+  notes: Auto-promoted alpine candidate from OSM. Verify resort boundaries, parking,
+    and pass pricing manually.
+  access:
+    requires_ch_vignette: false
+    requires_at_vignette: false
+  points:
+    low:
+      label: Base area / parking (OSM)
+      lat: 47.8023425
+      lon: 8.0293947
+    high:
+      label: Upper area (approx)
+      lat: 47.822343
+      lon: 8.049395
+      elev_m: null
+  costs:
+    assume_ferry_used: true
+    ferry_roundtrip_eur: 24.2
+    austria_vignette_1day_eur: 0.0
+    requires_ch_vignette: false
+- id: de_sulzberg
+  name: Sulzberg (DE)
+  country: DE
+  type: alpine
+  drive_time_min_from_konstanz: 118
+  drive_time_note: Auto-promoted from OSM alpine registry (needs field validation)
+  website: https://www.openstreetmap.org/?mlat=47.654305&mlon=10.356130#map=12/47.654305/10.356130
+  notes: Auto-promoted alpine candidate from OSM. Verify resort boundaries, parking,
+    and pass pricing manually.
+  access:
+    requires_ch_vignette: false
+    requires_at_vignette: false
+  points:
+    low:
+      label: Base area / parking (OSM)
+      lat: 47.6543045
+      lon: 10.3561304
+    high:
+      label: Upper area (approx)
+      lat: 47.674305
+      lon: 10.37613
+      elev_m: null
+  costs:
+    assume_ferry_used: true
+    ferry_roundtrip_eur: 24.2
+    austria_vignette_1day_eur: 0.0
+    requires_ch_vignette: false
+- id: at_kristberg_silbertal
+  name: Kristberg-Silbertal (AT)
+  country: AT
+  type: alpine
+  drive_time_min_from_konstanz: 119
+  drive_time_note: Auto-promoted from OSM alpine registry (needs field validation)
+  website: https://www.openstreetmap.org/?mlat=47.101903&mlon=9.988096#map=12/47.101903/9.988096
+  notes: Auto-promoted alpine candidate from OSM. Verify resort boundaries, parking,
+    and pass pricing manually.
+  access:
+    requires_ch_vignette: false
+    requires_at_vignette: true
+  points:
+    low:
+      label: Base area / parking (OSM)
+      lat: 47.1019027
+      lon: 9.9880957
+    high:
+      label: Upper area (approx)
+      lat: 47.121903
+      lon: 10.008096
+      elev_m: null
+  costs:
+    assume_ferry_used: true
+    ferry_roundtrip_eur: 24.2
+    austria_vignette_1day_eur: 9.3
+    requires_ch_vignette: false
+- id: ch_panoramaloipe_xc
+  name: Panoramaloipe (CH) — XC
+  country: CH
+  type: xc
+  drive_time_min_from_konstanz: 60
+  drive_time_note: Auto-promoted from OSM XC registry (needs field validation)
+  website: https://www.bergfex.de/ostschweiz/langlaufen/braunwald/
+  notes: Auto-promoted from extended OSM nordic candidate. Verify trail status/entry
+    point manually.
+  access:
+    requires_ch_vignette: false
+    requires_at_vignette: false
+  points:
+    low:
+      label: Trailhead / parking (OSM)
+      lat: 47.3026177
+      lon: 8.910172
+    high:
+      label: Nearby upper loop sector (approx)
+      lat: 47.312618
+      lon: 8.920172
+  costs:
+    assume_ferry_used: true
+    ferry_roundtrip_eur: 24.2
+    austria_vignette_1day_eur: 0.0
+    requires_ch_vignette: false
+- id: de_heersberg_loipe_xc
+  name: Heersberg-Loipe (DE) — XC
+  country: DE
+  type: xc
+  drive_time_min_from_konstanz: 83
+  drive_time_note: Auto-promoted from OSM XC registry (needs field validation)
+  website: https://www.openstreetmap.org/?mlat=48.235773&mlon=8.944272#map=13/48.235773/8.944272
+  notes: Auto-promoted from extended OSM nordic candidate. Verify trail status/entry
+    point manually.
+  access:
+    requires_ch_vignette: false
+    requires_at_vignette: false
+  points:
+    low:
+      label: Trailhead / parking (OSM)
+      lat: 48.2357726
+      lon: 8.9442717
+    high:
+      label: Nearby upper loop sector (approx)
+      lat: 48.245773
+      lon: 8.954272
+  costs:
+    assume_ferry_used: true
+    ferry_roundtrip_eur: 24.2
+    austria_vignette_1day_eur: 0.0
+    requires_ch_vignette: false
+- id: ch_wolzenalp
+  name: Wolzenalp (CH)
+  country: CH
+  type: alpine
+  drive_time_min_from_konstanz: 67
+  drive_time_note: Auto-promoted from OSM alpine registry (needs field validation)
+  website: https://www.openstreetmap.org/?mlat=47.227109&mlon=9.157652#map=12/47.227109/9.157652
+  notes: Auto-promoted alpine candidate from OSM. Verify resort boundaries, parking,
+    and pass pricing manually.
+  access:
+    requires_ch_vignette: true
+    requires_at_vignette: false
+  points:
+    low:
+      label: Base area / parking (OSM)
+      lat: 47.2271086
+      lon: 9.1576517
+    high:
+      label: Upper area (approx)
+      lat: 47.247109
+      lon: 9.177652
+      elev_m: null
+  costs:
+    assume_ferry_used: true
+    ferry_roundtrip_eur: 24.2
+    austria_vignette_1day_eur: 0.0
+    requires_ch_vignette: true
+- id: de_loipe_ettenberg_xc
+  name: Loipe Ettenberg (DE) — XC
+  country: DE
+  type: xc
+  drive_time_min_from_konstanz: 56
+  drive_time_note: Auto-promoted from OSM XC registry (needs field validation)
+  website: https://www.bergfex.de/bayern/langlaufen/rettenberg-kranzegg/
+  notes: Auto-promoted from extended OSM nordic candidate. Verify trail status/entry
+    point manually.
+  access:
+    requires_ch_vignette: false
+    requires_at_vignette: false
+  points:
+    low:
+      label: Trailhead / parking (OSM)
+      lat: 48.0134374
+      lon: 8.8907477
+    high:
+      label: Nearby upper loop sector (approx)
+      lat: 48.023437
+      lon: 8.900748
+  costs:
+    assume_ferry_used: true
+    ferry_roundtrip_eur: 24.2
+    austria_vignette_1day_eur: 0.0
+    requires_ch_vignette: false
+- id: de_bitzer_loipe_skating_xc
+  name: Bitzer Loipe Skating (DE) — XC
+  country: DE
+  type: xc
+  drive_time_min_from_konstanz: 83
+  drive_time_note: Auto-promoted from OSM XC registry (needs field validation)
+  website: https://www.bergfex.de/baden-wuerttemberg/langlaufen/bitz/
+  notes: Auto-promoted from extended OSM nordic candidate. Verify trail status/entry
+    point manually.
+  access:
+    requires_ch_vignette: false
+    requires_at_vignette: false
+  points:
+    low:
+      label: Trailhead / parking (OSM)
+      lat: 48.2525659
+      lon: 9.0937343
+    high:
+      label: Nearby upper loop sector (approx)
+      lat: 48.262566
+      lon: 9.103734
+  costs:
+    assume_ferry_used: true
+    ferry_roundtrip_eur: 24.2
+    austria_vignette_1day_eur: 0.0
+    requires_ch_vignette: false
+- id: at_dorf_loipe_hittisau_xc
+  name: Dorf-Loipe Hittisau (AT) — XC
+  country: AT
+  type: xc
+  drive_time_min_from_konstanz: 83
+  drive_time_note: Auto-promoted from OSM XC registry (needs field validation)
+  website: https://www.bergfex.de/vorarlberg/langlaufen/hittisau/
+  notes: Auto-promoted from extended OSM nordic candidate. Verify trail status/entry
+    point manually.
+  access:
+    requires_ch_vignette: false
+    requires_at_vignette: true
+  points:
+    low:
+      label: Trailhead / parking (OSM)
+      lat: 47.4580351
+      lon: 9.9696911
+    high:
+      label: Nearby upper loop sector (approx)
+      lat: 47.468035
+      lon: 9.979691
+  costs:
+    assume_ferry_used: true
+    ferry_roundtrip_eur: 24.2
+    austria_vignette_1day_eur: 9.3
+    requires_ch_vignette: false
+- id: ch_wissbodenloipe_xc
+  name: Wissbodenloipe (CH) — XC
+  country: CH
+  type: xc
+  drive_time_min_from_konstanz: 62
+  drive_time_note: Auto-promoted from OSM XC registry (needs field validation)
+  website: https://www.openstreetmap.org/?mlat=47.250384&mlon=9.058504#map=13/47.250384/9.058504
+  notes: Auto-promoted from extended OSM nordic candidate. Verify trail status/entry
+    point manually.
+  access:
+    requires_ch_vignette: false
+    requires_at_vignette: false
+  points:
+    low:
+      label: Trailhead / parking (OSM)
+      lat: 47.2503838
+      lon: 9.058504
+    high:
+      label: Nearby upper loop sector (approx)
+      lat: 47.260384
+      lon: 9.068504
+  costs:
+    assume_ferry_used: true
+    ferry_roundtrip_eur: 24.2
+    austria_vignette_1day_eur: 0.0
+    requires_ch_vignette: false
+- id: de_mahlstetter_loipe_xc
+  name: Mahlstetter Loipe (DE) — XC
+  country: DE
+  type: xc
+  drive_time_min_from_konstanz: 65
+  drive_time_note: Auto-promoted from OSM XC registry (needs field validation)
+  website: https://www.openstreetmap.org/?mlat=48.064713&mlon=8.832549#map=13/48.064713/8.832549
+  notes: Auto-promoted from extended OSM nordic candidate. Verify trail status/entry
+    point manually.
+  access:
+    requires_ch_vignette: false
+    requires_at_vignette: false
+  points:
+    low:
+      label: Trailhead / parking (OSM)
+      lat: 48.0647127
+      lon: 8.8325493
+    high:
+      label: Nearby upper loop sector (approx)
+      lat: 48.074713
+      lon: 8.842549
+  costs:
+    assume_ferry_used: true
+    ferry_roundtrip_eur: 24.2
+    austria_vignette_1day_eur: 0.0
+    requires_ch_vignette: false
+- id: de_spaichinger_loipe_xc
+  name: Spaichinger Loipe (DE) — XC
+  country: DE
+  type: xc
+  drive_time_min_from_konstanz: 69
+  drive_time_note: Auto-promoted from OSM XC registry (needs field validation)
+  website: https://www.openstreetmap.org/?mlat=48.079904&mlon=8.788964#map=13/48.079904/8.788964
+  notes: Auto-promoted from extended OSM nordic candidate. Verify trail status/entry
+    point manually.
+  access:
+    requires_ch_vignette: false
+    requires_at_vignette: false
+  points:
+    low:
+      label: Trailhead / parking (OSM)
+      lat: 48.0799036
+      lon: 8.7889638
+    high:
+      label: Nearby upper loop sector (approx)
+      lat: 48.089904
+      lon: 8.798964
+  costs:
+    assume_ferry_used: true
+    ferry_roundtrip_eur: 24.2
+    austria_vignette_1day_eur: 0.0
+    requires_ch_vignette: false
+- id: de_bubsheimer_loipe_xc
+  name: Bubsheimer Loipe (DE) — XC
+  country: DE
+  type: xc
+  drive_time_min_from_konstanz: 74
+  drive_time_note: Auto-promoted from OSM XC registry (needs field validation)
+  website: https://www.openstreetmap.org/?mlat=48.129535&mlon=8.812903#map=13/48.129535/8.812903
+  notes: Auto-promoted from extended OSM nordic candidate. Verify trail status/entry
+    point manually.
+  access:
+    requires_ch_vignette: false
+    requires_at_vignette: false
+  points:
+    low:
+      label: Trailhead / parking (OSM)
+      lat: 48.1295352
+      lon: 8.8129032
+    high:
+      label: Nearby upper loop sector (approx)
+      lat: 48.139535
+      lon: 8.822903
+  costs:
+    assume_ferry_used: true
+    ferry_roundtrip_eur: 24.2
+    austria_vignette_1day_eur: 0.0
+    requires_ch_vignette: false
+- id: ch_loipe_oetwil_hombrechtikon_xc
+  name: Loipe Oetwil-Hombrechtikon (CH) — XC
+  country: CH
+  type: xc
+  drive_time_min_from_konstanz: 74
+  drive_time_note: Auto-promoted from OSM XC registry (needs field validation)
+  website: https://www.openstreetmap.org/?mlat=47.259080&mlon=8.735887#map=13/47.259080/8.735887
+  notes: Auto-promoted from extended OSM nordic candidate. Verify trail status/entry
+    point manually.
+  access:
+    requires_ch_vignette: false
+    requires_at_vignette: false
+  points:
+    low:
+      label: Trailhead / parking (OSM)
+      lat: 47.2590796
+      lon: 8.7358869
+    high:
+      label: Nearby upper loop sector (approx)
+      lat: 47.26908
+      lon: 8.745887
+  costs:
+    assume_ferry_used: true
+    ferry_roundtrip_eur: 24.2
+    austria_vignette_1day_eur: 0.0
+    requires_ch_vignette: false
+- id: de_christazhofener_loipe_xc
+  name: Christazhofener Loipe (DE) — XC
+  country: DE
+  type: xc
+  drive_time_min_from_konstanz: 76
+  drive_time_note: Auto-promoted from OSM XC registry (needs field validation)
+  website: https://www.openstreetmap.org/?mlat=47.719324&mlon=9.954504#map=13/47.719324/9.954504
+  notes: Auto-promoted from extended OSM nordic candidate. Verify trail status/entry
+    point manually.
+  access:
+    requires_ch_vignette: false
+    requires_at_vignette: false
+  points:
+    low:
+      label: Trailhead / parking (OSM)
+      lat: 47.719324
+      lon: 9.954504
+    high:
+      label: Nearby upper loop sector (approx)
+      lat: 47.729324
+      lon: 9.964504
+  costs:
+    assume_ferry_used: true
+    ferry_roundtrip_eur: 24.2
+    austria_vignette_1day_eur: 0.0
+    requires_ch_vignette: false
+- id: de_trainings_loipe_xc
+  name: Trainings Loipe (DE) — XC
+  country: DE
+  type: xc
+  drive_time_min_from_konstanz: 79
+  drive_time_note: Auto-promoted from OSM XC registry (needs field validation)
+  website: https://www.openstreetmap.org/?mlat=47.596651&mlon=9.987199#map=13/47.596651/9.987199
+  notes: Auto-promoted from extended OSM nordic candidate. Verify trail status/entry
+    point manually.
+  access:
+    requires_ch_vignette: false
+    requires_at_vignette: false
+  points:
+    low:
+      label: Trailhead / parking (OSM)
+      lat: 47.5966509
+      lon: 9.9871989
+    high:
+      label: Nearby upper loop sector (approx)
+      lat: 47.606651
+      lon: 9.997199
+  costs:
+    assume_ferry_used: true
+    ferry_roundtrip_eur: 24.2
+    austria_vignette_1day_eur: 0.0
+    requires_ch_vignette: false
+- id: de_rotmoosloipe_xc
+  name: Rotmoosloipe (DE) — XC
+  country: DE
+  type: xc
+  drive_time_min_from_konstanz: 82
+  drive_time_note: Auto-promoted from OSM XC registry (needs field validation)
+  website: https://www.openstreetmap.org/?mlat=47.698859&mlon=10.021335#map=13/47.698859/10.021335
+  notes: Auto-promoted from extended OSM nordic candidate. Verify trail status/entry
+    point manually.
+  access:
+    requires_ch_vignette: false
+    requires_at_vignette: false
+  points:
+    low:
+      label: Trailhead / parking (OSM)
+      lat: 47.6988592
+      lon: 10.0213354
+    high:
+      label: Nearby upper loop sector (approx)
+      lat: 47.708859
+      lon: 10.031335
+  costs:
+    assume_ferry_used: true
+    ferry_roundtrip_eur: 24.2
+    austria_vignette_1day_eur: 0.0
+    requires_ch_vignette: false
+- id: de_riedholzloipe_xc
+  name: Riedholzloipe (DE) — XC
+  country: DE
+  type: xc
+  drive_time_min_from_konstanz: 85
+  drive_time_note: Auto-promoted from OSM XC registry (needs field validation)
+  website: https://www.openstreetmap.org/?mlat=47.647337&mlon=10.048215#map=13/47.647337/10.048215
+  notes: Auto-promoted from extended OSM nordic candidate. Verify trail status/entry
+    point manually.
+  access:
+    requires_ch_vignette: false
+    requires_at_vignette: false
+  points:
+    low:
+      label: Trailhead / parking (OSM)
+      lat: 47.6473368
+      lon: 10.048215
+    high:
+      label: Nearby upper loop sector (approx)
+      lat: 47.657337
+      lon: 10.058215
   costs:
     assume_ferry_used: true
     ferry_roundtrip_eur: 24.2

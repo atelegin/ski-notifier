@@ -40,6 +40,8 @@ def calculate_point_score(weather: PointWeather) -> PointScore:
     - + clamp(snow24_to_9_cm, 0..30) * 0.4   (fresh snow: 24h ending at 09:00)
     - - max(0, wind_gust_kmh_max - 35) * 0.8
     - - max(0, precip_mm_sum - 8) * 1.0   (heavy rain/wet snow penalty)
+    - - min(6.0, max(0, wind_gust_kmh_max-35) * max(0, precip_mm_sum-8) * 0.15)
+      (combo penalty when both wind and precipitation are elevated)
     - - max(0, temp_C_avg - 4) * 3.0      (warm = worse snow)
     - - max(0, -temp_C_avg - 18) * 1.0    (extreme cold discomfort)
     
@@ -61,15 +63,22 @@ def calculate_point_score(weather: PointWeather) -> PointScore:
         has_snow_data = True
         score += clamp(snowfall_for_scoring, 0, 30) * 0.4
     
+    wind_excess = 0.0
+    precip_excess = 0.0
+
     # Wind gust penalty (threshold for GUSTS specifically)
     if weather.wind_gust_kmh_max_9_16 is not None:
-        penalty = max(0, weather.wind_gust_kmh_max_9_16 - 35) * 0.8
-        score -= penalty
-    
+        wind_excess = max(0, weather.wind_gust_kmh_max_9_16 - 35)
+        score -= wind_excess * 0.8
+
     # Heavy precipitation penalty (wet/rain)
     if weather.precip_mm_sum_9_16 is not None:
-        penalty = max(0, weather.precip_mm_sum_9_16 - 8) * 1.0
-        score -= penalty
+        precip_excess = max(0, weather.precip_mm_sum_9_16 - 8)
+        score -= precip_excess * 1.0
+
+    # Additional penalty for windy + wet conditions together (capped to stay moderate)
+    if wind_excess > 0 and precip_excess > 0:
+        score -= min(6.0, wind_excess * precip_excess * 0.15)
     
     # Temperature penalties
     if weather.temp_c_avg_9_16 is not None:

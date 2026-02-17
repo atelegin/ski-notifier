@@ -1,0 +1,1047 @@
+schema_version: 1
+generated_at_utc: '2026-02-17T11:00:35Z'
+source:
+  core: ski_notifier/resorts.yaml (type=xc)
+  extended: OpenStreetMap Overpass (piste:type=nordic)
+  center:
+    name: Konstanz
+    lat: 47.6779
+    lon: 9.1758
+  max_approx_drive_time_min: 120
+  note: Extended list is semi-automatic and needs manual verification before promotion
+    to core.
+core:
+- id: ch_heiden_loipe
+  name: Heiden (CH) — Panoramic XC loop
+  country: CH
+  drive_time_min_from_konstanz: 45
+  website: https://loipen-heiden-bodensee.ch
+  low_point:
+    label: Heiden trailhead / parking
+    lat: 47.4426
+    lon: 9.5329
+- id: ch_gais_langlaufzentrum
+  name: Langlaufzentrum Gais (CH)
+  country: CH
+  drive_time_min_from_konstanz: 55
+  website: https://langlauf-gais.ch/
+  low_point:
+    label: Gais trailhead / parking
+    lat: 47.3616
+    lon: 9.4526
+- id: at_sulzberg_nordic_sport_park
+  name: Nordic Sport Park Sulzberg (AT)
+  country: AT
+  drive_time_min_from_konstanz: 60
+  website: https://www.vorarlberg.travel/en/activity/nordic-sport-park-sulzberg/
+  low_point:
+    label: Sulzberg Nordic trailhead / parking
+    lat: 47.5244329
+    lon: 9.9097887
+- id: ch_steg_toggenburg_xc
+  name: Steg im Toggenburg (CH) — XC
+  country: CH
+  drive_time_min_from_konstanz: 72
+  website: https://www.loipen-toggenburg.ch
+  low_point:
+    label: Steg trailhead / parking
+    lat: 47.1933904
+    lon: 9.2841293
+- id: de_heuberg_messstetten_xc
+  name: Heuberg / Meßstetten (Schwäbische Alb, DE) — XC
+  country: DE
+  drive_time_min_from_konstanz: 75
+  website: https://skiwanderwege-heuberg.de/
+  low_point:
+    label: Meßstetten trailhead / parking
+    lat: 48.1808093
+    lon: 8.9629934
+- id: de_hinterzarten_thurnerspur
+  name: Thurnerspur (Hinterzarten, DE) — XC
+  country: DE
+  drive_time_min_from_konstanz: 75
+  website: https://www.thurnerspur.de/
+  low_point:
+    label: Hinterzarten trailhead (Thurnerspur access)
+    lat: 47.9057159
+    lon: 8.1055964
+- id: de_rothaus_loipenzentrum_schoenwald
+  name: Rothaus Loipenzentrum Schönwald (DE)
+  country: DE
+  drive_time_min_from_konstanz: 76
+  website: https://www.schoenwald.net/
+  low_point:
+    label: Rothaus Loipenzentrum parking
+    lat: 48.105081
+    lon: 8.174171
+- id: de_schonach
+  name: Schonach (DE) — Loipenhaus / Langenwaldschanze
+  country: DE
+  drive_time_min_from_konstanz: 76
+  website: https://www.schonach.de
+  low_point:
+    label: Loipenhaus Schonach
+    lat: 48.131969
+    lon: 8.194406
+- id: ch_weissbad_bruelisau_xc
+  name: Weissbad–Brülisau (CH) — XC
+  country: CH
+  drive_time_min_from_konstanz: 78
+  website: https://www.appenzell.ch
+  low_point:
+    label: Weissbad trailhead / parking
+    lat: 47.3086841
+    lon: 9.4342407
+- id: de_notschrei
+  name: Nordic Center Notschrei (DE)
+  country: DE
+  drive_time_min_from_konstanz: 84
+  website: https://www.nordic-center-notschrei.de
+  low_point:
+    label: Nordic Center Notschrei (parking)
+    lat: 47.876251
+    lon: 7.909534
+- id: de_scheidegg_xc
+  name: Scheidegg (Westallgäu, DE) — XC
+  country: DE
+  drive_time_min_from_konstanz: 85
+  website: https://www.scheidegg.de/winter/langlaufen/
+  low_point:
+    label: Scheidegg trailhead / parking
+    lat: 47.582299
+    lon: 9.851159
+- id: at_boedele_loipen
+  name: Bödele (Dornbirn, AT) — XC
+  country: AT
+  drive_time_min_from_konstanz: 86
+  website: https://www.boedele.info
+  low_point:
+    label: Bödele pass parking / loipe access
+    lat: 47.410665
+    lon: 9.823666
+- id: ch_gruesch_danusa_xc
+  name: Grüsch–Danusa (CH) — XC loops
+  country: CH
+  drive_time_min_from_konstanz: 90
+  website: https://www.gruesch-danusa.ch
+  low_point:
+    label: Talstation Grüsch-Danusa
+    lat: 46.97265
+    lon: 9.63996
+- id: ch_einsiedeln_schwedentritt
+  name: Einsiedeln-Loipe Schwedentritt (CH)
+  country: CH
+  drive_time_min_from_konstanz: 92
+  website: https://www.einsiedeln.ch/home
+  low_point:
+    label: Parkplatz Schwedentritt (Brüel)
+    lat: 47.12886
+    lon: 8.753628
+- id: ch_hoch_ybrig_xc
+  name: Hoch-Ybrig (CH) — XC
+  country: CH
+  drive_time_min_from_konstanz: 100
+  website: https://www.hoch-ybrig.ch/
+  low_point:
+    label: Unteriberg / Weglosen trailhead
+    lat: 47.0358
+    lon: 8.7894
+- id: de_feldberg_nordic_xc
+  name: Feldberg Nordic Area (Schwarzwald, DE) — XC
+  country: DE
+  drive_time_min_from_konstanz: 105
+  website: https://www.feldberg-erlebnis.de/en
+  low_point:
+    label: Feldberg nordic trailhead / parking
+    lat: 47.862331
+    lon: 8.033947
+- id: de_oberstaufen_loipe
+  name: Loipe Oberstaufen (DE) — XC
+  country: DE
+  drive_time_min_from_konstanz: 108
+  website: https://www.oberstaufen.de/
+  low_point:
+    label: Oberstaufen trailhead / parking
+    lat: 47.559764
+    lon: 10.0285405
+- id: de_kniebis_loipenzentrum
+  name: Loipenzentrum Kniebis (DE)
+  country: DE
+  drive_time_min_from_konstanz: 113
+  website: https://www.kniebis.de/wunderbare-winterwelt
+  low_point:
+    label: Kniebis Nordic center parking
+    lat: 48.4737
+    lon: 8.3043
+- id: de_balderschwang_loipe
+  name: Loipe Balderschwang (DE) — XC
+  country: DE
+  drive_time_min_from_konstanz: 117
+  website: https://www.hoernerdoerfer.de/balderschwang
+  low_point:
+    label: Balderschwang trailhead / parking
+    lat: 47.4621544
+    lon: 10.0950563
+- id: ch_flumserberg_xc
+  name: Flumserberg (CH) — XC
+  country: CH
+  drive_time_min_from_konstanz: 117
+  website: https://flumserberg.ch
+  low_point:
+    label: Flumserberg trailhead / parking
+    lat: 47.0828508
+    lon: 9.2765894
+- id: at_au_schoppernau_xc
+  name: Au–Schoppernau (AT) — XC
+  country: AT
+  drive_time_min_from_konstanz: 119
+  website: https://www.au-schoppernau.at/de/winter
+  low_point:
+    label: Au trailhead / parking
+    lat: 47.324
+    lon: 10.027
+extended:
+- name: Loipe Höchsten grün
+  country: UNK
+  lat: 47.8041451
+  lon: 9.4190731
+  distance_km: 23.0
+  approx_drive_time_min: 30
+  source: osm_overpass:piste:type=nordic
+- name: Loipe Höchsten rot
+  country: UNK
+  lat: 47.8164615
+  lon: 9.4076698
+  distance_km: 23.2
+  approx_drive_time_min: 30
+  source: osm_overpass:piste:type=nordic
+- name: Loipe Höchsten blau
+  country: UNK
+  lat: 47.8251372
+  lon: 9.39967
+  distance_km: 23.4
+  approx_drive_time_min: 30
+  source: osm_overpass:piste:type=nordic
+- name: Juggenwaldloipe
+  country: UNK
+  lat: 47.4517168
+  lon: 9.2940609
+  distance_km: 26.7
+  approx_drive_time_min: 34
+  source: osm_overpass:piste:type=nordic
+- name: Loipe Tannenberg
+  country: UNK
+  lat: 47.4439354
+  lon: 9.2990984
+  distance_km: 27.6
+  approx_drive_time_min: 36
+  source: osm_overpass:piste:type=nordic
+- name: City-Loipe St. Gallen
+  country: UNK
+  lat: 47.4198847
+  lon: 9.3593427
+  distance_km: 31.8
+  approx_drive_time_min: 41
+  source: osm_overpass:piste:type=nordic
+- name: Loipe Moos
+  country: UNK
+  lat: 47.3831107
+  lon: 9.178693
+  distance_km: 32.8
+  approx_drive_time_min: 42
+  source: osm_overpass:piste:type=nordic
+- name: Loipe Kreuz
+  country: UNK
+  lat: 47.372674
+  lon: 9.1852563
+  distance_km: 33.9
+  approx_drive_time_min: 44
+  source: osm_overpass:piste:type=nordic
+- name: Loipe Speicher
+  country: UNK
+  lat: 47.4150173
+  lon: 9.44753
+  distance_km: 35.6
+  approx_drive_time_min: 46
+  source: osm_overpass:piste:type=nordic
+- name: Nachtloipe
+  country: UNK
+  lat: 47.3436668
+  lon: 9.2584478
+  distance_km: 37.7
+  approx_drive_time_min: 49
+  source: osm_overpass:piste:type=nordic
+- name: Einsigele plus Nachtloipe
+  country: UNK
+  lat: 47.3397676
+  lon: 9.2519689
+  distance_km: 38.0
+  approx_drive_time_min: 49
+  source: osm_overpass:piste:type=nordic
+- name: Emmingen-Loipe
+  country: UNK
+  lat: 47.939764
+  lon: 8.8413849
+  distance_km: 38.4
+  approx_drive_time_min: 50
+  source: osm_overpass:piste:type=nordic
+- name: Loipe Belwschwendi
+  country: UNK
+  lat: 47.3356716
+  lon: 9.2432302
+  distance_km: 38.4
+  approx_drive_time_min: 50
+  source: osm_overpass:piste:type=nordic
+- name: Loipe Schönengrund
+  country: UNK
+  lat: 47.3332161
+  lon: 9.2382404
+  distance_km: 38.6
+  approx_drive_time_min: 50
+  source: osm_overpass:piste:type=nordic
+- name: Witthoh-Loipe
+  country: UNK
+  lat: 47.9401672
+  lon: 8.8280412
+  distance_km: 39.1
+  approx_drive_time_min: 50
+  source: osm_overpass:piste:type=nordic
+- name: Emminger-Loipe
+  country: UNK
+  lat: 47.9438847
+  lon: 8.8316711
+  distance_km: 39.2
+  approx_drive_time_min: 51
+  source: osm_overpass:piste:type=nordic
+- name: Nachtloipe
+  country: UNK
+  lat: 47.3142353
+  lon: 9.2840397
+  distance_km: 41.2
+  approx_drive_time_min: 53
+  source: osm_overpass:piste:type=nordic
+- name: Loipe Hegaublick
+  country: UNK
+  lat: 47.879988
+  lon: 8.7084235
+  distance_km: 41.5
+  approx_drive_time_min: 54
+  source: osm_overpass:piste:type=nordic
+- name: Rote Loipe
+  country: UNK
+  lat: 47.3078352
+  lon: 9.2798638
+  distance_km: 41.9
+  approx_drive_time_min: 54
+  source: osm_overpass:piste:type=nordic
+- name: Nendinger Loipe
+  country: UNK
+  lat: 47.9886127
+  lon: 8.8520059
+  distance_km: 42.2
+  approx_drive_time_min: 54
+  source: osm_overpass:piste:type=nordic
+- name: Loipe Ettenberg
+  country: UNK
+  lat: 48.0134374
+  lon: 8.8907477
+  distance_km: 42.9
+  approx_drive_time_min: 56
+  source: osm_overpass:piste:type=nordic
+- name: Loipe Skatingrunde Eschheimertal
+  country: UNK
+  lat: 47.7058056
+  lon: 8.5977888
+  distance_km: 43.4
+  approx_drive_time_min: 56
+  source: osm_overpass:piste:type=nordic
+- name: Verbindungsloipe Waldburg-Vogt
+  country: UNK
+  lat: 47.7673095
+  lon: 9.739996
+  distance_km: 43.4
+  approx_drive_time_min: 56
+  source: osm_overpass:piste:type=nordic
+- name: Rueggental-Loipe
+  country: UNK
+  lat: 47.3386077
+  lon: 8.8821512
+  distance_km: 43.7
+  approx_drive_time_min: 56
+  source: osm_overpass:piste:type=nordic
+- name: Loipe Eschheimertal
+  country: UNK
+  lat: 47.7117282
+  lon: 8.5920416
+  distance_km: 43.9
+  approx_drive_time_min: 57
+  source: osm_overpass:piste:type=nordic
+- name: Thurloipe
+  country: UNK
+  lat: 47.2771317
+  lon: 9.1068504
+  distance_km: 44.9
+  approx_drive_time_min: 58
+  source: osm_overpass:piste:type=nordic
+- name: Maiwinkel-Loipe
+  country: UNK
+  lat: 47.3281473
+  lon: 8.8746438
+  distance_km: 45.0
+  approx_drive_time_min: 58
+  source: osm_overpass:piste:type=nordic
+- name: Wappenswiler Riet-Loipe
+  country: UNK
+  lat: 47.3231269
+  lon: 8.8726683
+  distance_km: 45.5
+  approx_drive_time_min: 59
+  source: osm_overpass:piste:type=nordic
+- name: Loipe Aufstieg Randenhaus
+  country: UNK
+  lat: 47.719038
+  lon: 8.5695676
+  distance_km: 45.6
+  approx_drive_time_min: 59
+  source: osm_overpass:piste:type=nordic
+- name: Loipe Talfahrt Eschheimertal
+  country: UNK
+  lat: 47.720612
+  lon: 8.5695676
+  distance_km: 45.6
+  approx_drive_time_min: 59
+  source: osm_overpass:piste:type=nordic
+- name: Langlauf- und Flutlichtstadion Damoos
+  country: UNK
+  lat: 47.786671
+  lon: 9.7665228
+  distance_km: 45.8
+  approx_drive_time_min: 59
+  source: osm_overpass:piste:type=nordic
+- name: Panoramaloipe
+  country: UNK
+  lat: 47.3026177
+  lon: 8.910172
+  distance_km: 46.3
+  approx_drive_time_min: 60
+  source: osm_overpass:piste:type=nordic
+- name: Flutlichtloipe Niederwangen
+  country: UNK
+  lat: 47.677368
+  lon: 9.7960125
+  distance_km: 46.4
+  approx_drive_time_min: 60
+  source: osm_overpass:piste:type=nordic
+- name: Flutlichtloipe Niederwangen Start
+  country: UNK
+  lat: 47.675106
+  lon: 9.79835
+  distance_km: 46.6
+  approx_drive_time_min: 60
+  source: osm_overpass:piste:type=nordic
+- name: Loipe Zelglirunde Klassisch und Skating
+  country: UNK
+  lat: 47.7446973
+  lon: 8.5531607
+  distance_km: 47.2
+  approx_drive_time_min: 61
+  source: osm_overpass:piste:type=nordic
+- name: Genussloipe
+  country: UNK
+  lat: 47.982595
+  lon: 9.6183832
+  distance_km: 47.3
+  approx_drive_time_min: 61
+  source: osm_overpass:piste:type=nordic
+- name: Loipe 436 Randenspur Skating 10 km
+  country: UNK
+  lat: 47.7386246
+  lon: 8.5477416
+  distance_km: 47.5
+  approx_drive_time_min: 61
+  source: osm_overpass:piste:type=nordic
+- name: Loipe 435 Randenspur Klassisch 15 km
+  country: UNK
+  lat: 47.7386246
+  lon: 8.5422807
+  distance_km: 47.9
+  approx_drive_time_min: 62
+  source: osm_overpass:piste:type=nordic
+- name: Loipe 435 Randenspur Klassisch 7 km
+  country: UNK
+  lat: 47.7366758
+  lon: 8.540483
+  distance_km: 48.0
+  approx_drive_time_min: 62
+  source: osm_overpass:piste:type=nordic
+- name: Rickenloipe
+  country: UNK
+  lat: 47.2558427
+  lon: 9.0330444
+  distance_km: 48.1
+  approx_drive_time_min: 62
+  source: osm_overpass:piste:type=nordic
+- name: Loipe Stetten am kalten Markt
+  country: UNK
+  lat: 48.1094516
+  lon: 9.1102733
+  distance_km: 48.2
+  approx_drive_time_min: 62
+  source: osm_overpass:piste:type=nordic
+- name: Wissbodenloipe
+  country: UNK
+  lat: 47.2503838
+  lon: 9.058504
+  distance_km: 48.3
+  approx_drive_time_min: 62
+  source: osm_overpass:piste:type=nordic
+- name: Säntisloipe
+  country: UNK
+  lat: 47.2451882
+  lon: 9.2438661
+  distance_km: 48.4
+  approx_drive_time_min: 63
+  source: osm_overpass:piste:type=nordic
+- name: Deutsche Bank Loipe
+  country: UNK
+  lat: 48.0380855
+  lon: 8.8028596
+  distance_km: 48.8
+  approx_drive_time_min: 63
+  source: osm_overpass:piste:type=nordic
+- name: Mahlstetter Loipe
+  country: UNK
+  lat: 48.0647127
+  lon: 8.8325493
+  distance_km: 50.1
+  approx_drive_time_min: 65
+  source: osm_overpass:piste:type=nordic
+- name: Dürbheimer Loipe
+  country: UNK
+  lat: 48.070371
+  lon: 8.8042746
+  distance_km: 51.7
+  approx_drive_time_min: 67
+  source: osm_overpass:piste:type=nordic
+- name: Spaichinger Loipe
+  country: UNK
+  lat: 48.0799036
+  lon: 8.7889638
+  distance_km: 53.2
+  approx_drive_time_min: 69
+  source: osm_overpass:piste:type=nordic
+- name: Loipe Hochberg leicht 3,8 km
+  country: UNK
+  lat: 48.1554661
+  lon: 9.2526915
+  distance_km: 53.4
+  approx_drive_time_min: 69
+  source: osm_overpass:piste:type=nordic
+- name: Loipe Munzenriet
+  country: UNK
+  lat: 47.1984761
+  lon: 9.3517183
+  distance_km: 54.9
+  approx_drive_time_min: 71
+  source: osm_overpass:piste:type=nordic
+- name: Böttinger Loipe
+  country: UNK
+  lat: 48.0997744
+  lon: 8.7854212
+  distance_km: 55.2
+  approx_drive_time_min: 71
+  source: osm_overpass:piste:type=nordic
+- name: Familienloipe
+  country: UNK
+  lat: 47.7164228
+  lon: 9.9105777
+  distance_km: 55.2
+  approx_drive_time_min: 71
+  source: osm_overpass:piste:type=nordic
+- name: Ratzenrieder Familienloipe
+  country: UNK
+  lat: 47.7165515
+  lon: 9.9105777
+  distance_km: 55.2
+  approx_drive_time_min: 71
+  source: osm_overpass:piste:type=nordic
+- name: Ratzenrieder Loipe
+  country: UNK
+  lat: 47.7170594
+  lon: 9.9107957
+  distance_km: 55.2
+  approx_drive_time_min: 71
+  source: osm_overpass:piste:type=nordic
+- name: Loipe Immenried
+  country: UNK
+  lat: 47.8092623
+  lon: 9.8895309
+  distance_km: 55.3
+  approx_drive_time_min: 72
+  source: osm_overpass:piste:type=nordic
+- name: Spaichinger Loipe
+  country: UNK
+  lat: 48.0938402
+  lon: 8.767001
+  distance_km: 55.4
+  approx_drive_time_min: 72
+  source: osm_overpass:piste:type=nordic
+- name: Panoramaloipe
+  country: UNK
+  lat: 47.783234
+  lon: 9.9072708
+  distance_km: 55.9
+  approx_drive_time_min: 72
+  source: osm_overpass:piste:type=nordic
+- name: Panoramaloipe
+  country: UNK
+  lat: 47.7165485
+  lon: 9.923569
+  distance_km: 56.1
+  approx_drive_time_min: 73
+  source: osm_overpass:piste:type=nordic
+- name: Ratzenrieder Panoramaloipe
+  country: UNK
+  lat: 47.7165485
+  lon: 9.923569
+  distance_km: 56.1
+  approx_drive_time_min: 73
+  source: osm_overpass:piste:type=nordic
+- name: Loipe Guldenen
+  country: UNK
+  lat: 47.2832277
+  lon: 8.7023341
+  distance_km: 56.5
+  approx_drive_time_min: 73
+  source: osm_overpass:piste:type=nordic
+- name: Gosheimer Loipe
+  country: UNK
+  lat: 48.1165219
+  lon: 8.7836983
+  distance_km: 56.9
+  approx_drive_time_min: 73
+  source: osm_overpass:piste:type=nordic
+- name: Bubsheimer Loipe
+  country: UNK
+  lat: 48.1295352
+  lon: 8.8129032
+  distance_km: 57.0
+  approx_drive_time_min: 74
+  source: osm_overpass:piste:type=nordic
+- name: Loipe Oetwil-Hombrechtikon
+  country: UNK
+  lat: 47.2590796
+  lon: 8.7358869
+  distance_km: 57.1
+  approx_drive_time_min: 74
+  source: osm_overpass:piste:type=nordic
+- name: Verbindungsloipe Hochwacht
+  country: UNK
+  lat: 47.2791541
+  lon: 8.6938208
+  distance_km: 57.3
+  approx_drive_time_min: 74
+  source: osm_overpass:piste:type=nordic
+- name: Wehinger Loipe
+  country: UNK
+  lat: 48.1231696
+  lon: 8.7826632
+  distance_km: 57.5
+  approx_drive_time_min: 74
+  source: osm_overpass:piste:type=nordic
+- name: Verbindungsloipe Ratzenried - Göttlishofen
+  country: UNK
+  lat: 47.7223794
+  lon: 9.9462098
+  distance_km: 57.9
+  approx_drive_time_min: 75
+  source: osm_overpass:piste:type=nordic
+- name: Christazhofener Loipe
+  country: UNK
+  lat: 47.719324
+  lon: 9.954504
+  distance_km: 58.5
+  approx_drive_time_min: 76
+  source: osm_overpass:piste:type=nordic
+- name: Verbindungsloipe Christazhofen - Eisenharz
+  country: UNK
+  lat: 47.7021778
+  lon: 9.9621361
+  distance_km: 58.9
+  approx_drive_time_min: 76
+  source: osm_overpass:piste:type=nordic
+- name: Eisenharzer Dorfloipe
+  country: UNK
+  lat: 47.6856753
+  lon: 9.9637561
+  distance_km: 59.0
+  approx_drive_time_min: 76
+  source: osm_overpass:piste:type=nordic
+- name: Eisenharzer Moosloipe
+  country: UNK
+  lat: 47.6850073
+  lon: 9.9745237
+  distance_km: 59.8
+  approx_drive_time_min: 77
+  source: osm_overpass:piste:type=nordic
+- name: Verbindung Simmerberger Loipe
+  country: UNK
+  lat: 47.5835704
+  lon: 9.9616028
+  distance_km: 59.8
+  approx_drive_time_min: 77
+  source: osm_overpass:piste:type=nordic
+- name: Hopfener Loipe
+  country: UNK
+  lat: 47.5683207
+  lon: 9.9667413
+  distance_km: 60.5
+  approx_drive_time_min: 78
+  source: osm_overpass:piste:type=nordic
+- name: Verbindung Stiefenhofener Loipe
+  country: UNK
+  lat: 47.5747037
+  lon: 9.9737405
+  distance_km: 60.9
+  approx_drive_time_min: 79
+  source: osm_overpass:piste:type=nordic
+- name: Dorfloipe
+  country: UNK
+  lat: 47.4191077
+  lon: 9.8935574
+  distance_km: 61.1
+  approx_drive_time_min: 79
+  source: osm_overpass:piste:type=nordic
+- name: Loipe 2
+  country: UNK
+  lat: 48.1686351
+  lon: 8.8064119
+  distance_km: 61.1
+  approx_drive_time_min: 79
+  source: osm_overpass:piste:type=nordic
+- name: Stiefenhofener Loipe
+  country: UNK
+  lat: 47.5860938
+  lon: 9.9800572
+  distance_km: 61.1
+  approx_drive_time_min: 79
+  source: osm_overpass:piste:type=nordic
+- name: Loipe 5
+  country: UNK
+  lat: 48.1686656
+  lon: 8.8034284
+  distance_km: 61.2
+  approx_drive_time_min: 79
+  source: osm_overpass:piste:type=nordic
+- name: Loipe Andelsbuch
+  country: UNK
+  lat: 47.4123461
+  lon: 9.8907114
+  distance_km: 61.2
+  approx_drive_time_min: 79
+  source: osm_overpass:piste:type=nordic
+- name: Loipe Trossingen
+  country: UNK
+  lat: 48.0880734
+  lon: 8.6272629
+  distance_km: 61.3
+  approx_drive_time_min: 79
+  source: osm_overpass:piste:type=nordic
+- name: Loipe 1
+  country: UNK
+  lat: 48.1715251
+  lon: 8.8056298
+  distance_km: 61.4
+  approx_drive_time_min: 79
+  source: osm_overpass:piste:type=nordic
+- name: Loipe 4
+  country: UNK
+  lat: 48.1704275
+  lon: 8.8026339
+  distance_km: 61.4
+  approx_drive_time_min: 79
+  source: osm_overpass:piste:type=nordic
+- name: Loipe 3
+  country: UNK
+  lat: 48.1704651
+  lon: 8.7998945
+  distance_km: 61.5
+  approx_drive_time_min: 79
+  source: osm_overpass:piste:type=nordic
+- name: Trainings Loipe
+  country: UNK
+  lat: 47.5966509
+  lon: 9.9871989
+  distance_km: 61.5
+  approx_drive_time_min: 79
+  source: osm_overpass:piste:type=nordic
+- name: Verbindung Trainings Loipe
+  country: UNK
+  lat: 47.5948836
+  lon: 9.9867287
+  distance_km: 61.5
+  approx_drive_time_min: 79
+  source: osm_overpass:piste:type=nordic
+- name: Loipe Wälderschanze
+  country: UNK
+  lat: 47.4067711
+  lon: 9.8905961
+  distance_km: 61.5
+  approx_drive_time_min: 80
+  source: osm_overpass:piste:type=nordic
+- name: Ochsenberg-Loipe
+  country: UNK
+  lat: 48.2283195
+  lon: 8.997915
+  distance_km: 62.6
+  approx_drive_time_min: 81
+  source: osm_overpass:piste:type=nordic
+- name: Schweineburgloipe
+  country: UNK
+  lat: 47.6698395
+  lon: 10.0172639
+  distance_km: 63.0
+  approx_drive_time_min: 81
+  source: osm_overpass:piste:type=nordic
+- name: Hörnleloipe
+  country: UNK
+  lat: 48.2112144
+  lon: 8.8821036
+  distance_km: 63.2
+  approx_drive_time_min: 82
+  source: osm_overpass:piste:type=nordic
+- name: Rotmoosloipe
+  country: UNK
+  lat: 47.6988592
+  lon: 10.0213354
+  distance_km: 63.3
+  approx_drive_time_min: 82
+  source: osm_overpass:piste:type=nordic
+- name: Verbindungsloipe Langlaufstadion - Rotmoos
+  country: UNK
+  lat: 47.6843636
+  lon: 10.0246972
+  distance_km: 63.6
+  approx_drive_time_min: 82
+  source: osm_overpass:piste:type=nordic
+- name: Zustieg Ochsenberg-Lerchenfeld Loipen
+  country: UNK
+  lat: 48.238244
+  lon: 9.0035645
+  distance_km: 63.6
+  approx_drive_time_min: 82
+  source: osm_overpass:piste:type=nordic
+- name: Flutlicht Trainingsloipe (beschneit)
+  country: UNK
+  lat: 47.6769419
+  lon: 10.0270933
+  distance_km: 63.7
+  approx_drive_time_min: 82
+  source: osm_overpass:piste:type=nordic
+- name: Flutlicht Wettkampfloipe
+  country: UNK
+  lat: 47.6759697
+  lon: 10.0263066
+  distance_km: 63.7
+  approx_drive_time_min: 82
+  source: osm_overpass:piste:type=nordic
+- name: Schweineburgloipe Start
+  country: UNK
+  lat: 47.677218
+  lon: 10.0272382
+  distance_km: 63.7
+  approx_drive_time_min: 82
+  source: osm_overpass:piste:type=nordic
+- name: Start Trainingsloipe
+  country: UNK
+  lat: 47.6769442
+  lon: 10.0271873
+  distance_km: 63.7
+  approx_drive_time_min: 82
+  source: osm_overpass:piste:type=nordic
+- name: Start Wettkampfloipe
+  country: UNK
+  lat: 47.6768995
+  lon: 10.0270048
+  distance_km: 63.7
+  approx_drive_time_min: 82
+  source: osm_overpass:piste:type=nordic
+- name: Nachtloipe
+  country: UNK
+  lat: 48.2517194
+  lon: 9.1778963
+  distance_km: 63.8
+  approx_drive_time_min: 82
+  source: osm_overpass:piste:type=nordic
+- name: Rotmoosloipe (Variante 2020/21)
+  country: UNK
+  lat: 47.6995903
+  lon: 10.0272372
+  distance_km: 63.8
+  approx_drive_time_min: 82
+  source: osm_overpass:piste:type=nordic
+- name: Degerfeld-Loipe
+  country: UNK
+  lat: 48.2481731
+  lon: 9.0586621
+  distance_km: 64.0
+  approx_drive_time_min: 83
+  source: osm_overpass:piste:type=nordic
+- name: Kohlloipe Neufra
+  country: UNK
+  lat: 48.2540106
+  lon: 9.1482691
+  distance_km: 64.1
+  approx_drive_time_min: 83
+  source: osm_overpass:piste:type=nordic
+- name: Lengersauloipe
+  country: UNK
+  lat: 47.6728135
+  lon: 10.0319095
+  distance_km: 64.1
+  approx_drive_time_min: 83
+  source: osm_overpass:piste:type=nordic
+- name: Verbindungsloipe
+  country: UNK
+  lat: 48.2529837
+  lon: 9.1126478
+  distance_km: 64.1
+  approx_drive_time_min: 83
+  source: osm_overpass:piste:type=nordic
+- name: Bitzer Loipe Skating
+  country: UNK
+  lat: 48.2525659
+  lon: 9.0937343
+  distance_km: 64.2
+  approx_drive_time_min: 83
+  source: osm_overpass:piste:type=nordic
+- name: Hochmoor-Loipe
+  country: UNK
+  lat: 47.4904886
+  lon: 9.984769
+  distance_km: 64.2
+  approx_drive_time_min: 83
+  source: osm_overpass:piste:type=nordic
+- name: Märchenwaldl-Loipe
+  country: UNK
+  lat: 47.7823581
+  lon: 10.021219
+  distance_km: 64.3
+  approx_drive_time_min: 83
+  source: osm_overpass:piste:type=nordic
+- name: Start Rotmoosloipe
+  country: UNK
+  lat: 47.6943732
+  lon: 10.0345302
+  distance_km: 64.3
+  approx_drive_time_min: 83
+  source: osm_overpass:piste:type=nordic
+- name: Dorf-Loipe Hittisau
+  country: UNK
+  lat: 47.4580351
+  lon: 9.9696911
+  distance_km: 64.4
+  approx_drive_time_min: 83
+  source: osm_overpass:piste:type=nordic
+- name: Heersberg-Loipe
+  country: UNK
+  lat: 48.2357726
+  lon: 8.9442717
+  distance_km: 64.4
+  approx_drive_time_min: 83
+  source: osm_overpass:piste:type=nordic
+- name: Lerchenfeld-Loipe
+  country: UNK
+  lat: 48.2442355
+  lon: 8.990336
+  distance_km: 64.5
+  approx_drive_time_min: 83
+  source: osm_overpass:piste:type=nordic
+- name: Brand-Loipe Hittisau
+  country: UNK
+  lat: 47.4588758
+  lon: 9.9728076
+  distance_km: 64.6
+  approx_drive_time_min: 83
+  source: osm_overpass:piste:type=nordic
+- name: Bitzer Loipe (klassisch)
+  country: UNK
+  lat: 48.2568988
+  lon: 9.1017621
+  distance_km: 64.6
+  approx_drive_time_min: 84
+  source: osm_overpass:piste:type=nordic
+- name: Start Gschwendloipe
+  country: UNK
+  lat: 47.6763294
+  lon: 10.0393048
+  distance_km: 64.6
+  approx_drive_time_min: 84
+  source: osm_overpass:piste:type=nordic
+- name: Hädrich-Loipe
+  country: UNK
+  lat: 47.4917343
+  lon: 9.9929099
+  distance_km: 64.7
+  approx_drive_time_min: 84
+  source: osm_overpass:piste:type=nordic
+- name: Missener-Loipe
+  country: UNK
+  lat: 47.7681721
+  lon: 10.0299949
+  distance_km: 64.7
+  approx_drive_time_min: 84
+  source: osm_overpass:piste:type=nordic
+- name: Fezachloipe-Loipe
+  country: UNK
+  lat: 47.7681721
+  lon: 10.0322859
+  distance_km: 64.8
+  approx_drive_time_min: 84
+  source: osm_overpass:piste:type=nordic
+- name: Verbindungsloipe Gschwend - Maierhöfen start
+  country: UNK
+  lat: 47.6733392
+  lon: 10.0433985
+  distance_km: 65.0
+  approx_drive_time_min: 84
+  source: osm_overpass:piste:type=nordic
+- name: Hörmoos-Loipe
+  country: UNK
+  lat: 47.4902887
+  lon: 9.9987066
+  distance_km: 65.1
+  approx_drive_time_min: 84
+  source: osm_overpass:piste:type=nordic
+- name: Verbindungsloipe Gschwend - Maierhöfen
+  country: UNK
+  lat: 47.6671323
+  lon: 10.0455031
+  distance_km: 65.1
+  approx_drive_time_min: 84
+  source: osm_overpass:piste:type=nordic
+- name: Gschwendloipe
+  country: UNK
+  lat: 47.67951
+  lon: 10.0478984
+  distance_km: 65.3
+  approx_drive_time_min: 84
+  source: osm_overpass:piste:type=nordic
+- name: Riedholzloipe
+  country: UNK
+  lat: 47.6473368
+  lon: 10.048215
+  distance_km: 65.4
+  approx_drive_time_min: 85
+  source: osm_overpass:piste:type=nordic
+- name: Verbindungsloipe Gschwend- Maierhöfen
+  country: UNK
+  lat: 47.6645218
+  lon: 10.0493736
+  distance_km: 65.4
+  approx_drive_time_min: 85
+  source: osm_overpass:piste:type=nordic
+stats:
+  core_count: 21
+  extended_count: 120
+  total_count: 141

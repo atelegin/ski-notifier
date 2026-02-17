@@ -70,9 +70,11 @@ Each point (low/high) is scored 0–100:
 ```
 base = 50
 + clamp(snow_depth_cm, 0..60) × 0.6
-+ clamp(snowfall_cm, 0..30) × 0.4    # fresh snow bonus
++ clamp(snow24_to_9_cm, 0..30) × 0.4 # fresh snow bonus (24h ending at 09:00)
 - max(0, wind_gust - 35) × 0.8       # gusts over 35 km/h
 - max(0, precip - 8) × 1.0           # heavy rain/wet snow
+- min(6, max(0, wind_gust-35) × max(0, precip-8) × 0.15)
+                                    # extra penalty for windy + wet combo
 - max(0, temp - 4) × 3.0             # warm = worse snow
 - max(0, -temp - 18) × 1.0           # extreme cold
 ```
@@ -106,8 +108,54 @@ ski-snow-notifier/
 │   ├── message.py              # Message formatter
 │   ├── telegram.py             # Telegram sender
 │   └── main.py                 # Orchestrator
+│   └── xc_registry.yaml        # Generated XC registry (core + extended)
+│   └── alpine_registry.yaml    # Generated Alpine registry (core + extended)
+├── scripts/
+│   └── build_xc_registry.py    # Builds xc_registry.yaml from resorts.yaml + OSM
+│   └── promote_extended_xc.py  # Promotes extended XC to resorts.yaml
+│   └── build_alpine_registry.py
+│   └── promote_extended_alpine.py
 ├── requirements.txt
 └── README.md
+```
+
+## XC Registry (Core + Extended)
+
+You now have two XC layers:
+
+- `core`: manually curated XC resorts from `ski_notifier/resorts.yaml` (`type: xc`)
+- `extended`: auto-discovered OSM nordic candidates around Konstanz (rough ETA filter)
+
+Regenerate registry:
+
+```bash
+python3 scripts/build_xc_registry.py
+```
+
+Output:
+
+- `ski_notifier/xc_registry.yaml`
+
+Promote extended XC into `resorts.yaml`:
+
+```bash
+python3 scripts/promote_extended_xc.py
+```
+
+Build Alpine registry:
+
+```bash
+python3 scripts/build_alpine_registry.py
+```
+
+Output:
+
+- `ski_notifier/alpine_registry.yaml`
+
+Promote extended Alpine into `resorts.yaml`:
+
+```bash
+python3 scripts/promote_extended_alpine.py
 ```
 
 ## License

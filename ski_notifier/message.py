@@ -109,7 +109,7 @@ def format_resort_weather_line(
 ) -> str:
     """Format single-line weather summary for a resort.
     
-    Format: 🎿 Name — score — 🚗 Nmin — snow24 Ncm, T −X..−Y, wind N, rain N
+    Format: 🎿 Name — score — 🚗 Nmin — snow24 Ncm, T −X..−Y, wind N, precip N
     """
     r = ranked.resort
     s = ranked.score
@@ -139,9 +139,9 @@ def format_resort_weather_line(
         if features.wind_max is not None:
             weather_parts.append(f"wind {features.wind_max:.0f}")
         
-        # Rain
+        # Precipitation (rain/snow equivalent, mm)
         if features.rain_mm >= 0.1:
-            weather_parts.append(f"rain {features.rain_mm:.0f}")
+            weather_parts.append(f"precip {features.rain_mm:.0f}")
         
         # Risk labels
         if features.slush_risk:

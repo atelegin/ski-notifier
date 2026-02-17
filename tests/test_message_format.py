@@ -7,7 +7,13 @@ import pytest
 
 from ski_notifier.features import ResortFeatures, DisciplineWeekly
 from ski_notifier.fetch import PointWeather
-from ski_notifier.message import RankedResort, format_message, format_costs_line, format_discipline_header_line
+from ski_notifier.message import (
+    RankedResort,
+    format_message,
+    format_costs_line,
+    format_discipline_header_line,
+    format_resort_weather_line,
+)
 from ski_notifier.resorts import Costs, Point, Resort
 from ski_notifier.score import ResortScore, PointScore
 
@@ -222,6 +228,26 @@ class TestFormatMessage:
         )
         
         assert "(каша)" in message
+
+    def test_weather_line_uses_precip_label(self):
+        """Weather line uses 'precip' label (not 'rain')."""
+        ranked = make_ranked(make_resort("a"), 80)
+        wet_features = ResortFeatures(
+            snow24_cm=10,
+            snow48_cm=20,
+            overnight_cm=None,
+            rain_mm=13,
+            temp_min=-4,
+            temp_max=-3,
+            wind_max=36,
+            slush_risk=False,
+            rain_risk=False,
+        )
+
+        line = format_resort_weather_line(ranked, wet_features)
+
+        assert "precip 13" in line
+        assert "rain 13" not in line
 
     def test_blocks_spacing(self):
         """Resort blocks are separated by exactly one blank line."""

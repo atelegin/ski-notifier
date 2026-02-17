@@ -123,6 +123,20 @@ class TestPointScore:
         # 50 - 10 = 40
         assert score.score == 40.0
 
+    def test_wind_and_precip_combo_penalty(self):
+        """Windy + wet conditions get an extra combo penalty."""
+        weather = PointWeather(
+            date=date(2025, 1, 15),
+            temp_c_avg_9_16=None,
+            wind_gust_kmh_max_9_16=36,  # 1 over threshold -> -0.8
+            precip_mm_sum_9_16=13,      # 5 over threshold -> -5
+            snow_depth_cm=None,
+            snowfall_cm=None,
+        )
+        score = calculate_point_score(weather)
+        # 50 - 0.8 - 5 - combo(1*5*0.15=0.75) = 43.45 -> 43.5
+        assert score.score == 43.5
+
     def test_ideal_conditions(self):
         """Test ideal skiing conditions."""
         weather = PointWeather(

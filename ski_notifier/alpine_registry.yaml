@@ -1,0 +1,1016 @@
+schema_version: 1
+generated_at_utc: '2026-02-17T11:07:24Z'
+source:
+  core: ski_notifier/resorts.yaml (type=alpine)
+  extended: OpenStreetMap Overpass (piste:type=downhill + landuse=winter_sports)
+  center:
+    name: Konstanz
+    lat: 47.6779
+    lon: 9.1758
+  max_approx_drive_time_min: 150
+  note: Extended list is semi-automatic and needs manual verification before promotion
+    to core.
+core:
+- id: at_schetteregg
+  name: Schetteregg (Bregenzerwald, AT)
+  country: AT
+  drive_time_min_from_konstanz: 75
+  website: https://www.schetteregg.at
+  low_point:
+    label: Schetteregg Talstation
+    lat: 47.4169653
+    lon: 9.9836748
+- id: ch_toggenburg_wildhaus
+  name: Wildhaus-Toggenburg (CH)
+  country: CH
+  drive_time_min_from_konstanz: 83
+  website: https://wildhaus.ch/
+  low_point:
+    label: Wildhaus (Talstation / Parking Bergbahnen)
+    lat: 47.19227
+    lon: 9.345343
+- id: de_scheidegg_alpine
+  name: Scheidegg (Westallgäu, DE) — Alpine
+  country: DE
+  drive_time_min_from_konstanz: 85
+  website: https://www.scheidegg.de/
+  low_point:
+    label: Scheidegg
+    lat: 47.582299
+    lon: 9.851159
+- id: at_laterns_gapfohl
+  name: Laterns–Gapfohl (AT)
+  country: AT
+  drive_time_min_from_konstanz: 85
+  website: https://www.laterns.net
+  low_point:
+    label: Laterns–Gapfohl Talstation
+    lat: 47.2607147903
+    lon: 9.7429389693
+- id: fl_malbun
+  name: Malbun (Liechtenstein)
+  country: FL
+  drive_time_min_from_konstanz: 85
+  website: https://tourismus.li
+  low_point:
+    label: Malbun (village)
+    lat: 47.102
+    lon: 9.608
+- id: ch_toggenburg_chaeserrugg
+  name: Chäserrugg-Toggenburg (Unterwasser, CH)
+  country: CH
+  drive_time_min_from_konstanz: 90
+  website: https://www.chaeserrugg.ch/
+  low_point:
+    label: Unterwasser Talstation Iltiosbahn
+    lat: 47.194664
+    lon: 9.309258
+- id: ch_gruesch_danusa
+  name: Grüsch–Danusa (CH)
+  country: CH
+  drive_time_min_from_konstanz: 90
+  website: https://www.gruesch-danusa.ch
+  low_point:
+    label: Talstation Grüsch-Danusa
+    lat: 46.97265
+    lon: 9.63996
+- id: at_brandnertal
+  name: Brandnertal (Brand/Bürserberg, AT)
+  country: AT
+  drive_time_min_from_konstanz: 90
+  website: https://www.vorarlberg-alpenregion.at/en/brandnertal/
+  low_point:
+    label: Brand (village)
+    lat: 47.111
+    lon: 9.75
+- id: at_boedele
+  name: Bödele (Dornbirn, AT)
+  country: AT
+  drive_time_min_from_konstanz: 93
+  website: https://www.boedele.info
+  low_point:
+    label: Bödele Pass (ski area)
+    lat: 47.410665
+    lon: 9.823666
+- id: ch_toggenburg_alt_st_johann
+  name: Alt St.Johann-Toggenburg (Sellamatt, CH)
+  country: CH
+  drive_time_min_from_konstanz: 95
+  website: https://www.sellamatt.ch/
+  low_point:
+    label: Alt St. Johann (base)
+    lat: 47.193567
+    lon: 9.287353
+- id: de_balderschwang
+  name: Balderschwang (DE)
+  country: DE
+  drive_time_min_from_konstanz: 100
+  website: https://www.skigebiet-balderschwang.de/
+  low_point:
+    label: Schelpenalp bottom station
+    lat: 47.46155
+    lon: 10.11039
+- id: ch_hoch_ybrig
+  name: Hoch-Ybrig (CH)
+  country: CH
+  drive_time_min_from_konstanz: 100
+  website: https://www.hoch-ybrig.ch/
+  low_point:
+    label: Talstation Weglosen (Unteriberg)
+    lat: 46.999857
+    lon: 8.797631
+- id: ch_pizol
+  name: Pizol (Bad Ragaz – Wangs, CH)
+  country: CH
+  drive_time_min_from_konstanz: 100
+  website: https://pizol.com
+  low_point:
+    label: Pizolbahnen Bad Ragaz (Talstation)
+    lat: 47.017142
+    lon: 9.473644
+- id: at_damuels_mellau
+  name: Damüls–Mellau (AT)
+  country: AT
+  drive_time_min_from_konstanz: 100
+  website: https://www.damuels-mellau.at/en/
+  low_point:
+    label: Uga Express Talstation (Damüls)
+    lat: 47.280205
+    lon: 9.89183
+- id: at_diedamskopf
+  name: Diedamskopf (Au–Schoppernau, AT)
+  country: AT
+  drive_time_min_from_konstanz: 100
+  website: https://www.diedamskopf.at
+  low_point:
+    label: Diedamskopf base (Schoppernau)
+    lat: 47.3172
+    lon: 10.0084
+- id: de_feldberg
+  name: Feldberg (Schwarzwald, DE)
+  country: DE
+  drive_time_min_from_konstanz: 105
+  website: https://www.feldberg-erlebnis.de/en
+  low_point:
+    label: Feldberg (base area)
+    lat: 47.862331
+    lon: 8.033947
+- id: de_oberstaufen_steibis
+  name: Oberstaufen (Steibis, DE) — Imbergbahn
+  country: DE
+  drive_time_min_from_konstanz: 108
+  website: https://www.imbergbahn.de
+  low_point:
+    label: Imbergbahn Talstation
+    lat: 47.5207786
+    lon: 10.0231676
+- id: ch_elm
+  name: Elm (CH)
+  country: CH
+  drive_time_min_from_konstanz: 110
+  website: https://www.sportbahnenelm.ch
+  low_point:
+    label: Elm Talstation (approx)
+    lat: 46.91278
+    lon: 9.16167
+- id: at_gargellen
+  name: Gargellen (Montafon, AT)
+  country: AT
+  drive_time_min_from_konstanz: 110
+  website: https://www.gargellen.at
+  low_point:
+    label: Gargellen (village)
+    lat: 46.97088
+    lon: 9.91818
+- id: at_silvretta_montafon
+  name: Silvretta Montafon (AT)
+  country: AT
+  drive_time_min_from_konstanz: 110
+  website: https://www.silvretta-montafon.at/
+  low_point:
+    label: Valisera Bahn Talstation (St. Gallenkirch)
+    lat: 47.0222
+    lon: 9.96459
+- id: ch_braunwald
+  name: Braunwald (CH, car-free)
+  country: CH
+  drive_time_min_from_konstanz: 117
+  website: https://www.braunwald.ch
+  low_point:
+    label: Braunwaldbahn Talstation (Linthal)
+    lat: 46.92861
+    lon: 9.0023
+- id: ch_flumserberg
+  name: Flumserberg (CH)
+  country: CH
+  drive_time_min_from_konstanz: 117
+  website: https://flumserberg.ch
+  low_point:
+    label: Flumserberg (resort area / base)
+    lat: 47.0828508
+    lon: 9.2765894
+- id: ch_arosa_lenzerheide
+  name: Arosa Lenzerheide (CH)
+  country: CH
+  drive_time_min_from_konstanz: 121
+  website: https://arosalenzerheide.swiss/de/Skigebiet/Bergbahnen/Tickets-Tarife-Winter
+  low_point:
+    label: Rothornbahn Talstation (Lenzerheide)
+    lat: 46.726688
+    lon: 9.557816
+- id: ch_laax_flims
+  name: Laax / Flims (CH)
+  country: CH
+  drive_time_min_from_konstanz: 124
+  website: https://www.laax.com
+  low_point:
+    label: Laax
+    lat: 46.8
+    lon: 9.25
+- id: ch_davos_jakobshorn
+  name: Davos (Jakobshorn, CH)
+  country: CH
+  drive_time_min_from_konstanz: 125
+  website: https://www.davos.ch/
+  low_point:
+    label: Jakobshornbahn Talstation (Davos Platz)
+    lat: 46.793993
+    lon: 9.822652
+- id: ch_davos_klosters_parsenn
+  name: Davos-Klosters Parsenn (CH)
+  country: CH
+  drive_time_min_from_konstanz: 125
+  website: https://www.davosklostersmountains.ch/de/mountains/winter/tarife-tickets/ski-regionalpass
+  low_point:
+    label: Parsennbahn / Davos Dorf (near valley station)
+    lat: 46.80885
+    lon: 9.838986
+- id: at_st_anton_am_arlberg
+  name: St. Anton am Arlberg (AT)
+  country: AT
+  drive_time_min_from_konstanz: 125
+  website: https://www.stantonamarlberg.com
+  low_point:
+    label: St. Anton am Arlberg
+    lat: 47.129635
+    lon: 10.268179
+- id: ch_engelberg_brunni
+  name: Engelberg-Brunni (CH)
+  country: CH
+  drive_time_min_from_konstanz: 127
+  website: https://www.brunni.ch/
+  low_point:
+    label: Brunni Talstation (Engelberg)
+    lat: 46.820351
+    lon: 8.403658
+- id: ch_engelberg_titlis
+  name: Engelberg-Titlis (Trübsee area, CH)
+  country: CH
+  drive_time_min_from_konstanz: 127
+  website: https://www.engelberg.ch/en/cable-cars/prices-winter/
+  low_point:
+    label: Titlis Talstation (Engelberg)
+    lat: 46.819439
+    lon: 8.402895
+- id: at_lech_zuers
+  name: Lech–Zürs (AT) — Ski Arlberg
+  country: AT
+  drive_time_min_from_konstanz: 135
+  website: https://www.lechzuers.com
+  low_point:
+    label: Lech
+    lat: 47.2
+    lon: 10.15
+extended:
+- name: Bischofsberg
+  country: UNK
+  lat: 47.4332191
+  lon: 9.5315288
+  distance_km: 38.1
+  approx_drive_time_min: 51
+  source: osm_overpass:downhill+winter_sports
+- name: Skilift Steg
+  country: UNK
+  lat: 47.3393507
+  lon: 8.9346887
+  distance_km: 41.8
+  approx_drive_time_min: 56
+  source: osm_overpass:downhill+winter_sports
+- name: Skihang
+  country: UNK
+  lat: 47.9934274
+  lon: 8.8549934
+  distance_km: 42.5
+  approx_drive_time_min: 57
+  source: osm_overpass:downhill+winter_sports
+- name: Übungs-Skihang
+  country: UNK
+  lat: 47.9934489
+  lon: 8.8547565
+  distance_km: 42.5
+  approx_drive_time_min: 57
+  source: osm_overpass:downhill+winter_sports
+- name: Hemberg
+  country: UNK
+  lat: 47.288037
+  lon: 9.1785165
+  distance_km: 43.4
+  approx_drive_time_min: 58
+  source: osm_overpass:downhill+winter_sports
+- name: Skilift Ghöch
+  country: UNK
+  lat: 47.3329874
+  lon: 8.9006
+  distance_km: 43.6
+  approx_drive_time_min: 58
+  source: osm_overpass:downhill+winter_sports
+- name: Skilift Fischenthal
+  country: UNK
+  lat: 47.3202202
+  lon: 8.9294249
+  distance_km: 43.9
+  approx_drive_time_min: 59
+  source: osm_overpass:downhill+winter_sports
+- name: Skilift Bäretswil
+  country: UNK
+  lat: 47.339186
+  lon: 8.8646253
+  distance_km: 44.3
+  approx_drive_time_min: 59
+  source: osm_overpass:downhill+winter_sports
+- name: Skilift Oberholz-Farner
+  country: UNK
+  lat: 47.2862838
+  lon: 8.9473651
+  distance_km: 46.8
+  approx_drive_time_min: 63
+  source: osm_overpass:downhill+winter_sports
+- name: Ebenalp-Horn
+  country: UNK
+  lat: 47.2884349
+  lon: 9.4148912
+  distance_km: 46.9
+  approx_drive_time_min: 63
+  source: osm_overpass:downhill+winter_sports
+- name: Skilift Berger Höhe
+  country: UNK
+  lat: 47.6861167
+  lon: 9.8174469
+  distance_km: 48.0
+  approx_drive_time_min: 64
+  source: osm_overpass:downhill+winter_sports
+- name: Skilift Bildhaus
+  country: UNK
+  lat: 47.2491569
+  lon: 9.0338839
+  distance_km: 48.9
+  approx_drive_time_min: 65
+  source: osm_overpass:downhill+winter_sports
+- name: Wolzenalp
+  country: UNK
+  lat: 47.2271086
+  lon: 9.1576517
+  distance_km: 50.1
+  approx_drive_time_min: 67
+  source: osm_overpass:downhill+winter_sports
+- name: Skihang Hausen
+  country: UNK
+  lat: 48.0433372
+  lon: 8.7172048
+  distance_km: 53.1
+  approx_drive_time_min: 71
+  source: osm_overpass:downhill+winter_sports
+- name: Hagenberg Sulzberg-Thal
+  country: UNK
+  lat: 47.5331032
+  lon: 9.8912932
+  distance_km: 56.0
+  approx_drive_time_min: 75
+  source: osm_overpass:downhill+winter_sports
+- name: Skigebiet Awengen
+  country: UNK
+  lat: 48.019245
+  lon: 9.830083
+  distance_km: 61.8
+  approx_drive_time_min: 83
+  source: osm_overpass:downhill+winter_sports
+- name: Skilift Malbun
+  country: UNK
+  lat: 47.146918
+  lon: 9.430846
+  distance_km: 62.1
+  approx_drive_time_min: 83
+  source: osm_overpass:downhill+winter_sports
+- name: Kerenzerberg
+  country: UNK
+  lat: 47.1086929
+  lon: 9.1282995
+  distance_km: 63.4
+  approx_drive_time_min: 85
+  source: osm_overpass:downhill+winter_sports
+- name: Skiweg
+  country: UNK
+  lat: 47.480854
+  lon: 9.9886115
+  distance_km: 64.8
+  approx_drive_time_min: 87
+  source: osm_overpass:downhill+winter_sports
+- name: Skilift Bennau
+  country: UNK
+  lat: 47.1432459
+  lon: 8.7318124
+  distance_km: 68.2
+  approx_drive_time_min: 91
+  source: osm_overpass:downhill+winter_sports
+- name: Skilift Schnabelsberg
+  country: UNK
+  lat: 47.1410997
+  lon: 8.7376466
+  distance_km: 68.2
+  approx_drive_time_min: 91
+  source: osm_overpass:downhill+winter_sports
+- name: Friherrenberg
+  country: UNK
+  lat: 47.1256357
+  lon: 8.7629492
+  distance_km: 68.8
+  approx_drive_time_min: 92
+  source: osm_overpass:downhill+winter_sports
+- name: Skigebiet Hennenstein
+  country: UNK
+  lat: 48.2977173
+  lon: 9.2348954
+  distance_km: 69.1
+  approx_drive_time_min: 92
+  source: osm_overpass:downhill+winter_sports
+- name: Skilift Mugi
+  country: UNK
+  lat: 47.0625084
+  lon: 9.0468112
+  distance_km: 69.1
+  approx_drive_time_min: 93
+  source: osm_overpass:downhill+winter_sports
+- name: Skilift Menzingen
+  country: UNK
+  lat: 47.1821636
+  lon: 8.5920991
+  distance_km: 70.5
+  approx_drive_time_min: 94
+  source: osm_overpass:downhill+winter_sports
+- name: Gohrersberg – Kreuzthal
+  country: UNK
+  lat: 47.7205911
+  lon: 10.1203695
+  distance_km: 70.8
+  approx_drive_time_min: 95
+  source: osm_overpass:downhill+winter_sports
+- name: Skilifte Thaler Höhe
+  country: UNK
+  lat: 47.5820344
+  lon: 10.1135924
+  distance_km: 71.1
+  approx_drive_time_min: 95
+  source: osm_overpass:downhill+winter_sports
+- name: Skilift Häusern
+  country: UNK
+  lat: 47.7458316
+  lon: 8.1630322
+  distance_km: 76.1
+  approx_drive_time_min: 102
+  source: osm_overpass:downhill+winter_sports
+- name: Skilift Brunni
+  country: UNK
+  lat: 47.0406749
+  lon: 8.7056847
+  distance_km: 79.2
+  approx_drive_time_min: 106
+  source: osm_overpass:downhill+winter_sports
+- name: Ski-Gleitweg Gottesacke
+  country: UNK
+  lat: 47.3559201
+  lon: 10.1191492
+  distance_km: 79.4
+  approx_drive_time_min: 106
+  source: osm_overpass:downhill+winter_sports
+- name: Ski-Gleitweg Gottesacker
+  country: UNK
+  lat: 47.3559201
+  lon: 10.1191492
+  distance_km: 79.4
+  approx_drive_time_min: 106
+  source: osm_overpass:downhill+winter_sports
+- name: Ibergeregg-Grossenboden
+  country: UNK
+  lat: 47.0182324
+  lon: 8.7282372
+  distance_km: 80.7
+  approx_drive_time_min: 108
+  source: osm_overpass:downhill+winter_sports
+- name: 6 Alpe-Eck
+  country: UNK
+  lat: 47.5047218
+  lon: 10.2222469
+  distance_km: 80.8
+  approx_drive_time_min: 108
+  source: osm_overpass:downhill+winter_sports
+- name: Ski-Gleitweg Küren
+  country: UNK
+  lat: 47.3471855
+  lon: 10.1341381
+  distance_km: 80.8
+  approx_drive_time_min: 108
+  source: osm_overpass:downhill+winter_sports
+- name: 1b Umfahrung Fäßler's Berg
+  country: UNK
+  lat: 47.4979913
+  lon: 10.2239256
+  distance_km: 81.1
+  approx_drive_time_min: 109
+  source: osm_overpass:downhill+winter_sports
+- name: Kalte Herberge
+  country: UNK
+  lat: 47.9981949
+  lon: 8.1984436
+  distance_km: 81.2
+  approx_drive_time_min: 109
+  source: osm_overpass:downhill+winter_sports
+- name: Ibergeregg-Handgruobi
+  country: UNK
+  lat: 47.0131644
+  lon: 8.7207168
+  distance_km: 81.5
+  approx_drive_time_min: 109
+  source: osm_overpass:downhill+winter_sports
+- name: Heuberg Arena/Walmendingerhorn
+  country: UNK
+  lat: 47.3362965
+  lon: 10.1453048
+  distance_km: 82.1
+  approx_drive_time_min: 110
+  source: osm_overpass:downhill+winter_sports
+- name: Skiweg Parsenn Heuberg
+  country: UNK
+  lat: 47.3484678
+  lon: 10.1619634
+  distance_km: 82.6
+  approx_drive_time_min: 111
+  source: osm_overpass:downhill+winter_sports
+- name: Skiweg Heuberg Zaferna
+  country: UNK
+  lat: 47.3319624
+  lon: 10.1532784
+  distance_km: 82.9
+  approx_drive_time_min: 111
+  source: osm_overpass:downhill+winter_sports
+- name: Skiweg Zaferna Heuberg
+  country: UNK
+  lat: 47.3310983
+  lon: 10.152634
+  distance_km: 82.9
+  approx_drive_time_min: 111
+  source: osm_overpass:downhill+winter_sports
+- name: Skiweg Mittelberg Zaferna
+  country: UNK
+  lat: 47.3236406
+  lon: 10.1513906
+  distance_km: 83.2
+  approx_drive_time_min: 111
+  source: osm_overpass:downhill+winter_sports
+- name: Ski lift Schwärzenbach
+  country: UNK
+  lat: 47.3318525
+  lon: 10.1627385
+  distance_km: 83.5
+  approx_drive_time_min: 112
+  source: osm_overpass:downhill+winter_sports
+- name: Skilift Mastrils
+  country: UNK
+  lat: 46.9659812
+  lon: 9.5358266
+  distance_km: 83.7
+  approx_drive_time_min: 112
+  source: osm_overpass:downhill+winter_sports
+- name: Kuchl + Körb/Jägeralpe
+  country: UNK
+  lat: 47.2630874
+  lon: 10.1315858
+  distance_km: 85.4
+  approx_drive_time_min: 114
+  source: osm_overpass:downhill+winter_sports
+- name: Alpe Schrattenwang
+  country: UNK
+  lat: 47.3783864
+  lon: 10.2393126
+  distance_km: 86.5
+  approx_drive_time_min: 116
+  source: osm_overpass:downhill+winter_sports
+- name: Rigi-Seebodenalp
+  country: UNK
+  lat: 47.0629958
+  lon: 8.4695387
+  distance_km: 86.6
+  approx_drive_time_min: 116
+  source: osm_overpass:downhill+winter_sports
+- name: Skigebiet Spitzenberg und Köpfle
+  country: UNK
+  lat: 47.8023425
+  lon: 8.0293947
+  distance_km: 86.8
+  approx_drive_time_min: 116
+  source: osm_overpass:downhill+winter_sports
+- name: Skifahren Rigi Staffel
+  country: UNK
+  lat: 47.0480867
+  lon: 8.482971
+  distance_km: 87.3
+  approx_drive_time_min: 117
+  source: osm_overpass:downhill+winter_sports
+- name: Gratalp
+  country: UNK
+  lat: 47.0462352
+  lon: 8.4631421
+  distance_km: 88.4
+  approx_drive_time_min: 118
+  source: osm_overpass:downhill+winter_sports
+- name: Skilift Rigi-Kaltbad Gratalp
+  country: UNK
+  lat: 47.0463501
+  lon: 8.4634652
+  distance_km: 88.4
+  approx_drive_time_min: 118
+  source: osm_overpass:downhill+winter_sports
+- name: Sulzberg
+  country: UNK
+  lat: 47.6543045
+  lon: 10.3561304
+  distance_km: 88.4
+  approx_drive_time_min: 118
+  source: osm_overpass:downhill+winter_sports
+- name: Kristberg-Silbertal
+  country: UNK
+  lat: 47.1019027
+  lon: 9.9880957
+  distance_km: 88.6
+  approx_drive_time_min: 119
+  source: osm_overpass:downhill+winter_sports
+- name: Heini-Klopfer-Skiflugschanze
+  country: UNK
+  lat: 47.3754638
+  lon: 10.269484
+  distance_km: 88.7
+  approx_drive_time_min: 119
+  source: osm_overpass:downhill+winter_sports
+- name: Seealplift
+  country: UNK
+  lat: 47.4099827
+  lon: 10.3126957
+  distance_km: 90.4
+  approx_drive_time_min: 121
+  source: osm_overpass:downhill+winter_sports
+- name: Skitunnel
+  country: UNK
+  lat: 47.0705835
+  lon: 9.977102
+  distance_km: 90.6
+  approx_drive_time_min: 121
+  source: osm_overpass:downhill+winter_sports
+- name: Nebelhorn-Gipfelskiweg
+  country: UNK
+  lat: 47.4213474
+  lon: 10.344681
+  distance_km: 92.2
+  approx_drive_time_min: 123
+  source: osm_overpass:downhill+winter_sports
+- name: Ochsenalpe
+  country: UNK
+  lat: 47.5076708
+  lon: 10.4048878
+  distance_km: 94.1
+  approx_drive_time_min: 126
+  source: osm_overpass:downhill+winter_sports
+- name: Skitunnel
+  country: UNK
+  lat: 47.848573
+  lon: 7.9367816
+  distance_km: 94.5
+  approx_drive_time_min: 127
+  source: osm_overpass:downhill+winter_sports
+- name: Skischulhang
+  country: UNK
+  lat: 47.8485908
+  lon: 7.9346583
+  distance_km: 94.7
+  approx_drive_time_min: 127
+  source: osm_overpass:downhill+winter_sports
+- name: Eggberge
+  country: UNK
+  lat: 46.9028249
+  lon: 8.6529581
+  distance_km: 94.8
+  approx_drive_time_min: 127
+  source: osm_overpass:downhill+winter_sports
+- name: Wiedhagalpe
+  country: UNK
+  lat: 47.5107485
+  lon: 10.4184967
+  distance_km: 95.0
+  approx_drive_time_min: 127
+  source: osm_overpass:downhill+winter_sports
+- name: Knödel - Alpe Rauz
+  country: UNK
+  lat: 47.1352978
+  lon: 10.1803316
+  distance_km: 96.7
+  approx_drive_time_min: 129
+  source: osm_overpass:downhill+winter_sports
+- name: Via Alp Muletg
+  country: UNK
+  lat: 46.8025296
+  lon: 9.1832867
+  distance_km: 97.3
+  approx_drive_time_min: 130
+  source: osm_overpass:downhill+winter_sports
+- name: Skilift Donnstetten
+  country: UNK
+  lat: 48.5154941
+  lon: 9.5574769
+  distance_km: 97.4
+  approx_drive_time_min: 130
+  source: osm_overpass:downhill+winter_sports
+- name: Alp Dado
+  country: UNK
+  lat: 46.8041037
+  lon: 9.0604205
+  distance_km: 97.6
+  approx_drive_time_min: 131
+  source: osm_overpass:downhill+winter_sports
+- name: Klewenalp - Stockhütte
+  country: UNK
+  lat: 46.9303343
+  lon: 8.4887851
+  distance_km: 97.9
+  approx_drive_time_min: 131
+  source: osm_overpass:downhill+winter_sports
+- name: Skikindergarten
+  country: UNK
+  lat: 47.8861884
+  lon: 7.8940143
+  distance_km: 98.5
+  approx_drive_time_min: 132
+  source: osm_overpass:downhill+winter_sports
+- name: Funslope Alp Dado - Parli
+  country: UNK
+  lat: 46.7912932
+  lon: 9.0803886
+  distance_km: 98.8
+  approx_drive_time_min: 132
+  source: osm_overpass:downhill+winter_sports
+- name: Gföllberglift
+  country: UNK
+  lat: 47.2611893
+  lon: 10.3363248
+  distance_km: 98.8
+  approx_drive_time_min: 132
+  source: osm_overpass:downhill+winter_sports
+- name: Fideriser Heuberge
+  country: UNK
+  lat: 46.8659098
+  lon: 9.7275875
+  distance_km: 99.4
+  approx_drive_time_min: 133
+  source: osm_overpass:downhill+winter_sports
+- name: Skigebiet Halde
+  country: UNK
+  lat: 48.5200659
+  lon: 9.628143
+  distance_km: 99.5
+  approx_drive_time_min: 133
+  source: osm_overpass:downhill+winter_sports
+- name: Nesselwang - Alpspitzbahnen
+  country: UNK
+  lat: 47.6079704
+  lon: 10.5013633
+  distance_km: 99.6
+  approx_drive_time_min: 133
+  source: osm_overpass:downhill+winter_sports
+- name: Skilift Beuren
+  country: UNK
+  lat: 48.5603462
+  lon: 9.4048545
+  distance_km: 99.6
+  approx_drive_time_min: 133
+  source: osm_overpass:downhill+winter_sports
+- name: Skigebiet Münstertal-Wieden
+  country: UNK
+  lat: 47.84227
+  lon: 7.8635016
+  distance_km: 99.8
+  approx_drive_time_min: 134
+  source: osm_overpass:downhill+winter_sports
+- name: Alpina-Parkplatz
+  country: UNK
+  lat: 46.818379
+  lon: 9.6040418
+  distance_km: 100.9
+  approx_drive_time_min: 135
+  source: osm_overpass:downhill+winter_sports
+- name: Jochalp
+  country: UNK
+  lat: 46.8148092
+  lon: 9.5942643
+  distance_km: 101.0
+  approx_drive_time_min: 135
+  source: osm_overpass:downhill+winter_sports
+- name: Furgglis;Jochalp
+  country: UNK
+  lat: 46.8126891
+  lon: 9.592562
+  distance_km: 101.2
+  approx_drive_time_min: 135
+  source: osm_overpass:downhill+winter_sports
+- name: Casanna Alp - Schifer
+  country: UNK
+  lat: 46.8754719
+  lon: 9.8188681
+  distance_km: 101.6
+  approx_drive_time_min: 136
+  source: osm_overpass:downhill+winter_sports
+- name: Skiweg zum Tiroler Stadl
+  country: UNK
+  lat: 47.5601693
+  lon: 10.5527108
+  distance_km: 104.0
+  approx_drive_time_min: 139
+  source: osm_overpass:downhill+winter_sports
+- name: Gruobenalp
+  country: UNK
+  lat: 46.8563951
+  lon: 9.8387246
+  distance_km: 104.1
+  approx_drive_time_min: 139
+  source: osm_overpass:downhill+winter_sports
+- name: Skizentrum Pfronten
+  country: UNK
+  lat: 47.5602453
+  lon: 10.5567777
+  distance_km: 104.3
+  approx_drive_time_min: 140
+  source: osm_overpass:downhill+winter_sports
+- name: Schwarzseealp
+  country: UNK
+  lat: 46.8561787
+  lon: 9.8486624
+  distance_km: 104.5
+  approx_drive_time_min: 140
+  source: osm_overpass:downhill+winter_sports
+- name: Hirtenhütte - Schwarzseealp
+  country: UNK
+  lat: 46.8557617
+  lon: 9.8483513
+  distance_km: 104.6
+  approx_drive_time_min: 140
+  source: osm_overpass:downhill+winter_sports
+- name: Weisshorn-Carmennaberg
+  country: UNK
+  lat: 46.7877852
+  lon: 9.6368466
+  distance_km: 104.9
+  approx_drive_time_min: 140
+  source: osm_overpass:downhill+winter_sports
+- name: Carmenna Berg-Carmenna Mitte
+  country: UNK
+  lat: 46.7859951
+  lon: 9.6367945
+  distance_km: 105.1
+  approx_drive_time_min: 141
+  source: osm_overpass:downhill+winter_sports
+- name: Bannalp
+  country: UNK
+  lat: 46.871454
+  lon: 8.4392566
+  distance_km: 105.5
+  approx_drive_time_min: 141
+  source: osm_overpass:downhill+winter_sports
+- name: Carmennaberg-Carmennahütte
+  country: UNK
+  lat: 46.7818822
+  lon: 9.6411379
+  distance_km: 105.6
+  approx_drive_time_min: 141
+  source: osm_overpass:downhill+winter_sports
+- name: Skisafari Tschiertschen, Lenzerheid, Arosa
+  country: UNK
+  lat: 46.7754384
+  lon: 9.6132661
+  distance_km: 105.6
+  approx_drive_time_min: 141
+  source: osm_overpass:downhill+winter_sports
+- name: Skilift Selfranga
+  country: UNK
+  lat: 46.8592414
+  lon: 9.8881845
+  distance_km: 105.7
+  approx_drive_time_min: 141
+  source: osm_overpass:downhill+winter_sports
+- name: Carmenna Mitte-Briggerhang Traverse-Ried Berg
+  country: UNK
+  lat: 46.7840427
+  lon: 9.6561205
+  distance_km: 105.8
+  approx_drive_time_min: 142
+  source: osm_overpass:downhill+winter_sports
+- name: Gondelbahn Kulm Berg-Tschuggenhütte-Ried Tal
+  country: UNK
+  lat: 46.7851806
+  lon: 9.6624582
+  distance_km: 105.8
+  approx_drive_time_min: 142
+  source: osm_overpass:downhill+winter_sports
+- name: Schwarzseealp - Klosters
+  country: UNK
+  lat: 46.8513977
+  lon: 9.8718297
+  distance_km: 105.9
+  approx_drive_time_min: 142
+  source: osm_overpass:downhill+winter_sports
+- name: Ried Berg-Gondelbahn Kulm Tal
+  country: UNK
+  lat: 46.7830616
+  lon: 9.660973
+  distance_km: 106.0
+  approx_drive_time_min: 142
+  source: osm_overpass:downhill+winter_sports
+- name: SBP Berg-Oberer Carmennahang-Unterer Carmennahang-Zufahrt SBP Tal
+  country: UNK
+  lat: 46.7764851
+  lon: 9.640258
+  distance_km: 106.2
+  approx_drive_time_min: 142
+  source: osm_overpass:downhill+winter_sports
+- name: Herrenbächli - Hundschopf - Alpenblick
+  country: UNK
+  lat: 46.7707098
+  lon: 9.6367635
+  distance_km: 106.7
+  approx_drive_time_min: 143
+  source: osm_overpass:downhill+winter_sports
+- name: Klempen - Alpentobel
+  country: UNK
+  lat: 46.7746336
+  lon: 9.6538357
+  distance_km: 106.7
+  approx_drive_time_min: 143
+  source: osm_overpass:downhill+winter_sports
+- name: Alpenblick - Hörnli-Express Tal
+  country: UNK
+  lat: 46.7727887
+  lon: 9.6498579
+  distance_km: 106.8
+  approx_drive_time_min: 143
+  source: osm_overpass:downhill+winter_sports
+- name: Sarn-Heinzenberg
+  country: UNK
+  lat: 46.7247026
+  lon: 9.3849076
+  distance_km: 107.2
+  approx_drive_time_min: 143
+  source: osm_overpass:downhill+winter_sports
+- name: Jochalpe
+  country: UNK
+  lat: 47.5149011
+  lon: 10.5949072
+  distance_km: 107.9
+  approx_drive_time_min: 144
+  source: osm_overpass:downhill+winter_sports
+- name: Familienskipark Stanzach
+  country: UNK
+  lat: 47.3768699
+  lon: 10.5627449
+  distance_km: 109.4
+  approx_drive_time_min: 146
+  source: osm_overpass:downhill+winter_sports
+- name: Skistadion Kniebis
+  country: UNK
+  lat: 48.4746351
+  lon: 8.2993644
+  distance_km: 109.9
+  approx_drive_time_min: 147
+  source: osm_overpass:downhill+winter_sports
+- name: Klosterreichenbacher Skihang
+  country: UNK
+  lat: 48.5225819
+  lon: 8.4032314
+  distance_km: 110.1
+  approx_drive_time_min: 147
+  source: osm_overpass:downhill+winter_sports
+- name: Bergwiesen-Skiweg
+  country: UNK
+  lat: 47.0765088
+  lon: 10.3553241
+  distance_km: 111.2
+  approx_drive_time_min: 149
+  source: osm_overpass:downhill+winter_sports
+stats:
+  core_count: 30
+  extended_count: 104
+  total_count: 134
