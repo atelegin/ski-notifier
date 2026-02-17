@@ -86,6 +86,10 @@ Distance bonus (closer resorts get more points):
 - +0 for 120+ min drive
 - linear in between
 
+Close-priority guardrail:
+- If the best nearby resort (<=95 min) is within 8 points of the global leader,
+  it is promoted to #1.
+
 ### Notes
 
 - **Wind threshold (35 km/h)** is for **gusts**, not average wind speed

@@ -29,6 +29,8 @@ TZ = ZoneInfo("Europe/Berlin")
 # Exit code thresholds
 SUCCESS_THRESHOLD = 0.60  # Exit 0 if >= 60% success
 CRITICAL_FAILURE_THRESHOLD = 0.30  # Exit 1 if < 30% success
+CLOSE_PRIORITY_MAX_DRIVE_MIN = 95
+CLOSE_PRIORITY_MAX_SCORE_GAP = 8.0
 
 
 def select_top_with_coverage(ranked: List[RankedResort], n_top: int = 3) -> List[RankedResort]:
@@ -50,6 +52,36 @@ def select_top_with_coverage(ranked: List[RankedResort], n_top: int = 3) -> List
                 result.append(candidate)
     
     return result
+
+
+def prioritize_close_leader(
+    ranked: List[RankedResort],
+    max_drive_min: int = CLOSE_PRIORITY_MAX_DRIVE_MIN,
+    max_score_gap: float = CLOSE_PRIORITY_MAX_SCORE_GAP,
+) -> List[RankedResort]:
+    """Move best nearby resort to #1 if it is close enough in score.
+
+    Rule:
+    - Find best resort within max_drive_min
+    - If its score is within max_score_gap of current #1, promote it to #1
+    """
+    if len(ranked) < 2:
+        return ranked
+
+    leader = ranked[0]
+    close_candidate = next(
+        (r for r in ranked if r.resort.drive_time_min <= max_drive_min),
+        None,
+    )
+    if close_candidate is None or close_candidate is leader:
+        return ranked
+
+    if (leader.score.score - close_candidate.score.score) > max_score_gap:
+        return ranked
+
+    reordered = [close_candidate]
+    reordered.extend(r for r in ranked if r is not close_candidate)
+    return reordered
 
 
 def is_in_season() -> bool:
@@ -153,6 +185,9 @@ def main() -> None:
     
     # Sort by score descending
     ranked_resorts.sort(key=lambda r: r.score.score, reverse=True)
+
+    # Guardrail: prefer nearby leader when score gap is small
+    ranked_resorts = prioritize_close_leader(ranked_resorts)
     
     # Apply selection logic: TOP-3 + ensure both types represented
     selected_ranked_resorts = select_top_with_coverage(ranked_resorts, n_top=3)

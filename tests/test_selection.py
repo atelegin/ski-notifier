@@ -5,13 +5,13 @@ from datetime import date
 import pytest
 
 from ski_notifier.fetch import PointWeather
-from ski_notifier.main import select_top_with_coverage
+from ski_notifier.main import prioritize_close_leader, select_top_with_coverage
 from ski_notifier.message import RankedResort
 from ski_notifier.resorts import Point, Resort
 from ski_notifier.score import ResortScore, PointScore
 
 
-def make_resort(id: str, type: str = "alpine") -> Resort:
+def make_resort(id: str, type: str = "alpine", drive_time_min: int = 60) -> Resort:
     """Create a minimal resort for testing."""
     point = Point(lat=47.0, lon=9.0)
     return Resort(
@@ -19,7 +19,7 @@ def make_resort(id: str, type: str = "alpine") -> Resort:
         name=f"Resort {id}",
         country="AT",
         type=type,
-        drive_time_min=60,
+        drive_time_min=drive_time_min,
         point_low=point,
         point_high=point,
         requires_ferry=False,
@@ -104,3 +104,43 @@ class TestSelectTopWithCoverage:
         
         assert len(result) == 4
         assert result[3].resort.type == "alpine"
+
+
+class TestPrioritizeCloseLeader:
+    def test_promotes_close_candidate_when_gap_is_small(self):
+        far_top = make_ranked(make_resort("far", drive_time_min=120), 90)
+        close_second = make_ranked(make_resort("close", drive_time_min=80), 84)
+        other = make_ranked(make_resort("other", drive_time_min=110), 82)
+
+        result = prioritize_close_leader(
+            [far_top, close_second, other],
+            max_drive_min=95,
+            max_score_gap=8.0,
+        )
+
+        assert result[0].resort.id == "close"
+        assert result[1].resort.id == "far"
+
+    def test_keeps_far_leader_when_gap_is_too_big(self):
+        far_top = make_ranked(make_resort("far", drive_time_min=120), 92)
+        close_second = make_ranked(make_resort("close", drive_time_min=80), 80)
+
+        result = prioritize_close_leader(
+            [far_top, close_second],
+            max_drive_min=95,
+            max_score_gap=8.0,
+        )
+
+        assert result[0].resort.id == "far"
+
+    def test_keeps_order_when_no_close_candidates(self):
+        top = make_ranked(make_resort("a", drive_time_min=110), 90)
+        second = make_ranked(make_resort("b", drive_time_min=115), 86)
+
+        result = prioritize_close_leader(
+            [top, second],
+            max_drive_min=95,
+            max_score_gap=8.0,
+        )
+
+        assert result[0].resort.id == "a"
