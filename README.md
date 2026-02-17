@@ -81,6 +81,11 @@ base = 50
 
 Resort score = 0.45 × low + 0.55 × high
 
+Distance bonus (closer resorts get more points):
+- +10 for ~60 min drive
+- +0 for 120+ min drive
+- linear in between
+
 ### Notes
 
 - **Wind threshold (35 km/h)** is for **gusts**, not average wind speed

@@ -6,6 +6,7 @@ import pytest
 
 from ski_notifier.fetch import PointWeather
 from ski_notifier.score import (
+    calculate_proximity_bonus,
     calculate_point_score,
     calculate_point_score_xc,
     calculate_resort_score,
@@ -22,6 +23,19 @@ class TestClamp:
 
     def test_above_max(self):
         assert clamp(150, 0, 100) == 100
+
+
+class TestProximityBonus:
+    def test_max_bonus_for_short_drive(self):
+        assert calculate_proximity_bonus(45) == 10.0
+        assert calculate_proximity_bonus(60) == 10.0
+
+    def test_no_bonus_for_long_drive(self):
+        assert calculate_proximity_bonus(120) == 0.0
+        assert calculate_proximity_bonus(180) == 0.0
+
+    def test_linear_interpolation(self):
+        assert calculate_proximity_bonus(90) == 5.0
 
 
 class TestPointScore:
@@ -232,6 +246,31 @@ class TestResortScore:
         result = calculate_resort_score(weather_low, weather_high, discipline="xc")
 
         assert result.score == round(0.6 * low_score + 0.4 * high_score, 1)
+
+    def test_drive_time_bonus_prefers_nearby_resort(self):
+        weather = PointWeather(
+            date=date(2025, 1, 15),
+            temp_c_avg_9_16=None,
+            wind_gust_kmh_max_9_16=None,
+            precip_mm_sum_9_16=None,
+            snow_depth_cm=20,
+            snowfall_cm=5,
+        )
+        near = calculate_resort_score(weather, weather, drive_time_min=70)
+        far = calculate_resort_score(weather, weather, drive_time_min=120)
+        assert near.score > far.score
+
+    def test_drive_time_bonus_is_capped_to_100(self):
+        weather = PointWeather(
+            date=date(2025, 1, 15),
+            temp_c_avg_9_16=None,
+            wind_gust_kmh_max_9_16=None,
+            precip_mm_sum_9_16=None,
+            snow_depth_cm=60,
+            snowfall_cm=30,
+        )
+        result = calculate_resort_score(weather, weather, drive_time_min=60)
+        assert result.score == 100.0
 
 
 class TestSnow24Scoring:

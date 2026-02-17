@@ -26,9 +26,32 @@ class ResortScore:
     weather_high: PointWeather
 
 
+PROXIMITY_MAX_BONUS = 10.0
+PROXIMITY_BEST_DRIVE_MIN = 60
+PROXIMITY_NO_BONUS_DRIVE_MIN = 120
+
+
 def clamp(value: float, min_val: float, max_val: float) -> float:
     """Clamp value to [min_val, max_val]."""
     return max(min_val, min(max_val, value))
+
+
+def calculate_proximity_bonus(drive_time_min: int) -> float:
+    """Calculate score bonus for shorter drive time.
+
+    Linear bonus:
+    - 60 min or faster: +10
+    - 120 min or slower: +0
+    - in between: linear interpolation
+    """
+    if drive_time_min <= PROXIMITY_BEST_DRIVE_MIN:
+        return PROXIMITY_MAX_BONUS
+    if drive_time_min >= PROXIMITY_NO_BONUS_DRIVE_MIN:
+        return 0.0
+
+    drive_range = PROXIMITY_NO_BONUS_DRIVE_MIN - PROXIMITY_BEST_DRIVE_MIN
+    ratio = (PROXIMITY_NO_BONUS_DRIVE_MIN - drive_time_min) / drive_range
+    return round(PROXIMITY_MAX_BONUS * ratio, 1)
 
 
 def calculate_point_score(weather: PointWeather) -> PointScore:
@@ -143,12 +166,14 @@ def calculate_resort_score(
     weather_low: PointWeather,
     weather_high: PointWeather,
     discipline: Literal["alpine", "xc"] = "alpine",
+    drive_time_min: int | None = None,
 ) -> ResortScore:
     """Calculate combined resort score for a day.
     
     Resort score:
     - alpine: 0.45 * score_low + 0.55 * score_high
     - xc: 0.60 * score_low + 0.40 * score_high
+    - + proximity bonus (optional): +0..10 based on drive_time_min
     
     Confidence:
     - 1.0 if snow data available for both points
@@ -164,6 +189,11 @@ def calculate_resort_score(
         score_high = calculate_point_score(weather_high)
         # Weighted combination (higher weight for summit)
         combined_score = 0.45 * score_low.score + 0.55 * score_high.score
+
+    if drive_time_min is not None:
+        combined_score += calculate_proximity_bonus(drive_time_min)
+
+    combined_score = clamp(combined_score, 0, 100)
     
     # Confidence based on snow data availability
     if score_low.has_snow_data and score_high.has_snow_data:
