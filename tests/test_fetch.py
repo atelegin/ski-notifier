@@ -426,6 +426,59 @@ class TestFetchAllResortsWeather:
         assert "resort_a" in result.weather
         assert date(2025, 1, 15) in result.weather["resort_a"].low
 
+    @patch("ski_notifier.fetch._http_get_with_retry")
+    def test_splits_batch_on_request_timeout(self, mock_http):
+        """Should reduce batch size and recover after a batch request timeout."""
+        resorts = [
+            Resort(
+                id="resort_a", name="Resort A", country="CH", type="alpine",
+                drive_time_min=60, point_low=Point(lat=47.0, lon=8.0),
+                point_high=Point(lat=47.1, lon=8.1),
+                requires_ferry=False, requires_at_vignette=False,
+                requires_ch_vignette=False, ferry_roundtrip_eur=0, at_vignette_eur=0,
+            ),
+            Resort(
+                id="resort_b", name="Resort B", country="CH", type="alpine",
+                drive_time_min=60, point_low=Point(lat=47.2, lon=8.2),
+                point_high=Point(lat=47.3, lon=8.3),
+                requires_ferry=False, requires_at_vignette=False,
+                requires_ch_vignette=False, ferry_roundtrip_eur=0, at_vignette_eur=0,
+            ),
+        ]
+
+        call_sizes = []
+
+        def side_effect(_url, params):
+            n_points = len(str(params["latitude"]).split(","))
+            call_sizes.append(n_points)
+            if n_points == 4:
+                raise RuntimeError("Read timed out")
+
+            mock_resp = MagicMock()
+            mock_resp.json.return_value = [
+                {
+                    "hourly": {
+                        "time": ["2025-01-15T10:00"],
+                        "temperature_2m": [-5.0],
+                        "wind_gusts_10m": [20.0],
+                        "precipitation": [0.0],
+                        "snowfall": [1.0],
+                    },
+                }
+                for _ in range(n_points)
+            ]
+            return mock_resp
+
+        mock_http.side_effect = side_effect
+
+        result = fetch_all_resorts_weather(resorts, forecast_days=7)
+
+        # First attempt with 4 points fails, then two 2-point retries succeed
+        assert call_sizes == [4, 2, 2]
+        assert result.n_points_total == 4
+        assert result.n_points_success == 4
+        assert len(result.failed_resorts) == 0
+
 
 class TestSnow24To9:
     """Tests for compute_snow24_to_9 computation (P0 - must implement before merge)."""

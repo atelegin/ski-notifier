@@ -22,6 +22,7 @@ TZ = ZoneInfo(TIMEZONE)
 # Batch settings
 DEFAULT_BATCH_SIZE = 40  # points per request
 FALLBACK_BATCH_SIZES = [20, 10]  # adaptive fallback on URL errors
+REQUEST_FALLBACK_BATCH_SIZES = [20, 10, 5, 2, 1]  # fallback on transient request errors
 
 # Retry settings
 MAX_RETRIES = 5
@@ -77,6 +78,23 @@ class FetchResult:
 class URLTooLongError(Exception):
     """Raised when URL is too long for the server."""
     pass
+
+
+class BatchRequestError(Exception):
+    """Raised when batch request fails after retries."""
+    pass
+
+
+def _next_smaller_batch_size(current_size: int, fallback_sizes: List[int]) -> Optional[int]:
+    """Get next smaller batch size from fallback chain."""
+    if current_size in fallback_sizes:
+        idx = fallback_sizes.index(current_size)
+        if idx + 1 < len(fallback_sizes):
+            return fallback_sizes[idx + 1]
+        return None
+
+    smaller = [s for s in fallback_sizes if s < current_size]
+    return smaller[0] if smaller else None
 
 
 def _is_url_too_long_error(response: Optional[requests.Response] = None, 
@@ -421,8 +439,7 @@ def _fetch_batch(
     except URLTooLongError:
         raise
     except RuntimeError as e:
-        logger.error(f"Batch request failed: {e}")
-        return {}, [p.index for p in points]
+        raise BatchRequestError(str(e)) from e
     
     data = resp.json()
     
@@ -526,14 +543,10 @@ def fetch_all_resorts_weather(
             
         except URLTooLongError:
             # Try smaller batch size
-            if batch_size in FALLBACK_BATCH_SIZES:
-                idx = FALLBACK_BATCH_SIZES.index(batch_size)
-                if idx + 1 < len(FALLBACK_BATCH_SIZES):
-                    batch_size = FALLBACK_BATCH_SIZES[idx + 1]
-                    logger.warning(f"URL too long, reducing batch size to {batch_size}")
-                    continue
-            elif batch_size == DEFAULT_BATCH_SIZE and FALLBACK_BATCH_SIZES:
-                batch_size = FALLBACK_BATCH_SIZES[0]
+            effective_size = min(batch_size, len(batch))
+            next_batch_size = _next_smaller_batch_size(effective_size, FALLBACK_BATCH_SIZES)
+            if next_batch_size is not None:
+                batch_size = next_batch_size
                 logger.warning(f"URL too long, reducing batch size to {batch_size}")
                 continue
             
@@ -541,6 +554,26 @@ def fetch_all_resorts_weather(
             logger.error("URL too long even with minimum batch size")
             all_failed.extend([p.index for p in batch])
             i += len(batch)
+        except BatchRequestError as e:
+            # Transient/timeouts: split into smaller batches and retry from same index
+            effective_size = min(batch_size, len(batch))
+            next_batch_size = _next_smaller_batch_size(
+                effective_size, REQUEST_FALLBACK_BATCH_SIZES
+            )
+            if next_batch_size is not None:
+                logger.warning(
+                    f"Batch request failed ({e}), reducing batch size "
+                    f"from {effective_size} to {next_batch_size} and retrying"
+                )
+                batch_size = next_batch_size
+                continue
+
+            logger.error(
+                f"Batch request failed even with minimum batch size ({batch_size}): {e}"
+            )
+            all_failed.extend([p.index for p in batch])
+            i += len(batch)
+            n_batches += 1
     
     logger.info(f"Open-Meteo: {n_batches} batches, {len(all_weather)}/{n_points_total} points OK")
     
