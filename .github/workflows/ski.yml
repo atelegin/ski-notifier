@@ -2,8 +2,10 @@ name: Daily Ski Notifier
 
 on:
   schedule:
-    # 16:00 UTC = 16:00 CET (winter) / 17:00 CEST (summer)
+    # Daily forecast (15:00 UTC = 16:00 CET winter / 17:00 CEST summer)
     - cron: '0 15 * * *'
+    # Process /refresh commands every 30 minutes
+    - cron: '*/30 * * * *'
   workflow_dispatch:  # Manual trigger for testing
 
 jobs:
@@ -26,4 +28,9 @@ jobs:
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
-        run: python -m ski_notifier.main
+        run: |
+          if [ "${{ github.event_name }}" = "schedule" ] && [ "${{ github.event.schedule }}" = "*/30 * * * *" ]; then
+            python -m ski_notifier.main --mode commands
+          else
+            python -m ski_notifier.main
+          fi

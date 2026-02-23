@@ -9,6 +9,7 @@ Daily Telegram notifier that recommends where to ski tomorrow based on weather a
 - **Best day of the week** detection
 - **8 resorts** in CH/AT/DE (alpine + XC)
 - **Daily notifications** at 17:00 Europe/Berlin (Nov–Mar only)
+- **`/refresh` command** (reply to last forecast) to re-check recommendations for *today*
 
 ## Setup
 
@@ -61,7 +62,21 @@ python -m ski_notifier.main --dry-run --force
 export TELEGRAM_BOT_TOKEN="your_token"
 export TELEGRAM_CHAT_ID="your_chat_id"
 python -m ski_notifier.main --force
+
+# Process incoming /refresh commands
+python -m ski_notifier.main --mode commands --force
 ```
+
+## Telegram /refresh
+
+To update the forecast right before departure:
+
+1. Open the latest forecast message from the bot
+2. Reply to that message with `/refresh`
+
+The bot will return:
+- all resorts from that replied forecast, but with **current-day weather now**
+- a **new top for now** if it changed
 
 ## Scoring Formula
 

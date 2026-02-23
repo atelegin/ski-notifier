@@ -1,12 +1,14 @@
-"""Telegram bot sender."""
+"""Telegram API client helpers."""
 
 import os
 import sys
+from typing import Any, Dict, List, Optional
 
 import requests
 
 # Telegram API endpoint
 TELEGRAM_API_URL = "https://api.telegram.org/bot{token}/sendMessage"
+TELEGRAM_UPDATES_API_URL = "https://api.telegram.org/bot{token}/getUpdates"
 
 
 def send_message(text: str, parse_mode: str = "Markdown") -> None:
@@ -51,3 +53,32 @@ def send_message(text: str, parse_mode: str = "Markdown") -> None:
         sys.exit(1)
     
     print(f"Message sent successfully to chat {chat_id}")
+
+
+def get_updates(offset: Optional[int] = None, timeout: int = 0, limit: int = 100) -> List[Dict[str, Any]]:
+    """Fetch incoming Telegram updates for this bot."""
+    token = os.environ.get("TELEGRAM_BOT_TOKEN")
+    if not token:
+        raise RuntimeError("TELEGRAM_BOT_TOKEN environment variable not set")
+
+    url = TELEGRAM_UPDATES_API_URL.format(token=token)
+    params: Dict[str, Any] = {
+        "timeout": timeout,
+        "limit": limit,
+        "allowed_updates": ["message"],
+    }
+    if offset is not None:
+        params["offset"] = offset
+
+    resp = requests.get(url, params=params, timeout=30)
+    if resp.status_code != 200:
+        raise RuntimeError(f"Telegram getUpdates returned {resp.status_code}: {resp.text}")
+
+    payload = resp.json()
+    if not payload.get("ok"):
+        raise RuntimeError(f"Telegram getUpdates error: {payload}")
+
+    result = payload.get("result", [])
+    if not isinstance(result, list):
+        raise RuntimeError("Telegram getUpdates returned malformed payload")
+    return result
