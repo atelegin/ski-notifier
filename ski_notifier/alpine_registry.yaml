@@ -50,12 +50,12 @@ core:
 - id: fl_malbun
   name: Malbun (Liechtenstein)
   country: FL
-  drive_time_min_from_konstanz: 85
+  drive_time_min_from_konstanz: 105
   website: https://tourismus.li
   low_point:
-    label: Malbun (village)
-    lat: 47.102
-    lon: 9.608
+    label: Malbun parking
+    lat: 47.1050006
+    lon: 9.6042309
 - id: ch_toggenburg_chaeserrugg
   name: Chäserrugg-Toggenburg (Unterwasser, CH)
   country: CH

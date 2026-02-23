@@ -1118,18 +1118,18 @@ resorts:
   name: Malbun (Liechtenstein)
   country: FL
   type: alpine
-  drive_time_min_from_konstanz: 85
+  drive_time_min_from_konstanz: 105
   website: https://tourismus.li
   notes: Alpine. Only ski area in Liechtenstein. Very high base (~1600 m) and top
     ~2100 m; ~23 km pistes. Access road from Vaduz is steep/serpentine in winter.
   access:
-    requires_ch_vignette: false
+    requires_ch_vignette: true
     requires_at_vignette: false
   points:
     low:
-      label: Malbun (village)
-      lat: 47.102
-      lon: 9.608
+      label: Malbun parking
+      lat: 47.1050006
+      lon: 9.6042309
       elev_m: 1600
     high:
       label: Sareiserjoch (top area)
@@ -1137,10 +1137,10 @@ resorts:
       lon: 9.62539
       elev_m: 2000
   costs:
-    assume_ferry_used: true
+    assume_ferry_used: false
     ferry_roundtrip_eur: 24.2
     austria_vignette_1day_eur: 0.0
-    requires_ch_vignette: false
+    requires_ch_vignette: true
 - id: de_kniebis_loipenzentrum
   name: Loipenzentrum Kniebis (DE)
   country: DE
