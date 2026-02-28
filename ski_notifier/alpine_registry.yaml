@@ -490,14 +490,14 @@ extended:
   lat: 47.3559201
   lon: 10.1191492
   distance_km: 79.4
-  approx_drive_time_min: 106
+  approx_drive_time_min: 162
   source: osm_overpass:downhill+winter_sports
 - name: Ski-Gleitweg Gottesacker
   country: UNK
   lat: 47.3559201
   lon: 10.1191492
   distance_km: 79.4
-  approx_drive_time_min: 106
+  approx_drive_time_min: 162
   source: osm_overpass:downhill+winter_sports
 - name: Ibergeregg-Grossenboden
   country: UNK

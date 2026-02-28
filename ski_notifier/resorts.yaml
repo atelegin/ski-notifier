@@ -2592,8 +2592,8 @@ resorts:
   name: Ski-Gleitweg Gottesacke (AT)
   country: AT
   type: alpine
-  drive_time_min_from_konstanz: 106
-  drive_time_note: Auto-promoted from OSM alpine registry (needs field validation)
+  drive_time_min_from_konstanz: 162
+  drive_time_note: 'User-provided: 2h42m (Feb 2026)'
   website: https://www.openstreetmap.org/?mlat=47.355920&mlon=10.119149#map=12/47.355920/10.119149
   notes: Auto-promoted alpine candidate from OSM. Verify resort boundaries, parking,
     and pass pricing manually.

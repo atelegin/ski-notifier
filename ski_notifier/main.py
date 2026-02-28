@@ -33,6 +33,7 @@ SUCCESS_THRESHOLD = 0.60  # Exit 0 if >= 60% success
 CRITICAL_FAILURE_THRESHOLD = 0.30  # Exit 1 if < 30% success
 CLOSE_PRIORITY_MAX_DRIVE_MIN = 95
 CLOSE_PRIORITY_MAX_SCORE_GAP = 8.0
+HARD_MAX_DRIVE_MIN = 135
 
 
 @dataclass
@@ -140,13 +141,16 @@ def build_forecast_bundle(target_date: date) -> ForecastBundle:
     logger.info(f"Fetching weather for {target_date}")
 
     load_result: LoadResult = load_resorts()
-    resorts = load_result.resorts
+    resorts = [r for r in load_result.resorts if r.drive_time_min <= HARD_MAX_DRIVE_MIN]
     costs = load_result.costs
+    n_filtered_out = len(load_result.resorts) - len(resorts)
 
     if load_result.n_skipped > 0:
         logger.info(f"Loaded {len(resorts)} resorts ({load_result.n_skipped} skipped: invalid coordinates)")
     else:
         logger.info(f"Loaded {len(resorts)} resorts")
+    if n_filtered_out > 0:
+        logger.info(f"Hard-filtered {n_filtered_out} resorts by drive_time_min > {HARD_MAX_DRIVE_MIN}")
 
     if not resorts:
         logger.error("CRITICAL: No valid resorts loaded")
