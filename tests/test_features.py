@@ -75,6 +75,34 @@ class TestComputeResortFeatures:
         features = compute_resort_features(weather, weather)
         
         assert features.snow48_cm == 10.0  # 5.0 * 2
+
+    def test_daily_snowfall_comes_from_calendar_day_sum(self):
+        """daily_snowfall_cm should be max of low/high snowfall_cm."""
+        weather_low = PointWeather(
+            date=date(2025, 1, 15),
+            temp_c_avg_9_16=-5,
+            wind_gust_kmh_max_9_16=20,
+            precip_mm_sum_9_16=0,
+            snow_depth_cm=50,
+            snowfall_cm=12.0,
+            snow24_to_9_cm=0.0,
+            snow24_quality="ok",
+        )
+        weather_high = PointWeather(
+            date=date(2025, 1, 15),
+            temp_c_avg_9_16=-8,
+            wind_gust_kmh_max_9_16=25,
+            precip_mm_sum_9_16=0,
+            snow_depth_cm=100,
+            snowfall_cm=18.0,
+            snow24_to_9_cm=0.0,
+            snow24_quality="ok",
+        )
+
+        features = compute_resort_features(weather_low, weather_high)
+
+        assert features.snow24_cm == 0.0
+        assert features.daily_snowfall_cm == 18.0
     
     def test_slush_risk_triggered(self):
         """slush_risk when temp in [-0.5, +2] AND rain > 0.5."""

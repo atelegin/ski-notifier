@@ -22,6 +22,7 @@ class ResortFeatures:
     wind_max: Optional[float]       # max of low/high gust
     slush_risk: bool                # temp∈[−0.5,+2] AND rain>0.5
     rain_risk: bool                 # rain>1.0 AND temp_max>1
+    daily_snowfall_cm: Optional[float] = None  # calendar-day snowfall for target date
 
 
 def compute_resort_features(
@@ -44,6 +45,10 @@ def compute_resort_features(
     # snow48 = for now, just double snow24 (simplified; proper implementation would need 2 days of data)
     # TODO: Implement proper 48h window when needed
     snow48_cm = snow24_cm * 2 if snow24_cm is not None else None
+
+    # Calendar-day snowfall for the target date, kept separate from snow24.
+    daily_snowfall_values = [w.snowfall_cm for w in [weather_low, weather_high] if w.snowfall_cm is not None]
+    daily_snowfall_cm = max(daily_snowfall_values) if daily_snowfall_values else None
     
     # Aggregation: max(low, high) for rain
     rain_low = weather_low.precip_mm_sum_9_16 or 0
@@ -79,6 +84,7 @@ def compute_resort_features(
         wind_max=wind_max,
         slush_risk=slush_risk,
         rain_risk=rain_risk,
+        daily_snowfall_cm=daily_snowfall_cm,
     )
 
 

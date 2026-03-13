@@ -74,6 +74,7 @@ def make_features() -> ResortFeatures:
         wind_max=15,
         slush_risk=False,
         rain_risk=False,
+        daily_snowfall_cm=12,
     )
 
 
@@ -242,12 +243,35 @@ class TestFormatMessage:
             wind_max=36,
             slush_risk=False,
             rain_risk=False,
+            daily_snowfall_cm=20,
         )
 
         line = format_resort_weather_line(ranked, wet_features)
 
         assert "precip 13" in line
         assert "rain 13" not in line
+
+    def test_weather_line_shows_zero_snow24_and_daily_separately(self):
+        """snow24=0 should still be displayed, alongside calendar-day snowfall."""
+        ranked = make_ranked(make_resort("a"), 80)
+        mixed_snow_features = ResortFeatures(
+            snow24_cm=0,
+            snow48_cm=0,
+            overnight_cm=None,
+            rain_mm=0,
+            temp_min=-4,
+            temp_max=-3,
+            wind_max=12,
+            slush_risk=False,
+            rain_risk=False,
+            daily_snowfall_cm=18,
+        )
+
+        line = format_resort_weather_line(ranked, mixed_snow_features)
+
+        assert "snow24 0cm" in line
+        assert "daily 18cm" in line
+        assert "depth 50cm" in line
 
     def test_blocks_spacing(self):
         """Resort blocks are separated by exactly one blank line."""

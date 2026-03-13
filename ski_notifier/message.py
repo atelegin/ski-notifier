@@ -109,7 +109,7 @@ def format_resort_weather_line(
 ) -> str:
     """Format single-line weather summary for a resort.
     
-    Format: 🎿 Name — score — 🚗 Nmin — snow24 Ncm, T −X..−Y, wind N, precip N
+    Format: 🎿 Name — score — 🚗 Nmin — snow24 Ncm, daily Ncm, depth Ncm, T −X..−Y, wind N, precip N
     """
     r = ranked.resort
     s = ranked.score
@@ -125,10 +125,12 @@ def format_resort_weather_line(
     weather_parts = []
     
     if features:
-        # Snow
-        if features.snow24_cm is not None and features.snow24_cm > 0:
+        # Snow metrics are independent: snow24 can be 0 while daily snowfall is positive.
+        if features.snow24_cm is not None:
             weather_parts.append(f"snow24 {features.snow24_cm:.0f}cm")
-        elif s.weather_high.snow_depth_cm is not None:
+        if features.daily_snowfall_cm is not None:
+            weather_parts.append(f"daily {features.daily_snowfall_cm:.0f}cm")
+        if s.weather_high.snow_depth_cm is not None:
             weather_parts.append(f"depth {s.weather_high.snow_depth_cm:.0f}cm")
         
         # Temp range
