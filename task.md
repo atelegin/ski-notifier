@@ -1,7 +1,7 @@
-# SKI_SNOW_NOTIFIER — Variant B (Telegram, daily 17:00, Nov–Mar)
+# SKI_SNOW_NOTIFIER — Variant B (Telegram, daily 17:00, Nov–Apr)
 
 ## Goal
-Каждый день (только в сезон Nov–Mar) в 17:00 Europe/Berlin отправлять в Telegram одно сообщение:
+Каждый день (только в сезон Nov–Apr) в 17:00 Europe/Berlin отправлять в Telegram одно сообщение:
 - “куда ехать завтра и почему”
 - с оценкой условий (score) на основе погоды/снега
 - с показом условий в 2 точках (низ/верх)
@@ -74,7 +74,7 @@ score = 0.45 * score_low + 0.55 * score_high
 ## Scheduling
 - GitHub Actions cron:
   - каждый день в 17:00 Europe/Berlin
-  - только Nov–Mar: реализовать early-exit в коде (if month not in [11,12,1,2,3] -> return without send)
+  - только Nov–Apr: реализовать early-exit в коде (if month not in [11,12,1,2,3,4] -> return without send)
 
 ## Telegram (personal bot)
 - Создать бота через @BotFather, получить BOT_TOKEN.

@@ -8,7 +8,7 @@ Daily Telegram notifier that recommends where to ski tomorrow based on weather a
 - **Smart scoring** based on snow depth, fresh snow, temperature, wind gusts, precipitation
 - **Best day of the week** detection
 - **8 resorts** in CH/AT/DE (alpine + XC)
-- **Daily notifications** at 17:00 Europe/Berlin (Nov–Mar only)
+- **Daily notifications** at 17:00 Europe/Berlin (Nov–Apr only)
 - **`/refresh` command** (reply to last forecast) to re-check recommendations for *today*
 
 ## Setup

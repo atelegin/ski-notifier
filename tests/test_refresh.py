@@ -1,11 +1,13 @@
 """Tests for /refresh helpers."""
 
-from datetime import date
+from datetime import date, datetime
+from unittest.mock import patch
 
 from ski_notifier.main import (
     ForecastBundle,
     extract_recommended_resort_names,
     format_refresh_message,
+    is_in_season,
     is_refresh_command,
 )
 from ski_notifier.fetch import PointWeather
@@ -84,6 +86,18 @@ def test_is_refresh_command_variants():
     assert is_refresh_command("/refresh@my_bot")
     assert is_refresh_command("/refresh please")
     assert not is_refresh_command("/start")
+
+
+def test_is_in_season_includes_april():
+    with patch("ski_notifier.main.datetime") as mock_datetime:
+        mock_datetime.now.return_value = datetime(2026, 4, 15, 12, 0)
+        assert is_in_season()
+
+
+def test_is_in_season_excludes_may():
+    with patch("ski_notifier.main.datetime") as mock_datetime:
+        mock_datetime.now.return_value = datetime(2026, 5, 1, 12, 0)
+        assert not is_in_season()
 
 
 def test_refresh_message_marks_top_unchanged():

@@ -24,8 +24,8 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-# Season months (Nov-Mar)
-SEASON_MONTHS = {11, 12, 1, 2, 3}
+# Season months (Nov-Apr)
+SEASON_MONTHS = {11, 12, 1, 2, 3, 4}
 TZ = ZoneInfo("Europe/Berlin")
 
 # Exit code thresholds
@@ -103,7 +103,7 @@ def prioritize_close_leader(
 
 
 def is_in_season() -> bool:
-    """Check if current month is in ski season (Nov-Mar)."""
+    """Check if current month is in ski season (Nov-Apr)."""
     now = datetime.now(TZ)
     return now.month in SEASON_MONTHS
 
@@ -375,7 +375,7 @@ def main() -> None:
     parser.add_argument(
         "--force",
         action="store_true",
-        help="Run even if not in season (Nov-Mar)",
+        help="Run even if not in season (Nov-Apr)",
     )
     parser.add_argument(
         "--mode",
@@ -386,7 +386,7 @@ def main() -> None:
     args = parser.parse_args()
 
     if not is_in_season() and not args.force:
-        print("Not in season (Nov-Mar). Use --force to override.")
+        print("Not in season (Nov-Apr). Use --force to override.")
         return
 
     if args.mode == "commands":
